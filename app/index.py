@@ -8,13 +8,13 @@ from flask_login import login_user
 def index():
     return render_template('index.html')
 
-@app.route('/user-login', methods=['get','post'])
+@app.route('/user-login', methods=['post'])
 def user_signin():
-    # username = request.form.get('Username')
-    # password = request.form.get('Password')
-    # user = dao.auth_user(username=username, password=password)
-    # if user:
-    #     login_user(user)
+    username = request.form.get('username')
+    password = request.form.get('password')
+    user = dao.auth_user(username=username, password=password)
+    if user:
+        login_user(user)
     return render_template('login.html')
 
 @app.route('/register', methods=['get','post'])
