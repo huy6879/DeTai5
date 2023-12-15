@@ -1,0 +1,155 @@
+{% extends 'layout/base.html' %}
+
+
+{% block title %}Tài khoản của tôi{% endblock %}
+
+
+
+{% block content %}
+<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+<section class="vh-100 bg-image"
+		 style="background-image: url(https://tindep.com/wp-content/uploads/2023/03/background-bau-troi--background-sky-xanh--hoang-hon-dep--buon-15.jpg);">
+	<div class="mask d-flex align-items-center h-100 gradient-custom-3">
+
+
+
+				<div class="container">
+					<div class="row-cols-1 row-cols-md-2 row-cols-xl-3">
+
+						<div class="nav-item">
+							<div class="card radius-10 border-start border-0 border-3 border-info"
+								 style="position: absolute;  top: 27.9%; left: 16%; width:400px; transform: translate(-50%, -50%);">
+								<div class="card-body">
+									<a class="nav-link" style="color: black; font-size : 25px;"
+									   href="/user-info/account/{{ current_user.id }}">
+										<img src="https://toppng.com/uploads/preview/circled-user-icon-user-pro-icon-11553397069rpnu1bqqup.png"
+											 alt="User icon"
+											 style="width: 35px; height: 35px; border-radius: 50%; margin-right: 12px;">
+										Tài khoản của tôi
+									</a>
+								</div>
+							</div>
+						</div>
+
+
+						<div class="nav-item">
+							<div class="card radius-10 border-start border-0 border-3 border-danger"
+								 style="position: absolute; top: 40.9%; left: 16%; width:400px; transform: translate(-50%, -50%);">
+								<div class="card-body">
+									<a class="nav-link" style="color: black; font-size : 25px;"
+									   href="/user-info/personal/{{ current_user.id }}">
+										<img src="https://static.vecteezy.com/system/resources/previews/005/747/906/non_2x/info-icon-template-information-icon-colorful-free-vector.jpg"
+											 alt="Info icon"
+											 style="width: 42px; height: 42px; border-radius: 50%; margin-right: 8px;">
+										Thông tin cá nhân
+									</a>
+								</div>
+							</div>
+						</div>
+						<br>
+
+						<div class="nav-item">
+							<div class="card radius-10 border-start border-0 border-3 border-success"
+							 style="position: absolute; top: 54%; left: 16%; width:400px; transform: translate(-50%, -50%);">
+								<div class="card-body">
+									<a class="nav-link" style="color: black; font-size : 25px;"
+									   href="/user-info/{{ current_user.id }}">
+										<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/27/OOjs_UI_icon_history.svg/1200px-OOjs_UI_icon_history.svg.png"
+											 alt="History icon"
+											 style="width: 40px; height: 40px; border-radius: 50%; margin-right: 11px;">
+										Lịch sử giao dịch
+									</a>
+								</div>
+							</div>
+						</div>
+						<br>
+
+						<div class="nav-item">
+							<div class="card radius-10 border-start border-0 border-3 border-warning"
+														 style="position: absolute; top:67.2%; left: 16%; width:400px; transform: translate(-50%, -50%);">
+								<div class="card-body">
+									<a class="nav-link" style="color: black; font-size : 25px;"
+									   href="/user-info/{{ current_user.id }}">
+										<img src="https://cdn-icons-png.flaticon.com/512/3003/3003385.png"
+											 alt="Manager icon"
+											 style="width: 42px; height: 42px; border-radius: 50%; margin-right: 5px;">
+										Quản lý chuyến bay
+									</a>
+								</div>
+							</div>
+						</div>
+					</div>
+			</div>
+	</div>
+</section>
+
+<div class="card"
+	 style="position: absolute; background-color: #FFFAFA !important; top:21.5%; left:31%; width: 1000px; height: 420px;">
+	<div class="card-body">
+		<div class="section-1" style=" font-weight: bold; font-size: 32px; background-color: #F0F8FF;">Thông tin cá nhân</div>
+		<span class="line">------------------------------------------------------------------------------------------------------------------------------------------------------</span>
+		<h1></h1>
+		<table>
+			<tr>
+				<td>
+					<span style="position: relative; color:#A9A9A9; font-family: Arial; font-size : 25px; top : 10px; padding-left: 14px;">Họ và tên :</span>
+				</td>
+
+				<td style="position: relative;  top: 10px; font-family: Arial; font-size : 25px; left: 2%;">
+					{{ current_user.username }}
+				</td>
+			</tr>
+
+			<tr>
+				<td>
+					<span style="position: relative; color:#A9A9A9; font-family: Arial; font-size : 25px; top: 30px; padding-left: 14px; ">Ngày sinh :</span>
+				</td>
+				<td style="position: relative;  top: 30px; font-family: Arial; font-size : 25px; left: 2%;">
+					{{ current_user.date }}
+				</td>
+			</tr>
+
+			<tr>
+				<td>
+					<span style="position: relative; color:#A9A9A9; font-family: Arial; font-size : 25px; left: 12%;  top: 50px;">Di động : </span>
+				</td>
+				<td style="position: relative; top: 50px; font-family: Arial; font-size : 25px; left: -2%;">{{
+					current_user.phone }}
+				</td>
+			</tr>
+
+			<tr>
+				<td>
+					<span style="position: relative; color:#A9A9A9; font-family: Arial; font-size : 25px; left: 12%;  top: 70px;">CMND : </span>
+				</td>
+				<td style="position: relative; top: 70px; font-family: Arial; font-size : 25px; left: -2%;">{{
+					current_user.cmnd }}
+				</td>
+			</tr>
+
+			<tr>
+				<td>
+					<span style="position: relative; color:#A9A9A9; font-family: Arial; font-size : 25px; padding-left: 16px;  top: 92px;">Địa chỉ : </span>
+				<td style="position: relative; top: 92px; font-family: Arial; font-size: 25px; left: -2%;">
+					{{current_user.address}}
+				</td>
+			</tr>
+<!--			<tr>-->
+<!--				<td>-->
+<!--					<div class="nav-item">-->
+<!--						<a href="/user-info/account/{{ current_user.id }}" class="change-password-link"-->
+<!--						   style="position: relative; text-decoration: underline; font-size : 20px;  color:#0080ff;  top: 92px; left:110%;">Đổi-->
+<!--							mật khẩu</a>-->
+<!--						<img src="data:image/png;base64,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"-->
+<!--							 alt="User icon"-->
+<!--							 style="position: relative; top: 89px; left: 112%; width: 20px; height: 20px;">-->
+<!--					</div>-->
+
+<!--				</td>-->
+<!--			</tr>-->
+		</table>
+	</div>
+</div>
+
+{% endblock %}
+
