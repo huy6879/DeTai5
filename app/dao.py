@@ -40,3 +40,9 @@ def auth_user(username, password):
         password = str(hashlib.md5(password.encode('utf-8')).hexdigest())
         return User.query.filter(User.username.__eq__(username),
                                  User.password.__eq__(password)).first()
+
+def re_pass(id, new_password):
+    user = db.session.query(User).filter_by(id=id).first()
+    password_hash = str(hashlib.md5(new_password.strip().encode('utf-8')).hexdigest())
+    user.password = password_hash
+    db.session.commit()
