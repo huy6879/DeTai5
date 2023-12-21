@@ -1,5 +1,9 @@
 {% extends 'admin/base.html' %}
 
 {% block body %}
+{% if is_admin() %}
 <h1 class="text-center text-danger">THONG KE DOANH THU</h1>
+{% else %}
+<h1 class="text-center text-danger">Bạn không có quyền truy cập</h1>
+{% endif %}
 {% endblock %}

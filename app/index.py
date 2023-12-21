@@ -6,12 +6,9 @@ from app import app,login
 from flask_login import login_user, logout_user, current_user, UserMixin
 from app.models import User
 
-
-
 @app.route("/")
 def index():
     return render_template('index.html')
-
 
 
 @app.route("/user-login", methods=['get','post'])
@@ -95,7 +92,6 @@ def user_repass(user_id):
             elif password1 == user.password and new_password.strip().__eq__(confirm.strip()):
                 dao.re_pass(id=user_id,new_password=new_password)
                 err_msg = 'Cập nhật thanh công'
-                time.sleep(5)
                 user_logout()
                 return redirect('/user-login')
             else:
@@ -114,18 +110,16 @@ def user_info(user_id):
 
 
 
-
 @app.route('/user-info/personal/<int:user_id>')
 def personal_info(user_id):
     user = User.query.get(user_id)
     return render_template('personal_info.html', user=user)
 
 
-
-
 @login.user_loader
 def load_user(user_id):
     return dao.get_user_by_id(user_id)
+
 
 
 if __name__ == '__main__':

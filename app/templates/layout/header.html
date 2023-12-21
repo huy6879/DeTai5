@@ -23,6 +23,12 @@
                 <a class="nav-link" style="color : #4682B4; font-size : 18px" href="/user-logout">Đăng xuất</a>
                 {% endif %}
             </li>
+            <li class="nav-item"
+                style="position: absolute; top: 12; right: 0; width: 31.5%; height: 110%; animation: nav-links-animation 5s infinite ease-in-out;">
+                {% if current_user.user_role.value == 3 %}
+                <a class="nav-link" style="color : #4682B4; font-size : 18px" href="/admin">Quản trị</a>
+                {% endif %}
+            </li>
             {% else %}
             <li class="nav-item"
                 style="position: absolute; top: 0; right: 0; width: 40%; height: 110%; animation: nav-links-animation 5s infinite ease-in-out;">
