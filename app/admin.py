@@ -1,4 +1,4 @@
-from app.models import User, UserRoleEnum
+from app.models import User, UserRoleEnum, Airport
 from app import app,db
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
@@ -19,11 +19,31 @@ class AuthenticatedUser(BaseView):
         return current_user.is_authenticated
 
 
+class MyUserView(AuthenticatedAdmin):
+    column_list = ['id', 'fullname', 'date', 'phone','cmnd','email', 'user_role']
+    column_searchable_list = ['fullname']
+
+
+class MyAirPortView(AuthenticatedAdmin):
+    column_list = ['id','name','city']
+    column_searchable_list = ['city']
+
+
+
 class LogoutView(AuthenticatedUser):
     @expose("/")
     def index(self):
         logout_user()
         return redirect('/user-login')
 
-admin.add_view(ModelView(User, db.session))
+class FlightView(AuthenticatedUser):
+    @expose("/")
+    def index(self):
+        return self.render('admin/flight_management.html')
+
+
+
+admin.add_view(MyUserView(User, db.session))
+admin.add_view(FlightView(name='Chuyến bay'))
+admin.add_view(MyAirPortView(Airport, db.session))
 admin.add_view(LogoutView(name='Đăng xuất'))
