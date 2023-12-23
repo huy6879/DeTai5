@@ -1,4 +1,4 @@
-from app.models import User, UserRoleEnum
+from app.models import User, UserRoleEnum, Schedules
 from app import app,db
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
@@ -25,5 +25,12 @@ class LogoutView(AuthenticatedUser):
         logout_user()
         return redirect('/user-login')
 
+class SchedulesView(ModelView):
+    can_view_details = True
+
+
+
 admin.add_view(ModelView(User, db.session))
 admin.add_view(LogoutView(name='Đăng xuất'))
+admin.add_view(SchedulesView(Schedules,db.session))
+# admin.add_view(ModelView(name=''))
