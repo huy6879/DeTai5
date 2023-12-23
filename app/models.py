@@ -26,6 +26,12 @@ class User(db.Model, UserMixin):
     # def __str__(self):
     #     return self.name
 
+class Airport(db.Model):
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    name = Column(String(100), nullable=True)
+    city = Column(String(100), nullable=False, unique=True)
+    def __str__(self):
+        return self.name
 
 class Schedules(db.Model):
     id = Column(Integer, primary_key=True, autoincrement=True)
@@ -53,6 +59,7 @@ class Schedules(db.Model):
 
 if __name__ == '__main__':
     with app.app_context():
+
         # db.create_all()
         # import hashlib
         # u1= User(fullname='Nguyễn Gia Huy', date=datetime.strptime('26/11/2003', '%d/%m/%Y'), address='141/17/16 Đường số 11 Phường bình hưng hòa quận Bình Tân', username='huybambo',
@@ -67,3 +74,12 @@ if __name__ == '__main__':
 
         db.session.add(c1)
         db.session.commit()
+
+#         db.create_all()
+#         # import hashlib
+#         # u1 = User(fullname='Nguyễn Gia Huy', date=datetime.strptime('26/11/2003', '%d/%m/%Y'), address='141/17/16 Đường số 11 Phường bình hưng hòa quận Bình Tân', username='huybambo',
+#         #            password=str(hashlib.md5('123'.encode('utf-8')).hexdigest()), phone='0983325261', email='giahuy261103@gmail.com', cmnd='2135133154', user_role=UserRoleEnum.ADMIN)
+#         #
+#         # db.session.add(u1)
+#         # db.session.commit()
+

@@ -1,0 +1,86 @@
+{% extends 'admin/base.html' %}
+
+{% block body %}
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-13 offset-md-0">
+            <form accept="" class="shadow p-4" style="height: 35 0px;">
+                 <div class="row">
+                     <div class="col-sm-6 form-group">
+                         <label for="airport1">Sân bay đi : </label>
+                         <input type="text" placeholder="Enter Full Name Here.." class="form-control"
+                                               id="airport1" name="fullname" required/>
+                     </div>
+                     <div class="col-sm-6 form-group">
+                         <label for="airport2">Sân bay đến : </label>
+                         <input type="text" placeholder="Enter Username Here.." class="form-control"
+                                               id="airport2" name="username" required/>
+                     </div>
+                     <div class="col-sm-3 form-group">
+                         <label for="time1">Thời gian đi : </label>
+                         <input type="date" class="form-control form-control-ml"
+                                               id="time1" name="time1" required/>
+                     </div>
+
+                     <div class="col-sm-3 form-group">
+                         <label for="time2">Thời gian đến : </label>
+                         <input type="date" class="form-control form-control-ml"
+                                               id="time2" name="time2" required/>
+                     </div>
+
+                     <div class="col-sm-3 form-group">
+                         <label for="quantity1">Số lượng vé loại 1 : </label>
+                         <input type="text" placeholder="Enter Username Here.." class="form-control"
+                                               id="quantity1" name="username" required/>
+                     </div>
+
+                     <div class="col-sm-3 form-group">
+                         <label for="quantity2">Số lượng vé loại 2 : </label>
+                         <input type="text" placeholder="Enter Username Here.." class="form-control"
+                                               id="quantity2" name="username" required/>
+                     </div>
+
+                     <div class="col-sm-3 form-group">
+                         <label for="AP_TG1">Sân bay trung gian : </label>
+                         <input type="password" placeholder="Sân bay trung gian 1"
+                                               class="form-control"
+                                               id="AP_TG1" name="confirm" required/>
+                         <br>
+                         <input type="password" placeholder="Sân bay trung gian 2 (Nếu có)"
+                                               class="form-control"
+                                               id="AP_TG2" name="confirm" required/>
+                     </div>
+
+                     <div class="col-sm-3 form-group">
+                         <label for="pendingT">Thời gian dừng : </label>
+                         <input type="number" placeholder="Enter Phone Number Here.."
+                                               class="form-control"
+                                               id="pendingT" name="phone" required/>
+                     </div>
+                     <div class="col-sm-6 form-group">
+                         <label class="form-label" for="note">Ghi chú</label>
+                         <input type="text" placeholder="Enter Confirm Password Here.."
+                                               class="form-control"
+                                               id="note" name="confirm" required/>
+                     </div>
+
+
+                </div>
+
+
+                <section style="position: relative;">
+                    <div class="mb-3" style="text-align: right; position: absolute; top: -55px; left: 84%;">
+                        <button type="submit" class="btn btn-success">Tạo lịch chuyến bay</button>
+                    </div>
+                </section>
+
+            </form>
+            <form accept="" class="shadow p-4 mt-4" style="height: 400px;">
+                <h3>LỊCH CHUYẾN BAY ĐÃ TẠO </h3>
+                <hr width="100%"  color="blue">
+
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
