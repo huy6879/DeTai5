@@ -1,11 +1,11 @@
 from app.models import User, UserRoleEnum, Airport
+import dao
 from app import app,db
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
 from flask_admin import BaseView, expose
 from flask_login import logout_user, current_user
-from flask import redirect
-
+from flask import redirect, request
 
 admin = Admin(app=app, name="OU AIRLINE Administration", template_mode='bootstrap4')
 
@@ -36,10 +36,19 @@ class LogoutView(AuthenticatedUser):
         logout_user()
         return redirect('/user-login')
 
+# @app.route('/admin/flightview', methods=['post'])
 class FlightView(AuthenticatedUser):
     @expose("/")
     def index(self):
-        return self.render('admin/flight_management.html')
+        flight = dao.get_flight()
+        # if request.method.__eq__('POST'):
+        #     sb1 = request.form.get('sb1')
+        #     sb2 = request.form.get('sb2')
+        #     t1 = request.form.get('time1')
+        #     t2 = request.form.get('time2')
+        #     v1 = request.form.get('quantity1')
+        #     v2 = request.form.get('quantity2')
+        return self.render('admin/flight_management.html', Flight=flight)
 
 
 

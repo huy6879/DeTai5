@@ -4,64 +4,70 @@
 <div class="container mt-3">
     <div class="row">
         <div class="col-md-13 offset-md-0">
-            <form accept="" class="shadow p-4" style="height: 35 0px;">
+            <form accept="" class="shadow p-4" style="height: 350px;" method="post" action="/admin/flightview">
                  <div class="row">
                      <div class="col-sm-6 form-group">
                          <label for="airport1">Sân bay đi : </label>
-                         <input type="text" placeholder="Enter Full Name Here.." class="form-control"
-                                               id="airport1" name="fullname" required/>
+                         <input type="text" placeholder="Nhập sân bay đi.." class="form-control"
+                                               id="airport1" name="sb1" required/>
                      </div>
                      <div class="col-sm-6 form-group">
                          <label for="airport2">Sân bay đến : </label>
-                         <input type="text" placeholder="Enter Username Here.." class="form-control"
-                                               id="airport2" name="username" required/>
+                         <input type="text" placeholder="Nhập sân bay đến.." class="form-control"
+                                               id="airport2" name="sb2" required/>
                      </div>
                      <div class="col-sm-3 form-group">
                          <label for="time1">Thời gian đi : </label>
-                         <input type="date" class="form-control form-control-ml"
+                         <input type="time" class="form-control form-control-ml"
                                                id="time1" name="time1" required/>
                      </div>
 
                      <div class="col-sm-3 form-group">
                          <label for="time2">Thời gian đến : </label>
-                         <input type="date" class="form-control form-control-ml"
+                         <input type="time" class="form-control form-control-ml"
                                                id="time2" name="time2" required/>
                      </div>
 
                      <div class="col-sm-3 form-group">
                          <label for="quantity1">Số lượng vé loại 1 : </label>
-                         <input type="text" placeholder="Enter Username Here.." class="form-control"
-                                               id="quantity1" name="username" required/>
+                         <input type="text" placeholder="Nhập số lượng vé.." class="form-control"
+                                               id="quantity1" name="quantity1" required/>
                      </div>
 
                      <div class="col-sm-3 form-group">
                          <label for="quantity2">Số lượng vé loại 2 : </label>
-                         <input type="text" placeholder="Enter Username Here.." class="form-control"
-                                               id="quantity2" name="username" required/>
+                         <input type="text" placeholder="Nhập số lượng vé.." class="form-control"
+                                               id="quantity2" name="quantity2" required/>
                      </div>
 
                      <div class="col-sm-3 form-group">
                          <label for="AP_TG1">Sân bay trung gian : </label>
-                         <input type="password" placeholder="Sân bay trung gian 1"
+                         <input type="text" placeholder="Nhập sân bay.."
                                                class="form-control"
-                                               id="AP_TG1" name="confirm" required/>
+                                               id="AP_TG1" name="sb3" required/>
                          <br>
-                         <input type="password" placeholder="Sân bay trung gian 2 (Nếu có)"
+                         <input type="text" placeholder= "Nhập sân bay 2.. (Nếu có)"
                                                class="form-control"
-                                               id="AP_TG2" name="confirm" required/>
+                                               id="AP_TG2" name="sb4" required/>
                      </div>
 
                      <div class="col-sm-3 form-group">
                          <label for="pendingT">Thời gian dừng : </label>
-                         <input type="number" placeholder="Enter Phone Number Here.."
+                         <input type="text" placeholder="Nhập thời gian.."
                                                class="form-control"
-                                               id="pendingT" name="phone" required/>
+                                               id="pendingT" name="pendingT" required/>
+                         <br>
+                         <label class="form-label" style="position: relative; top: -23px;" for="Date">Ngày đi : </label>
+                         <input type="date" style="position: relative; top: -30px;" class="form-control form-control-mg"
+                                               id="Date" name="date" required/>
+
                      </div>
+
                      <div class="col-sm-6 form-group">
                          <label class="form-label" for="note">Ghi chú</label>
-                         <input type="text" placeholder="Enter Confirm Password Here.."
+                         <input type="text" placeholder="Nhập ghi chú.."
                                                class="form-control"
-                                               id="note" name="confirm" required/>
+                                               id="note" name="note" required/>
                      </div>
 
 
@@ -69,15 +75,54 @@
 
 
                 <section style="position: relative;">
-                    <div class="mb-3" style="text-align: right; position: absolute; top: -55px; left: 84%;">
+                    <div class="mb-3" style="text-align: right; position: absolute; top: -85px; left: 84%;">
                         <button type="submit" class="btn btn-success">Tạo lịch chuyến bay</button>
                     </div>
                 </section>
 
             </form>
-            <form accept="" class="shadow p-4 mt-4" style="height: 400px;">
+
+            <form accept="" class="shadow p-4 mt-4" style="height: 500px; width: 120%; margin-left: -120px;">
                 <h3>LỊCH CHUYẾN BAY ĐÃ TẠO </h3>
                 <hr width="100%"  color="blue">
+                <table>
+                    <tr>
+                        <td>Id</td>
+                        <td style="position: relative; padding-left: 50px;">Sân bay đi</td>
+                        <td style="position: relative; padding-left: 50px;">Sân bay đến</td>
+                        <td style="position: relative; padding-left: 50px;">Thời gian đi</td>
+                        <td style="position: relative; padding-left: 50px;">Thời gian đến</td>
+                        <td style="position: relative; padding-left: 50px;">Vé hạng 1</td>
+                        <td style="position: relative; padding-left: 50px;">Vé hạng 2</td>
+                        <td style="position: relative; padding-left: 50px;">Sân bay trung gian</td>
+                        <td style="position: relative; padding-left: 50px;">Thời gian dừng</td>
+                        <td style="position: relative; padding-left: 50px;">Tình trạng </td>
+                    </tr>
+                </table>
+                <hr width="100%"  color="blue">
+
+                <table>
+                    {% for u in Flight %}
+                    <tr>
+                        <td>{{ u.id }} </td>
+                        <td style="position: relative; padding-left: 50px;">{{ u.D_air }}</td>
+                        <td style="position: relative; padding-left: 30px;">{{ u.A_air }}</td>
+                        <td style="position: relative; padding-left: 45px;">{{ u.T_time}}</td>
+                        <td style="position: relative; padding-left: 70px;">{{ u.A_time }}</td>
+                        <td style="position: relative; padding-left: 100px;">{{ u.T1_quantity }}</td>
+                        <td style="position: relative; padding-left: 100px;">{{ u.T2_quantity }}</td>
+                        <td style="position: relative; padding-left: 100px;">{{ u.I_air }}</td>
+                        <td style="position: relative; padding-left: 100px;">{{ u.S_time }}</td>
+                        {% if u.note == '1' %}
+                        <td  style="position: relative; padding-left: 110px;">&#9989;</td>
+                        {% elif u.note == '0' %} <td style="position: relative; padding-left: 110px; font-size:15px;">&#10060;</td>
+                        {% else %}  <td  style="position: relative; padding-left: 95px;">{{ u.note }}</td>
+                        {% endif %}
+
+
+                    </tr>
+                    {% endfor %}
+                </table>
 
             </form>
         </div>

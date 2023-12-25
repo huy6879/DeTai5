@@ -1,5 +1,5 @@
 from app import db
-from app.models import User
+from app.models import User, Flight
 import hashlib
 
 
@@ -7,6 +7,8 @@ import hashlib
 def get_user_by_id(user_id):
     return User.query.get(user_id)
 
+def get_flight():
+    return Flight.query.all()
 
 
 def add_user(fullname, date, address, username, password, phone, cmnd, email):
