@@ -1,4 +1,6 @@
-from sqlalchemy import Column, Integer, String, Float, Boolean, ForeignKey, Enum, Date
+
+from sqlalchemy import Column, Integer, String, Float, Boolean, ForeignKey, Enum,Date, DateTime
+
 from sqlalchemy.orm import relationship
 from app import db, app
 from flask_login import UserMixin
@@ -28,7 +30,7 @@ class User(db.Model, UserMixin):
 
 class Airport(db.Model):
     id = Column(Integer, primary_key=True, autoincrement=True)
-    name = Column(String(100), nullable=True)
+    name = Column(String(100), nullable=False)
     city = Column(String(100), nullable=False, unique=True)
     # def __str__(self):
     #     return self.name
@@ -48,8 +50,7 @@ class Flight(db.Model):
 
 if __name__ == '__main__':
     with app.app_context():
-
-        # db.create_all()
+        db.create_all()
         # ap1= Airport(name='Tan Son Nhat', city='HCM')
         # ap2= Airport(name='Noi Bai', city='HN')
         # ap3= Airport(name='Da Nang', city='Da Nang')
@@ -64,6 +65,7 @@ if __name__ == '__main__':
         #            password=str(hashlib.md5('123'.encode('utf-8')).hexdigest()), phone='0945540161', email='ptd.zuxg193@gmail.com', cmnd='2154050055', user_role=UserRoleEnum.ADMIN)
         # db.session.add(u2)
         # db.session.add(u1)
+
         # c1 = Schedules(sanbaydi='Tan Son Nhat', sanbayden='Noi Bai', ngaybay=datetime.strptime('21/12/2023', '%d/%m/%Y'),
         #                gioibay='15:00PM', thoigianbay='2', ghehang1='60', ghehang2='60', sbtrunggian='khong co', thoigiandung='khong co', note='0')
         #
@@ -82,10 +84,10 @@ if __name__ == '__main__':
 #                     password=str(hashlib.md5('123'.encode('utf-8')).hexdigest()), phone='232323', email='nv1@gmail.com', cmnd='232323', user_role=UserRoleEnum.EMPLOYEE)
 #         db.session.add(u3)
 #         db.session.commit()
-        c2 = Flight(sanbaydi='Tan Son Nhat', sanbayden='Noi Bai', ngaybay=datetime.strptime('21/12/2023', '%d/%m/%Y'),
-                    gioibay='15:00PM', thoigianbay='2', ghehang1='88', ghehang2='80', sbtrunggian='đsdsa', thoigiandung='kcohong ', note='0')
-
-        db.session.add(c2)
-        db.session.commit()
+#         c2 = Flight(sanbaydi='Tan Son Nhat', sanbayden='Noi Bai', ngaybay=datetime.strptime('21/12/2023', '%d/%m/%Y'),
+#                     gioibay='15:00PM', thoigianbay='2', ghehang1='88', ghehang2='80', sbtrunggian='đsdsa', thoigiandung='kcohong ', note='0')
+#
+#         db.session.add(c2)
+#         db.session.commit()
 
 
