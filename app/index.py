@@ -4,7 +4,7 @@ import dao
 from app import db
 from app import app,login
 from flask_login import login_user, logout_user, current_user, UserMixin
-from app.models import User
+from app.models import User, Flight, Airport
 
 @app.route("/")
 def index():
@@ -121,6 +121,52 @@ def load_user(user_id):
     return dao.get_user_by_id(user_id)
 
 
+@app.route('/add_flights', methods=['get','post'])
+def add_flights():
+    airports = Airport.query.all()
+    flights = Flight.query.all()
+    err_msg = ''
+    if request.method.__eq__('POST'):
+        sanbaydi = request.form.get('airport1')
+        sanbayden = request.form.get('airport2')
+        ngaybay = request.form.get('date1')
+        gioibay = request.form.get('time1')
+        thoigianbay = request.form.get('time2')
+        ghehang1 = request.form.get('1stclass')
+        ghehang2 = request.form.get('2ndclass')
+        sbtrunggian = request.form.get('AP_TG1')
+        thoigiandung = request.form.get('pendingT')
+        note = request.form.get('note')
+
+        dao.add_flight(sanbaydi=sanbaydi,sanbayden=sanbayden,ngaybay=ngaybay,gioibay=gioibay,thoigianbay=thoigianbay,
+                       ghehang1=ghehang1,ghehang2=ghehang2,sbtrunggian=sbtrunggian,thoigiandung=thoigiandung,note=note)
+        err_msg = 'Thêm thành công'
+    else:
+        err_msg = 'Thêm không thành công'
+
+    return render_template('add_flights.html', airports=airports,flights=flights, err_msg=err_msg)
+
+@app.route("/flight_list")
+def search_flight():
+    # if request.method.__eq__('POST'):
+    # cate_id = request.args.get("flight_type")
+    # fr = request.args.get("from")
+    # to = request.args.get("to")
+    # flight = dao.get_flight(cate_id=cate_id, fr=fr, to=to)
+    # departure = request.form["departure"]
+    # arrival = request.form["arrival"]
+    # departure_date = request.form["departure_date"]
+    # return_date = request.form["return_date"]
+    # passenger_count = request.form["passenger_count"]
+    # #
+    # trip_type = "oneway"
+    # if request.form.get("trip_type") == "roundtrip":
+    #     trip_type = "roundtrip"
+    return render_template('flight_list.html')
+
+# @app.route("/flight_list" , methods=['post'])
+# def flight_list():
+#     return render_template('flight_list.html')
 
 if __name__ == '__main__':
     from app import admin

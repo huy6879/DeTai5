@@ -1,7 +1,152 @@
 {% extends 'layout/base.html' %}
 
-{% block title %}Đăng nhập{% endblock %}
-<body>
+{% block title %}OUAirlines{% endblock %}
+{% if err_msg %}
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+    <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+    </symbol>
+    <symbol id="info-fill" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16zm.93-9.412-1 4.705c-.07.34.029.533.304.533.194 0 .487-.07.686-.246l-.088.416c-.287.346-.92.598-1.465.598-.703 0-1.002-.422-.808-1.319l.738-3.468c.064-.293.006-.399-.287-.47l-.451-.081.082-.381 2.29-.287zM8 5.5a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
+    </symbol>
+    <symbol id="exclamation-triangle-fill" fill="currentColor" viewBox="0 0 16 16">
+        <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+    </symbol>
+</svg>
 
-</body>
-</html>
+<div class="alert alert-danger d-flex align-items-center" role="alert" style="
+  position: absolute;
+  top: 100px;
+  left: 85%;
+  transform: translate(-20%, -20%);
+  z-index: 1;
+">
+
+    <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:">
+        <use xlink:href="#exclamation-triangle-fill"/>
+    </svg>
+    <div>
+        {{ err_msg }}
+    </div>
+</div>
+{% endif %}
+
+{% block content %}
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-md-13 offset-md-0">
+            <form method="post" action="/add_flights" class="shadow p-4 mt-4">
+                <div class="row">
+                    <div class="col-sm-6 form-group">
+                        <label for="airport1" class="form-label">Sân bay đến:</label>
+                        <select class="form-select" id="airport1" name="airport1" required>
+                            <option selected disabled>Chọn một sân bay</option>
+                            {% for airport in airports %}
+                            <option value="{{ airport.name }}">{{ airport.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <label for="airport2" class="form-label">Sân bay đến:</label>
+                        <select class="form-select" id="airport2" name="airport2" required>
+                            <option selected disabled>Chọn một sân bay</option>
+                            {% for airport in airports %}
+                            <option value="{{ airport.name }}">{{ airport.name }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="col-sm-2 form-group">
+                        <label for="date1">Ngày bay: </label>
+                        <input type="date" class="form-control form-control-ml"
+                               id="date1" name="date1" required/>
+                    </div>
+                    <div class="col-sm-2 form-group">
+                        <label for="time1">Giời bay: </label>
+                        <input type="text" class="form-control form-control-ml"
+                               id="time1" name="time1" required/>
+                    </div>
+                    <div class="col-sm-2 form-group">
+                        <label for="time2">Thời gian bay: </label>
+                        <input type="text" class="form-control form-control-ml"
+                               id="time2" name="time2" required/>
+                    </div>
+
+                    <div class="col-sm-3 form-group">
+                        <label for="1stclass">Số lượng ghế hạng 1: </label>
+                        <input type="text" class="form-control"
+                               id="1stclass" name="1stclass" required/>
+                    </div>
+
+                    <div class="col-sm-3 form-group">
+                        <label for="2ndclass">Số lượng ghê hạng 2: </label>
+                        <input type="text" placeholder="Enter Username Here.." class="form-control"
+                               id="2ndclass" name="2ndclass" required/>
+                    </div>
+
+                    <div class="col-sm-3 form-group">
+                        <label for="AP_TG1">Sân bay trung gian: </label>
+                        <input type="text" placeholder="Sân bay trung gian 1"
+                               class="form-control"
+                               id="AP_TG1" name="AP_TG1" required/>
+                        <br>
+                        <input type="text" placeholder="Sân bay trung gian 2 (Nếu có)"
+                               class="form-control"
+                               id="AP_TG2" name="AP_TG2" required/>
+                    </div>
+
+                    <div class="col-sm-3 form-group">
+                        <label for="pendingT">Thời gian dừng: </label>
+                        <input type="number" placeholder="Thời gian dừng tối đa 30 phút"
+                               class="form-control"
+                               id="pendingT" name="pendingT" required/>
+                    </div>
+                    <div class="col-sm-6 form-group">
+                        <label for="note">Ghi chú</label>
+                        <input type="text" placeholder="Ghi chú..."
+                               class="form-control"
+                               id="note" name="note" required/>
+                    </div>
+                </div>
+                <section style="position: relative;">
+                    <div class="mb-3" style="text-align: right; position: absolute; top: -30px;right: 0px;">
+                        <button type="submit" class="btn btn-success">Tạo lịch chuyến bay</button>
+                    </div>
+                </section>
+            </form>
+            <h3 class="mt-5">Danh sách chuyến bay:</h3>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Sân bay đi</th>
+                    <th scope="col">Sân bay đến</th>
+                    <th scope="col">Ngày bay</th>
+                    <th scope="col">Giời bay</th>
+                    <th scope="col">Thời gian bay</th>
+                    <th scope="col">1st Class</th>
+                    <th scope="col">2nd Class</th>
+                    <th scope="col">Sân bay Trung gian</th>
+                    <th scope="col">Thời gian dừng</th>
+                    <th scope="col">Ghi chú</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for flight in flights %}
+                <tr>
+                    <td>{{ flight.sanbaydi }}</td>
+                    <td>{{ flight.sanbayden }}</td>
+                    <td>{{ flight.ngaybay }}</td>
+                    <td>{{ flight.gioibay }}</td>
+                    <td>{{ flight.thoigianbay }}</td>
+                    <td>{{ flight.ghehang1 }}</td>
+                    <td>{{ flight.ghehang2 }}</td>
+                    <td>{{ flight.sbtrunggian}}</td>
+                    <td>{{ flight.thoigiandung }}</td>
+                    <td>{{ flight.note }}</td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

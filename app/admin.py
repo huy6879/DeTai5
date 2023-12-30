@@ -1,4 +1,4 @@
-from app.models import User, UserRoleEnum, Schedules, Airport
+from app.models import User, UserRoleEnum, Flight, Airport
 from app import app,db
 from flask_admin import Admin
 from flask_admin.contrib.sqla import ModelView
@@ -51,7 +51,6 @@ class FlightView(AuthenticatedUser):
     @expose("/")
     def index(self):
         return self.render('admin/flight_management.html')
-
 
 
 admin.add_view(MyUserView(User, db.session))
