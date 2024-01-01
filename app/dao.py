@@ -2,8 +2,6 @@ from app import db
 from app.models import User, Flight
 import hashlib
 
-
-
 def get_user_by_id(user_id):
     return User.query.get(user_id)
 
@@ -48,3 +46,32 @@ def re_pass(id, new_password):
     password_hash = str(hashlib.md5(new_password.strip().encode('utf-8')).hexdigest())
     user.password = password_hash
     db.session.commit()
+
+def add_flight(sanbaydi, sanbayden, ngaybay, gioibay, thoigianbay, ghehang1, ghehang2, sbtrunggian, thoigiandung,note):
+    flight= Flight(sanbaydi=sanbaydi,
+                   sanbayden=sanbayden,
+                   ngaybay=ngaybay.strip(),
+                   gioibay=gioibay.strip(),
+                   thoigianbay=thoigianbay.strip(),
+                   ghehang1=ghehang1.strip(),
+                   ghehang2=ghehang2.strip(),
+                   sbtrunggian=sbtrunggian.strip(),
+                   thoigiandung=thoigiandung.strip(),
+                   note=note.strip())
+    db.session.add(flight)
+    db.session.commit()
+def get_flight(cate_id=None, fr=None, to=None):
+    flights = Flight.query.all()
+
+    if cate_id:
+        flights = [f for f in flights if f.flight_type.id == int(cate_id)]
+
+    if fr and to:
+        flights = [f for f in flights if
+                   f.departure_point.lower().find(fr.lower()) >= 0 and f.destination.lower().find(to.lower()) >= 0]
+    elif fr:
+        flights = [f for f in flights if f.departure_point.lower().find(fr.lower()) >= 0]
+    elif to:
+        flights = [f for f in flights if f.destination.lower().find(to.lower()) >= 0]
+
+    return flights

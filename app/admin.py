@@ -1,4 +1,5 @@
-from app.models import User, UserRoleEnum, Airport
+
+from app.models import User, UserRoleEnum, Airport, Flight
 import dao
 from app import app,db
 from flask_admin import Admin
@@ -36,7 +37,9 @@ class LogoutView(AuthenticatedUser):
         logout_user()
         return redirect('/user-login')
 
+
 # @app.route('/admin/flightview', methods=['post'])
+
 class FlightView(AuthenticatedUser):
     @expose("/")
     def index(self):
@@ -51,8 +54,8 @@ class FlightView(AuthenticatedUser):
         return self.render('admin/flight_management.html', Flight=flight)
 
 
-
 admin.add_view(MyUserView(User, db.session))
 admin.add_view(FlightView(name='Chuyến bay'))
 admin.add_view(MyAirPortView(Airport, db.session))
 admin.add_view(LogoutView(name='Đăng xuất'))
+
