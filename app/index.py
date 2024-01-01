@@ -6,6 +6,7 @@ from app import app,login
 from flask_login import login_user, logout_user, current_user, UserMixin
 from app.models import User, Flight, Airport
 
+
 @app.route("/")
 def index():
     return render_template('index.html')
@@ -119,6 +120,60 @@ def personal_info(user_id):
 @login.user_loader
 def load_user(user_id):
     return dao.get_user_by_id(user_id)
+
+
+@app.route('/admin/flightview/<int:flight_id>/edit', methods=['GET','POST'])
+def flight_edit(flight_id):
+    if current_user.user_role.value == 3:
+        flight = Flight.query.get(flight_id)
+        err_msg = ''
+        if request.method.__eq__('POST'):
+            D_air = request.form.get('sb1')
+            A_air = request.form.get('sb2')
+            Date = request.form.get('date')
+            T_time = request.form.get('time1')
+            T1_quantity = request.form.get('sl1')
+            T2_quantity = request.form.get('sl2')
+            I_air = request.form.get('sb3')
+            I2_air = request.form.get('sb4')
+            S_time = request.form.get('time2')
+            S2_time = request.form.get('time3')
+            Flight_time = request.form.get('time4')
+            note = request.form.get('status')
+            dao.change_flight(id=flight_id, D_air=D_air, A_air=A_air, Date=Date, T_time=T_time, T1_quantity=T1_quantity,
+                                  T2_quantity=T2_quantity, I_air=I_air, I2_air=I2_air, S_time=S_time, S2_time=S2_time, Flight_time=Flight_time, note=note)
+    return render_template('flight_edit.html', flight=flight)
+
+
+@app.route('/admin/flightview/<int:flight_id>/edit-delete', methods=['GET','POST'])
+def deleteFlight(flight_id):
+    if current_user.user_role.value == 3:
+        flight = Flight.query.get(flight_id)
+        if request.method.__eq__('POST'):
+            dao.delete_flight(flight_id)
+    return redirect('/admin/flightview/')
+
+
+
+@app.route('/admin/flightview', methods=['GET','POST'])
+def add_flight():
+    if current_user.user_role.value == 3:
+        if request.method.__eq__('POST'):
+            D_air = request.form.get('sb1')
+            A_air = request.form.get('sb2')
+            Date = request.form.get('date')
+            T_time = request.form.get('time1')
+            T1_quantity = request.form.get('quantity1')
+            T2_quantity = request.form.get('quantity2')
+            I_air = request.form.get('sb3')
+            I2_air = request.form.get('sb4')
+            S_time = request.form.get('time2')
+            S2_time = request.form.get('time3')
+            Flight_time = request.form.get('time4')
+            note = request.form.get('note')
+            dao.add_flight(D_air=D_air, A_air=A_air, Date=Date, T_time=T_time, T1_quantity=T1_quantity
+                           , T2_quantity=T2_quantity, I_air=I_air, I2_air=I2_air, S_time=S_time, S2_time=S2_time, Flight_time=Flight_time, note=note)
+        return redirect('/admin/flightview/')
 
 
 @app.route('/add_flights', methods=['get','post'])

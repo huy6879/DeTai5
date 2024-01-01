@@ -37,16 +37,18 @@ class Airport(db.Model):
 
 class Flight(db.Model):
     id = Column(Integer, primary_key=True, autoincrement=True)
-    sanbaydi = Column(String(50), nullable=False)
-    sanbayden = Column(String(50), nullable=False)
-    ngaybay = Column(Date, nullable=False)
-    gioibay = Column(String(10), nullable=False)
-    thoigianbay = Column(String(10), nullable=False)
-    ghehang1 = Column(String(5), nullable=False)
-    ghehang2 = Column(String(5), nullable=False)
-    sbtrunggian = Column(String(50), nullable=True)
-    thoigiandung = Column(String(10), nullable=True)
-    note = Column(String(100))
+    D_air = Column(String(100), nullable=False)
+    A_air = Column(String(100), nullable=False)
+    Date = Column(Date, nullable=False)
+    T_time = Column(String(50), nullable=False)
+    T1_quantity = Column(String(10), nullable=False)
+    T2_quantity = Column(String(10), nullable=False)
+    I_air = Column(String(100), nullable=True)
+    I2_air = Column(String(100), nullable=True)
+    S_time = Column(String(20), nullable=True)
+    S2_time = Column(String(20), nullable=True)
+    Flight_time = Column(String(20), nullable=True)
+    note = Column(String(50), nullable=False)
 
 if __name__ == '__main__':
     with app.app_context():
@@ -88,6 +90,10 @@ if __name__ == '__main__':
 #                     gioibay='15:00PM', thoigianbay='2', ghehang1='88', ghehang2='80', sbtrunggian='đsdsa', thoigiandung='kcohong ', note='0')
 #
 #         db.session.add(c2)
+#         db.session.commit()
+#         f2 = Flight(D_air='Phu Quoc', A_air='Vinh', Date=datetime.strptime('26/11/2003', '%d/%m/%Y'), T_time= '12:03 AM',
+#                     T1_quantity='90', T2_quantity='120', I_air='Cam Ranh', I2_air='Tan Son Nhat', S_time='130', S2_time='60', Flight_time='60', note='1')
+#         db.session.add(f2)
 #         db.session.commit()
 
 

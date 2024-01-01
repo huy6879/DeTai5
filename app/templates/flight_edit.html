@@ -1,0 +1,139 @@
+
+{% block body %}
+
+    <link rel="stylesheet" href=
+"https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src=
+"https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js">
+    </script>
+    <script src=
+"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js">
+    </script>
+    <script src=
+"https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js">
+    </script>
+
+
+<style>
+    body {
+      background-color: #F5F5F5;
+    }
+</style>
+
+
+<div style="position: absolute; top: 5%; left:3%; width: 1450px; height: 950px; background-color: white; text-align: center; border-radius: 30px;" >
+        <div class="container">
+            <form method="POST" action="/admin/flightview/{{flight.id}}/edit">
+                <div class="form-group">
+                    <label style="position: absolute;  top: 15px; left: 5%; ">Sân bay đi :<span class="text-danger"
+                                                                                                style="color:red;">*</span></label>
+                    <input type="text" class="form-control"
+                           style="position: absolute; width: 1300px; top: 45px; left: 5%; height: 35px;"
+                           id="D_air" name="sb1" required value="{{flight.D_air}}">
+                </div>
+                <div class="form-group">
+                    <label style="position: absolute;  top: 85px; left: 5%; ">Sân bay đến :<span class="text-danger"
+                                                                                                 style="color:red;">*</span></label>
+                    <input type="text" class="form-control"
+                           style="position: absolute; width: 1300px; top: 115px; left: 5%; height: 35px;"
+                           id="A_air" name="sb2" required value="{{flight.A_air}}">
+                </div>
+                <div class="form-group">
+                    <label style="position: absolute;  top: 155px; left: 5%; ">Ngày :<span class="text-danger"
+                                                                                           style="color:red;">*</span></label>
+                    <input type="Date" class="form-control"
+                           style="position: absolute; width: 1300px; top: 185px; left: 5%; height: 35px;"
+                           id="Date" name="date" required value="{{flight.Date}}">
+                </div>
+                <div class="form-group">
+                    <label style="position: absolute;  top: 225px; left: 5%; ">Thời gian khởi hành :<span
+                            class="text-danger" style="color:red;">*</span></label>
+                    <input type="text" class="form-control"
+                           style="position: absolute; width: 1300px; top: 255px; left: 5%; height: 35px;"
+                           id="time1" name="time1" required value="{{flight.T_time}}">
+                </div>
+
+                <div class="form-group">
+                    <label style="position: absolute;  top: 295px; left: 5%; ">Vé hạng 1 :<span class="text-danger"
+                                                                                                style="color:red;">*</span></label>
+                    <input type="text" class="form-control"
+                           style="position: absolute; width: 1300px; top: 325px; left: 5%; height: 35px;"
+                           id="sl1" name="sl1" required value="{{flight.T1_quantity}}">
+                </div>
+                <div class="form-group">
+                    <label style="position: absolute;  top: 365px; left: 5%; ">Vé hạng 2 :<span class="text-danger"
+                                                                                                style="color:red;">*</span></label>
+                    <input type="text" class="form-control"
+                           style="position: absolute; width: 1300px; top: 395px; left: 5%; height: 35px;"
+                           id="sl2" name="sl2" required value="{{flight.T2_quantity}}">
+                </div>
+                <div class="form-group">
+                    <label style="position: absolute;  top: 435px; left: 5%; ">Sân bay trung gian :<span
+                            class="text-danger" style="color:red;">*</span></label>
+                    <input type="text" class="form-control"
+                           style="position: absolute; width: 1300px; top: 465px; left: 5%; height: 35px;"
+                           id="sb3" name="sb3" required value="{{flight.I_air}}">
+                </div>
+                <div class="form-group">
+                    <label style="position: absolute;  top: 505px; left: 5%; ">Sân bay trung gian 2:<span
+                            class="text-danger" style="color:red;">*</span></label>
+                    <input type="text" class="form-control"
+                           style="position: absolute; width: 1300px; top: 535px; left: 5%; height: 35px;"
+                           id="sb4" name="sb4" value="{{flight.I2_air}}">
+                </div>
+
+                <div class="form-group">
+                    <label style="position: absolute;  top: 575px; left: 5%; ">Thời gian dừng 1 :<span
+                            class="text-danger" style="color:red;">*</span></label>
+                    <input type="text" class="form-control"
+                           style="position: absolute; width: 1300px; top: 605px; left: 5%; height: 35px;"
+                           id="time2" name="time2" required value="{{flight.S_time}}">
+                </div>
+
+                <div class="form-group">
+                    <label style="position: absolute;  top: 650px; left: 5%; ">Thời gian dừng 2 :<span
+                            class="text-danger" style="color:red;">*</span></label>
+                    <input type="text" class="form-control"
+                           style="position: absolute; width: 1300px; top: 680px; left: 5%; height: 35px;"
+                           id="time3" name="time3" value="{{flight.S2_time}}">
+                </div>
+
+                <div class="form-group">
+                    <label style="position: absolute;  top: 720px; left: 5%; ">Thời gian bay :<span class="text-danger"
+                                                                                                 style="color:red;">*</span></label>
+                    <input type="text" class="form-control"
+                           style="position: absolute; width: 1300px; top: 750px; left: 5%; height: 35px;"
+                           id="time4" name="time4" required value="{{flight.Flight_time}}">
+                </div>
+
+                <div class="form-group">
+                    <label style="position: absolute;  top: 790px; left: 5%; ">Tình trạng :<span class="text-danger"
+                                                                                                 style="color:red;">*</span></label>
+                    <input type="text" class="form-control"
+                           style="position: absolute; width: 1300px; top: 820px; left: 5%; height: 35px;"
+                           id="status" name="status" required value="{{flight.note}}">
+                </div>
+
+                <button type="submit" class="btn bg-primary"
+                        style="position: absolute; color: white;  top: 870px; left: 5%; ">
+                    Thay đổi
+                </button>
+
+                <a href="/admin/flightview/">
+                    <button type="button" class="btn bg-success"
+                            style="position: absolute; color: white; top: 870px; left: 19%; width: 87px;">
+                        Quay lại
+                    </button>
+                </a>
+            </form>
+
+            <form method="POST" action="/admin/flightview/{{flight.id}}/edit-delete">
+                    <button  type="submit" class="btn bg-danger"
+                            style="position: absolute; color: white;  top: 870px; left: 12%; width: 87px;">
+                        Xóa
+                    </button>
+            </form>
+    </div>
+</div>
+
+{% endblock %}
