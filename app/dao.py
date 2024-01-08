@@ -47,6 +47,7 @@ def re_pass(id, new_password):
     user.password = password_hash
     db.session.commit()
 
+
 def add_flight(departure, arrival, sanbaydi, sanbayden, ngaybay, gioibay, thoigianbay, ghehang1, ghehang2, sbtrunggian, thoigiandung,note):
     flight= Flight(departure=departure,
                    arrival=arrival,
@@ -72,3 +73,4 @@ def get_flight(fr=None, to=None, date=None):
     elif to:
         flights = [f for f in flights if f.arrival.lower().find(to.lower()) >= 0]
     return flights
+

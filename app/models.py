@@ -37,6 +37,7 @@ class Airport(db.Model):
 
 class Flight(db.Model):
     id = Column(Integer, primary_key=True, autoincrement=True)
+
     departure = Column(String(50), nullable=False)
     arrival = Column(String(50), nullable=False)
     sanbaydi = Column(String(50), nullable=False)
@@ -49,6 +50,7 @@ class Flight(db.Model):
     sbtrunggian = Column(String(50), nullable=True)
     thoigiandung = Column(String(10), nullable=True)
     note = Column(String(100))
+
 
 if __name__ == '__main__':
     with app.app_context():
@@ -89,6 +91,7 @@ if __name__ == '__main__':
 #             c1 = Flight(departure='Ho Chi Minh', arrival='Ha Noi', sanbaydi='Tan Son Nhat', sanbayden='Noi Bai', ngaybay=datetime.strptime('21/12/2023', '%d/%m/%Y'),
 #                         gioibay='15:00PM', thoigianbay='2', ghehang1='88', ghehang2='80', sbtrunggian='đsdsa', thoigiandung='kcohong ', note='0')
 #
+
 #             db.session.add(c1)
 #             db.session.commit()
             c2 = Flight(departure='Ho Chi Minh', arrival='Da Nang', sanbaydi='Tan Son Nhat', sanbayden='SBQT Da Nang',
@@ -98,5 +101,6 @@ if __name__ == '__main__':
 
             db.session.add(c2)
             db.session.commit()
+
 
 
