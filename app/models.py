@@ -37,6 +37,8 @@ class Airport(db.Model):
 
 class Flight(db.Model):
     id = Column(Integer, primary_key=True, autoincrement=True)
+    departure = Column(String(50), nullable=False)
+    arrival = Column(String(50), nullable=False)
     sanbaydi = Column(String(50), nullable=False)
     sanbayden = Column(String(50), nullable=False)
     ngaybay = Column(Date, nullable=False)
@@ -50,7 +52,7 @@ class Flight(db.Model):
 
 if __name__ == '__main__':
     with app.app_context():
-        db.create_all()
+        # db.create_all()
         # ap1= Airport(name='Tan Son Nhat', city='HCM')
         # ap2= Airport(name='Noi Bai', city='HN')
         # ap3= Airport(name='Da Nang', city='Da Nang')
@@ -84,10 +86,17 @@ if __name__ == '__main__':
 #                     password=str(hashlib.md5('123'.encode('utf-8')).hexdigest()), phone='232323', email='nv1@gmail.com', cmnd='232323', user_role=UserRoleEnum.EMPLOYEE)
 #         db.session.add(u3)
 #         db.session.commit()
-#         c2 = Flight(sanbaydi='Tan Son Nhat', sanbayden='Noi Bai', ngaybay=datetime.strptime('21/12/2023', '%d/%m/%Y'),
-#                     gioibay='15:00PM', thoigianbay='2', ghehang1='88', ghehang2='80', sbtrunggian='đsdsa', thoigiandung='kcohong ', note='0')
+#             c1 = Flight(departure='Ho Chi Minh', arrival='Ha Noi', sanbaydi='Tan Son Nhat', sanbayden='Noi Bai', ngaybay=datetime.strptime('21/12/2023', '%d/%m/%Y'),
+#                         gioibay='15:00PM', thoigianbay='2', ghehang1='88', ghehang2='80', sbtrunggian='đsdsa', thoigiandung='kcohong ', note='0')
 #
-#         db.session.add(c2)
-#         db.session.commit()
+#             db.session.add(c1)
+#             db.session.commit()
+            c2 = Flight(departure='Ho Chi Minh', arrival='Da Nang', sanbaydi='Tan Son Nhat', sanbayden='SBQT Da Nang',
+                ngaybay=datetime.strptime('8/1/2024', '%d/%m/%Y'),
+                gioibay='20:00', thoigianbay='2', ghehang1='88', ghehang2='80', sbtrunggian='Không có',
+                thoigiandung='Không Có ', note='0')
+
+            db.session.add(c2)
+            db.session.commit()
 
 

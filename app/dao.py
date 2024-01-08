@@ -47,8 +47,10 @@ def re_pass(id, new_password):
     user.password = password_hash
     db.session.commit()
 
-def add_flight(sanbaydi, sanbayden, ngaybay, gioibay, thoigianbay, ghehang1, ghehang2, sbtrunggian, thoigiandung,note):
-    flight= Flight(sanbaydi=sanbaydi,
+def add_flight(departure, arrival, sanbaydi, sanbayden, ngaybay, gioibay, thoigianbay, ghehang1, ghehang2, sbtrunggian, thoigiandung,note):
+    flight= Flight(departure=departure,
+                   arrival=arrival,
+                   sanbaydi=sanbaydi,
                    sanbayden=sanbayden,
                    ngaybay=ngaybay.strip(),
                    gioibay=gioibay.strip(),
@@ -60,18 +62,13 @@ def add_flight(sanbaydi, sanbayden, ngaybay, gioibay, thoigianbay, ghehang1, ghe
                    note=note.strip())
     db.session.add(flight)
     db.session.commit()
-def get_flight(cate_id=None, fr=None, to=None):
+def get_flight(fr=None, to=None, date=None):
     flights = Flight.query.all()
-
-    if cate_id:
-        flights = [f for f in flights if f.flight_type.id == int(cate_id)]
-
-    if fr and to:
+    if fr and to and date:
         flights = [f for f in flights if
-                   f.departure_point.lower().find(fr.lower()) >= 0 and f.destination.lower().find(to.lower()) >= 0]
+                   f.departure.lower().find(fr.lower()) >= 0 and f.arrival.lower().find(to.lower()) >= 0]
     elif fr:
-        flights = [f for f in flights if f.departure_point.lower().find(fr.lower()) >= 0]
+        flights = [f for f in flights if f.departure.lower().find(fr.lower()) >= 0]
     elif to:
-        flights = [f for f in flights if f.destination.lower().find(to.lower()) >= 0]
-
+        flights = [f for f in flights if f.arrival.lower().find(to.lower()) >= 0]
     return flights

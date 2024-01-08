@@ -1,6 +1,180 @@
-{% extends 'layout/base.html' %}
-{% block content %}
-<h1>
-    List
-</h1>
-{% endblock %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="{{ url_for('static', filename='CSS/flight_list.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='Image/background.jpg') }}" rel="stylesheet">
+</head>
+<body>
+{% include 'layout/header.html' %}
+<div class="Layout-main">
+    <div class="background">
+        <div class="container-flight">
+            <div class="Card-card FlightSearchNavigation_wrapper">
+                <div class="search-container-2">
+                    <form method="GET" action="/flight_list">
+                        <div class="form-group">
+                            <input type="checkbox" id="roundtrip" name="trip_type" value="roundtrip">
+                            <label for="roundtrip" style="font-size: 18px">Khứ hồi</label>
+                        </div>
+                        <!--                        <div class="form-group">-->
+                        <!--                          <input type="checkbox" id="oneway" name="oneway" value="oneway">-->
+                        <!--                          <label for="oneway">Một chiều</label>-->
+                        <!--                        </div>-->
+
+                        <div style="display: grid; grid-template-columns: repeat(2,1fr); grid-row-gap: 24px; grid-column-gap: 16px; justify-content: center">
+                            <div class="col-sm-12 form group">
+                                <label for="departure" class="form-label">Điểm khởi hành:</label>
+                                <input type="text" class="form-control" id="departure" name="departure" required>
+                            </div>
+                            <div class="col-sm-12 form group">
+                                <label for="arrival" class="form-label">Điểm đến:</label>
+                                <input type="text" class="form-control" id="arrival" name="arrival" required>
+                            </div>
+                        </div>
+                        <div style="display: grid; grid-template-columns: repeat(2,1fr); grid-row-gap: 24px; grid-column-gap: 16px;">
+                            <div style="display: grid; grid-template-columns: repeat(2,1fr); grid-row-gap: 24px; grid-column-gap: 16px;">
+                                <div class="col-sm-12 form group">
+                                    <label for="departure_Date" class="form-label">Ngày đi:</label>
+                                    <input type="date" class="form-control" id="departure_Date" name="departure_date"
+                                           required>
+                                </div>
+                                <div class="col-sm-12 form group hidden" id="return_date_container">
+
+                                    <label for="return_date" class="form-label">Ngày về:</label>
+                                    <input type="date" class="form-control" id="return_date" name="return_date"
+                                           required>
+                                </div>
+                            </div>
+                            <div style="display: grid; grid-template-columns: repeat(2,1fr); grid-row-gap: 24px; grid-column-gap: 16px;">
+                                <div class="col-sm-12 form group">
+                                    <label for="numPassengers" class="form-label">Hành khách:</label>
+                                    <input type="number" class="form-control" id="numPassengers" name="num_passengers"
+                                           required>
+                                </div>
+                                <button type="submit" class="btn btn-warning"
+                                        style="position: relative; top: 30px; height: 40px;">Tìm Chuyến Bay
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                    <script>
+                        const roundtripCheckbox = document.getElementById("roundtrip");
+                        const onewayCheckbox = document.getElementById("oneway");
+                        const returnDateContainer = document.getElementById("return_date_container");
+
+                        roundtripCheckbox.addEventListener("change", () => {
+                          if (roundtripCheckbox.checked) {
+                            returnDateContainer.style.display = "block";
+                          } else {
+                            returnDateContainer.style.display = "none";
+                          }
+                        });
+                    </script>
+                </div>
+            </div>
+            <div class="cha">
+                <div class="con1">
+                    <div class="chau3">
+                        <label style="color: #364681;">THÔNG TIN ĐẶT CHỖ</label>
+                    </div>
+                    <div class="chau5">
+                        <div class="lb_flight">
+                            <label class="chat1" style="font-size: 20px;font-weight: bold;">SGN</label>
+                            <div class="container-icon">
+                                <img src="/static/Image/blue-plane-icon.png" style="width 50%; height:50%">
+                            </div>
+                            <label class="chat1" style="font-size: 20px;font-weight: bold;">HAN</label>
+                        </div>
+                        <div class="lb_flight">
+                            <label>gioiBay, ngaybay</label>
+                        </div>
+                    </div>
+                    <div class="chau4">
+                    </div>
+                    <div class="chau6">
+                        <div class="chau6-1">
+                            <label style="font-weight: bold; color: #364681;">Tổng:</label>
+                            <label>1.500.000VND</label>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="con2">
+                    <div class="Flightscard_header">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200">
+                            <image xlink:href="/static/Image/logo-OUAir.png" width="80" height="80"/>
+                        </svg>
+                        <script>
+                            // Lấy tham số từ URL
+                            const urlParams = new URLSearchParams(window.location.search);
+                            const diemDi = urlParams.get('departure');
+                            const diemDen = urlParams.get('arrival');
+
+                            // Kiểm tra xem có tham số không và hiển thị thông tin tương ứng
+                            if (diemDi && diemDen) {
+                                document.write(`<p>Điểm Đi: ${departure}</p>`);
+                                document.write(`<p>Điểm Đến: ${arrival}</p>`);
+
+                                // Thực hiện xử lý danh sách chuyến bay tại đây
+                                // ...
+
+                        </script>
+                        <div class="Flightscard_header_details">
+                            <div class="Flightscard_header_lb">
+                                <label style="color: #364681;" >{{ fr }}</label>
+                                <div class="container-icon" style="width: 10%">
+                                    <img src="/static/Image/right-arrow.png" style="width 50%; height:50%">
+                                </div>
+                                <label style="color: #364681;">{{ to }}</label>
+                            </div>
+                            <div class="Flightscard_header_lb" style="font-weight: normal; font-size: 15px;">
+                                <label>Thứ 2 | 08/01/2024</label>
+                            </div>
+                        </div>
+                    </div>
+                    {% for f in flight %}
+                    <div class="chau">
+                            <div class="chau1">
+                                <div class="chat">
+                                    <div class="chat1" style="font-weight: bold;">
+                                        <label style="color: #364681;">{{ f.departure }}</label>
+                                    </div>
+                                    <div class="chat1">
+                                        <label class="font-new">22:0</label>
+                                    </div>
+                                </div>
+                                <div class="container-icon">
+                                    <img src="/static/Image/yellow-plane-icon.png" style="width 50%; height:50%">
+                                </div>
+                                <div class="chat">
+                                    <div class="chat1" style="font-weight: bold;">
+                                        <label style="color: #364681;">{{ f.arrival }}</label>
+                                    </div>
+                                    <div class="chat1">
+                                        <label>24:0</label>
+                                    </div>
+                                </div>
+                                <div class="chat" style="justify-content: center; align-items: center; ">
+                                    <button type="submit" class="btn-chon">Chọn</button>
+                                </div>
+
+                            </div>
+                            <div class="chau2">
+
+                                <div class="chit"></div>
+                                <hr>
+                                <div class="chit"></div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% include 'layout/footer.html' %}
+</body>
+
+</html>

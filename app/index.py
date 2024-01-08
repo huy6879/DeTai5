@@ -1,5 +1,5 @@
 import time
-from flask import render_template, request, redirect
+from flask import render_template, request, redirect, session
 import dao
 from app import db
 from app import app,login
@@ -148,26 +148,21 @@ def add_flights():
 
 @app.route("/flight_list")
 def search_flight():
-    # if request.method.__eq__('POST'):
-    # cate_id = request.args.get("flight_type")
-    # fr = request.args.get("from")
-    # to = request.args.get("to")
-    # flight = dao.get_flight(cate_id=cate_id, fr=fr, to=to)
-    # departure = request.form["departure"]
-    # arrival = request.form["arrival"]
-    # departure_date = request.form["departure_date"]
-    # return_date = request.form["return_date"]
-    # passenger_count = request.form["passenger_count"]
-    # #
-    # trip_type = "oneway"
-    # if request.form.get("trip_type") == "roundtrip":
-    #     trip_type = "roundtrip"
-    return render_template('flight_list.html')
+
+    fr = request.args.get("departure")
+    to = request.args.get("arrival")
+    flight = dao.get_flight(fr=fr, to=to)
+    # session['From'] = fr
+    # session['To'] = to
+    return render_template('flight_list.html', flight=flight, fr=fr, to=to)
 
 # @app.route("/flight_list" , methods=['post'])
 # def flight_list():
 #     return render_template('flight_list.html')
 
+# @app.route("/test.html")
+# def test():
+#     return render_template('test.html')
 if __name__ == '__main__':
     from app import admin
     app.run(debug=True)

@@ -1,0 +1,38 @@
+    .banner {
+        height: 550px;
+        width: 100%;
+        top: 150px;
+        left: 300px;
+        background-image: url("https://i.ibb.co/BBk5CG5/airplane-isolated-cloud-sky.jpg");
+        background-size: 100% 100%;
+    }
+    body {
+        background-color: #f8f9fa;
+    }
+    .search-container {
+        position: relative;
+        top: -150px;
+        background-color: white;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        bottom: -350px;
+        transform: translateX(-50%);
+        left: 50%;
+        width: 700px;
+    }
+    .hidden{
+        display: none;
+    }
+    .center-line {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Chiều cao 100% của viewport */
+        }
+
+    .line {
+            width: 80%; /* Chiều rộng của đường kẻ ngang */
+            height: 2px; /* Độ dày của đường kẻ ngang */
+            background-color: #000; /* Màu sắc của đường kẻ ngang */
+    }
