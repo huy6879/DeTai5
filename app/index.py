@@ -192,32 +192,23 @@ def add_flights():
         sbtrunggian = request.form.get('AP_TG1')
         thoigiandung = request.form.get('pendingT')
         note = request.form.get('note')
-
+        flightRoute_id = request.form.get('route')
         dao.add_flight(sanbaydi=sanbaydi,sanbayden=sanbayden,ngaybay=ngaybay,gioibay=gioibay,thoigianbay=thoigianbay,
                        ghehang1=ghehang1,ghehang2=ghehang2,sbtrunggian=sbtrunggian,thoigiandung=thoigiandung,note=note)
         err_msg = 'Thêm thành công'
     else:
         err_msg = 'Thêm không thành công'
+    return render_template('add_flights.html', airports=airports,flights=flights,err_msg=err_msg)
 
-    return render_template('add_flights.html', airports=airports,flights=flights, err_msg=err_msg)
-
-@app.route("/flight_list")
+@app.route("/flight_list", methods=['get'])
 def search_flight():
+    departure = request.args.get("departure")
+    arrival = request.args.get("arrival")
+    departure_date = request.args.get("departure_date")
+    flights = Flight.query.filter_by(departure=departure, arrival=arrival, ngaybay=departure_date).all()
 
-    fr = request.args.get("departure")
-    to = request.args.get("arrival")
-    flight = dao.get_flight(fr=fr, to=to)
-    # session['From'] = fr
-    # session['To'] = to
-    return render_template('flight_list.html', flight=flight, fr=fr, to=to)
+    return render_template('flight_list.html', flights=flights, departure=departure, arrival=arrival, departure_date=departure_date)
 
-# @app.route("/flight_list" , methods=['post'])
-# def flight_list():
-#     return render_template('flight_list.html')
-
-# @app.route("/test.html")
-# def test():
-#     return render_template('test.html')
 if __name__ == '__main__':
     from app import admin
     app.run(debug=True)

@@ -106,6 +106,15 @@
                                class="form-control"
                                id="note" name="note" required/>
                     </div>
+                    <div class="col-sm-6 form-group">
+                        <label for="route" class="form-label">Ma tuyến bay:</label>
+                        <select class="form-select" id="route" name="route" required>
+                            <option selected disabled>Chọn mã tuyến bay</option>
+                            {% for r in flightRoute %}
+                            <option value="{{ r.id }}">{{ r.id }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
                 </div>
                 <section style="position: relative;">
                     <div class="mb-3" style="text-align: right; position: absolute; top: -30px;right: 0px;">

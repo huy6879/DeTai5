@@ -48,7 +48,7 @@ def re_pass(id, new_password):
     db.session.commit()
 
 
-def add_flight(departure, arrival, sanbaydi, sanbayden, ngaybay, gioibay, thoigianbay, ghehang1, ghehang2, sbtrunggian, thoigiandung,note):
+def add_flight(departure, arrival, sanbaydi, sanbayden, ngaybay, gioibay, thoigianbay, ghehang1, ghehang2, sbtrunggian, thoigiandung,note, flightRoute_id):
     flight= Flight(departure=departure,
                    arrival=arrival,
                    sanbaydi=sanbaydi,
@@ -63,14 +63,14 @@ def add_flight(departure, arrival, sanbaydi, sanbayden, ngaybay, gioibay, thoigi
                    note=note.strip())
     db.session.add(flight)
     db.session.commit()
-def get_flight(fr=None, to=None, date=None):
+def get_flight(fr, to, date):
+    # existing_departure = Flight.query.filter_by(departure=departure).first()
+    # existing_arrival = Flight.query.filter_by(arrival=arrival).all()
+    # existing_ngaybay = Flight.query.filter_by(ngaybay=ngaybay).first()
+    # return existing_departure is not None
     flights = Flight.query.all()
     if fr and to and date:
         flights = [f for f in flights if
-                   f.departure.lower().find(fr.lower()) >= 0 and f.arrival.lower().find(to.lower()) >= 0]
-    elif fr:
-        flights = [f for f in flights if f.departure.lower().find(fr.lower()) >= 0]
-    elif to:
-        flights = [f for f in flights if f.arrival.lower().find(to.lower()) >= 0]
+                   f.departure.lower().find(fr.lower()) >= 0 and f.arrival.lower().find(to.lower()) >= 0 and f.date == date]
     return flights
 
