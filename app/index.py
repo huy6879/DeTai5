@@ -1,10 +1,11 @@
 import time
-from flask import render_template, request, redirect
-import dao
+from flask import render_template, request, redirect, session
+import dao, utils
 from app import db
 from app import app,login
 from flask_login import login_user, logout_user, current_user, UserMixin
-from app.models import User, Flight, Airport
+from app.models import User, Flight
+
 
 
 @app.route("/")
@@ -31,6 +32,59 @@ def user_signin():
 
     return render_template('login.html', err_msg=err_msg)
 
+
+User
+@app.route("/forgot-password", methods=['get','post'])
+def forgot_pass():
+    err_msg = ''
+    if request.method == 'POST':
+        user_email = request.form['email']
+        email = dao.is_email_exists(user_email)
+        if email:
+                otp = utils.generate_otp()
+                session['otp'] = otp
+                session['email'] = user_email
+                utils.send_mail(user_email,otp)
+                return redirect('/forgot-password/verify')
+        else:
+            err_msg = 'Email không tồn tại!! Vui lòng thử lại. '
+    return render_template('forgot_pass.html',err_msg=err_msg)
+
+
+
+@app.route("/forgot-password/verify", methods=['get', 'post'])
+def confirm_vc():
+    err_msg = ''
+    if request.method == 'POST':
+        otp_code = request.form['otp']
+        stored_code = session['otp']
+        if otp_code == stored_code:
+            return redirect("/forgot-password/verify/update-pass")
+        else:
+            err_msg = 'OTP không hợp lệ !! Vui lòng thử lại.'
+    return render_template('confirm_vc.html', err_msg=err_msg)
+
+
+@app.route("/forgot-password/verify/update-pass", methods=['get', 'post'])
+def update_pass():
+    err_msg = ''
+    if request.method == 'POST':
+        new_password = request.form.get('new_password')
+        confirm = request.form.get('confirm')
+        email = session['email']
+        try:
+            if len(new_password) < 8:
+                raise Exception('Mật khẩu phải có ít nhất 8 ký tự!')
+            elif new_password.strip().__eq__(confirm.strip()):
+                dao.change_pass_by_email(email=email,new_password=new_password)
+                session.pop('email', None)
+                session.pop('otp', None)
+                return redirect('/user-login')
+            else:
+                err_msg = 'Mật khẩu không trùng khớp!'
+        except Exception as ex:
+            err_msg = 'He thong dang co loi : ' + str(ex)
+    return render_template('update_pass_forgot.html', err_msg=err_msg)
 
 
 @app.route('/register', methods=['get','post'])
@@ -171,14 +225,16 @@ def add_flight():
             S2_time = request.form.get('time3')
             Flight_time = request.form.get('time4')
             note = request.form.get('note')
+            flightRoute_id = request.form.get('route')
+
             dao.add_flight(D_air=D_air, A_air=A_air, Date=Date, T_time=T_time, T1_quantity=T1_quantity
-                           , T2_quantity=T2_quantity, I_air=I_air, I2_air=I2_air, S_time=S_time, S2_time=S2_time, Flight_time=Flight_time, note=note)
+                           , T2_quantity=T2_quantity, I_air=I_air, I2_air=I2_air, S_time=S_time, S2_time=S2_time, Flight_time=Flight_time, note=note, flightRoute_id=flightRoute_id)
         return redirect('/admin/flightview/')
 
 
 @app.route('/add_flights', methods=['get','post'])
 def add_flights():
-    airports = Airport.query.all()
+    # airports = Airport.query.all()
     flights = Flight.query.all()
     err_msg = ''
     if request.method.__eq__('POST'):
@@ -222,6 +278,9 @@ def search_flight():
 # @app.route("/flight_list" , methods=['post'])
 # def flight_list():
 #     return render_template('flight_list.html')
+
+
+
 
 if __name__ == '__main__':
     from app import admin

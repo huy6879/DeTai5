@@ -1,9 +1,24 @@
-from app import db
+from app import db, app
 from app.models import User, Flight
 import hashlib
+from sqlalchemy import func
+
 
 def get_user_by_id(user_id):
     return User.query.get(user_id)
+
+# def get_user_by_email(email):
+#     return User.query.filter_by(email=email).first()
+
+
+
+def change_pass_by_email(email, new_password):
+    user = db.session.query(User).filter_by(email=email).first()
+    password_hash = str(hashlib.md5(new_password.strip().encode('utf-8')).hexdigest())
+    user.password = password_hash
+    db.session.commit()
+
+
 
 def get_flight():
     return Flight.query.all()
@@ -48,9 +63,9 @@ def re_pass(id, new_password):
     db.session.commit()
 
 
-def add_flight(D_air, A_air, Date,T_time,T1_quantity,T2_quantity,I_air,I2_air,S_time, S2_time, Flight_time, note):
+def add_flight(D_air, A_air, Date,T_time,T1_quantity,T2_quantity,I_air,I2_air,S_time, S2_time, Flight_time, note, flightRoute_id):
     flight = Flight(D_air=D_air,A_air=A_air,Date=Date,T_time=T_time,T1_quantity=T1_quantity,
-                    T2_quantity=T2_quantity, I_air=I_air, I2_air=I2_air, S_time=S_time,S2_time=S2_time,Flight_time=Flight_time,note=note)
+                    T2_quantity=T2_quantity, I_air=I_air, I2_air=I2_air, S_time=S_time,S2_time=S2_time,Flight_time=Flight_time, note=note, flightRoute_id=flightRoute_id)
     db.session.add(flight)
     db.session.commit()
 
@@ -76,6 +91,10 @@ def delete_flight(id):
     flight = db.session.query(Flight).filter_by(id=id).first()
     db.session.delete(flight)
     db.session.commit()
+
+
+
+
 
 # def add_flight(sanbaydi, sanbayden, ngaybay, gioibay, thoigianbay, ghehang1, ghehang2, sbtrunggian, thoigiandung,note):
 #     flight= Flight(sanbaydi=sanbaydi,
