@@ -1,9 +1,24 @@
-from app import db
+from app import db, app
 from app.models import User, Flight
 import hashlib
+from sqlalchemy import func
+
 
 def get_user_by_id(user_id):
     return User.query.get(user_id)
+
+# def get_user_by_email(email):
+#     return User.query.filter_by(email=email).first()
+
+
+
+def change_pass_by_email(email, new_password):
+    user = db.session.query(User).filter_by(email=email).first()
+    password_hash = str(hashlib.md5(new_password.strip().encode('utf-8')).hexdigest())
+    user.password = password_hash
+    db.session.commit()
+
+
 
 def get_flight():
     return Flight.query.all()
@@ -48,29 +63,67 @@ def re_pass(id, new_password):
     db.session.commit()
 
 
-def add_flight(departure, arrival, sanbaydi, sanbayden, ngaybay, gioibay, thoigianbay, ghehang1, ghehang2, sbtrunggian, thoigiandung,note, flightRoute_id):
-    flight= Flight(departure=departure,
-                   arrival=arrival,
-                   sanbaydi=sanbaydi,
-                   sanbayden=sanbayden,
-                   ngaybay=ngaybay.strip(),
-                   gioibay=gioibay.strip(),
-                   thoigianbay=thoigianbay.strip(),
-                   ghehang1=ghehang1.strip(),
-                   ghehang2=ghehang2.strip(),
-                   sbtrunggian=sbtrunggian.strip(),
-                   thoigiandung=thoigiandung.strip(),
-                   note=note.strip())
+def add_flight(D_air, A_air, Date,T_time, E_time, T1_quantity,T2_quantity,I_air,I2_air,S_time, S2_time, Flight_time, note, flightRoute_id):
+    flight = Flight(D_air=D_air,A_air=A_air,Date=Date,T_time=T_time, E_time=E_time, T1_quantity=T1_quantity,
+                    T2_quantity=T2_quantity, I_air=I_air, I2_air=I2_air, S_time=S_time,S2_time=S2_time,Flight_time=Flight_time, note=note, flightRoute_id=flightRoute_id)
     db.session.add(flight)
     db.session.commit()
-def get_flight(fr, to, date):
-    # existing_departure = Flight.query.filter_by(departure=departure).first()
-    # existing_arrival = Flight.query.filter_by(arrival=arrival).all()
-    # existing_ngaybay = Flight.query.filter_by(ngaybay=ngaybay).first()
-    # return existing_departure is not None
-    flights = Flight.query.all()
-    if fr and to and date:
-        flights = [f for f in flights if
-                   f.departure.lower().find(fr.lower()) >= 0 and f.arrival.lower().find(to.lower()) >= 0 and f.date == date]
-    return flights
 
+
+
+def change_flight(id, D_air, A_air, Date, T_time, T1_quantity, T2_quantity, I_air, I2_air, S_time, S2_time, Flight_time, note):
+    flight = db.session.query(Flight).filter_by(id=id).first()
+    flight.D_air = D_air
+    flight.A_air = A_air
+    flight.Date = Date
+    flight.T_time = T_time
+    flight.T1_quantity = T1_quantity
+    flight.T2_quantity = T2_quantity
+    flight.I_air = I_air
+    flight.I2_air = I2_air
+    flight.S_time = S_time
+    flight.S2_time = S2_time
+    flight.note = note
+    flight.Flight_time = Flight_time
+    db.session.commit()
+
+
+def delete_flight(id):
+    flight = db.session.query(Flight).filter_by(id=id).first()
+    db.session.delete(flight)
+    db.session.commit()
+
+
+
+
+
+# def add_flight(sanbaydi, sanbayden, ngaybay, gioibay, thoigianbay, ghehang1, ghehang2, sbtrunggian, thoigiandung,note):
+#     flight= Flight(sanbaydi=sanbaydi,
+#                    sanbayden=sanbayden,
+#                    ngaybay=ngaybay.strip(),
+#                    gioibay=gioibay.strip(),
+#                    thoigianbay=thoigianbay.strip(),
+#                    ghehang1=ghehang1.strip(),
+#                    ghehang2=ghehang2.strip(),
+#                    sbtrunggian=sbtrunggian.strip(),
+#                    thoigiandung=thoigiandung.strip(),
+#                    note=note.strip())
+#     db.session.add(flight)
+#     db.session.commit()
+
+
+# def get_flight(cate_id=None, fr=None, to=None):
+#     flights = Flight.query.all()
+#
+#     if cate_id:
+#         flights = [f for f in flights if f.flight_type.id == int(cate_id)]
+#
+#     if fr and to:
+#         flights = [f for f in flights if
+#                    f.departure_point.lower().find(fr.lower()) >= 0 and f.destination.lower().find(to.lower()) >= 0]
+#     elif fr:
+#         flights = [f for f in flights if f.departure_point.lower().find(fr.lower()) >= 0]
+#     elif to:
+#         flights = [f for f in flights if f.destination.lower().find(to.lower()) >= 0]
+#
+#     return flights

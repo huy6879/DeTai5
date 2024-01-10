@@ -141,15 +141,24 @@
                 <tbody>
                 {% for flight in flights %}
                 <tr>
-                    <td>{{ flight.sanbaydi }}</td>
-                    <td>{{ flight.sanbayden }}</td>
-                    <td>{{ flight.ngaybay }}</td>
-                    <td>{{ flight.gioibay }}</td>
-                    <td>{{ flight.thoigianbay }}</td>
-                    <td>{{ flight.ghehang1 }}</td>
-                    <td>{{ flight.ghehang2 }}</td>
-                    <td>{{ flight.sbtrunggian}}</td>
-                    <td>{{ flight.thoigiandung }}</td>
+                    <td>{{ flight.D_air }}</td>
+                    <td>{{ flight.A_air }}</td>
+                    <td>{{ flight.Date }}</td>
+                    <td>{{ flight.T_time }}</td>
+                    <td>{{ flight.E_time }}</td>
+                    <td>{{ flight.T1_quantity }}</td>
+                    <td>{{ flight.T2_quantity }}</td>
+                    {% if flight.I2_air != '' %}
+                        <td>{{ flight.I_air }}, {{flight.I2_air}}</td>
+                        {% else %}
+                        <td>{{ flight.I_air }}</td>
+                    {% endif%}
+
+                    {% if flight.S2_time > '0' %}
+                        <td>{{ flight.S_time }}, {{ flight.S2_time}} phút</td>
+                        {% else %}
+                        <td>{{ flight.S_time }} phút</td>
+                    {%endif%}
                     <td>{{ flight.note }}</td>
                 </tr>
                 {% endfor %}

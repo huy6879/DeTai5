@@ -91,7 +91,13 @@
                                 <label>gioiBay, ngaybay</label>
                             </div>
                         </div>
+
                         <div class="chau4">
+                            <div class="chat3">Chuyến bay:</div>
+                            <div class="chit3">Thời gian bay:</div>
+                            <div class="chit3">Máy bay:</div>
+                            <div class="chit3">Hành lý xách tay:</div>
+                            <div class="chit3">Hành lý ký gửi:</div>
                         </div>
                         <div class="chau6">
                             <div class="chau6-1">
@@ -124,12 +130,19 @@
                             {% for f in flights %}
                             <div class="chau">
                                 <div class="chau1">
+
                                     <div class="chat">
                                         <div class="chat1" style="font-weight: bold;">
-                                            <label style="color: #364681;">{{ f.departure }}</label>
+                                            <label style="color: #364681;">{{ f.D_air }}</label>
                                         </div>
                                         <div class="chat1">
-                                            <label for="gioBay" id="gioBay">{{ f.giobay.strftime('%H:%M') }} </label>
+                                            <!--                                                    <script>-->
+                                            <!--                                                        const gioBay ='{{ f.giobay }}';-->
+                                            <!--                                                        const gioBayFormatted = moment(gioBay).format('HH:mm');-->
+                                            <!--                                                        var labelGioBay = -->
+                                            <!--                                                        document.getElementById("gioBay").textContent = gioBayFormatted;-->
+                                            <!--                                                    </script>-->
+                                            <label for="gioBay" id="gioBay">{{ f.T_time.strftime('%H:%M') }} </label>
                                         </div>
                                     </div>
                                     <div class="container-icon">
@@ -137,24 +150,24 @@
                                     </div>
                                     <div class="chat">
                                         <div class="chat1" style="font-weight: bold;">
-                                            <label style="color: #364681;">{{ f.arrival }}</label>
+                                            <label style="color: #364681;">{{ f.A_air }}</label>
                                         </div>
                                         <div class="chat1">
-                                            <label for="gioden" id="gioden">{{ f.gioden.strftime('%H:%M') }}</label>
+                                            <label for="gioden" id="gioden">{{ f.E_time.strftime('%H:%M') }}</label>
                                         </div>
                                     </div>
                                     <div class="chat" style="justify-content: center; align-items: center; ">
-                                        <script>
-                                            function ChiTietChuyenBay(){
-                                                if(document.getElementById('chau2').style.display == 'none')
-                                                    document.getElementById('chau2').style.display = 'flex';
-                                                else
-                                                    document.getElementById('chau2').style.display = 'none';
-                                            }
-                                        </script>
                                         <button type="submit" class="btn-chiTietChuyenBay" onclick="ChiTietChuyenBay()">
                                             Chi Tiết
                                         </button>
+                                        <script>
+                                            function ChiTietChuyenBay(){
+                                                    if(document.getElementById('chau2').style.display == 'none')
+                                                        document.getElementById('chau2').style.display = 'flex';
+                                                    else
+                                                        document.getElementById('chau2').style.display = 'none';
+                                            }
+                                        </script>
                                     </div>
                                 </div>
                                 <div id="chau2" class="chau2">
@@ -162,14 +175,28 @@
                                         <div class="chit1" style="color: white">
                                             <div class="chit2" style="font-size: 20px; font-weight: bold;">"1st"<br>CLASS
                                             </div>
-                                            <div class="Airfares">1.600.000VND</div>
+                                            <div class="Airfares">
+                                                <label class="lb_price">
+                                                    1.600.000
+                                                </label>
+                                                <label class="lb_price">
+                                                    VND
+                                                </label>
+                                            </div>
                                         </div>
                                         <div class="chit1" style="color: white;">
                                             <div class="chit2"
                                                  style="font-size: 20px; font-weight: bold; background-color: #364681;">
                                                 "2nd"<br>CLASS
                                             </div>
-                                            <div class="Airfares">880.000VND</div>
+                                            <div class="Airfares">
+                                                <label class="lb_price">
+                                                    880.000
+                                                </label>
+                                                <label class="lb_price">
+                                                    VND
+                                                </label>
+                                            </div>
                                         </div>
                                     </div>
                                     <div class="chit">
@@ -183,22 +210,23 @@
                             </div>
                             {% endfor %}
                         </div>
-                        <!--                        <form>-->
-                        <!--                            <div class="CustomerInfo_customer-info">-->
-                        <!--                                <div class="CustomerInfo_customer-info__header">-->
-                        <!--                                    <div class="Subheading">Thông tin hành khách</div>-->
-                        <!--                                    <p class="Submiddel" style="margin: 0;">* Quý Khách vui lòng sử dụng tiếng Việt không dấu và không sử dụng các ký tự đặc biệt.-->
-                        <!--                                        <br>* Vui lòng nhập đầy đủ tên hành khách và những thông tin khác xuất hiện trên (các) giấy tờ tùy thân do chính phủ cấp của hành khách.-->
-                        <!--                                    </p>-->
-                        <!--                                </div>-->
-                        <!--                                <div class="CustomerInfo_customer-info__content">-->
+<!--                    <form>-->
+<!--                                                    <div class="CustomerInfo_customer-info">-->
+<!--                                                        <div class="CustomerInfo_customer-info__header">-->
+<!--                                                            <div class="Subheading">Thông tin hành khách</div>-->
+<!--                                                            <p class="Submiddel" style="margin: 0;">* Quý Khách vui lòng sử dụng tiếng Việt không dấu và không sử dụng các ký tự đặc biệt.-->
+<!--                                                                <br>* Vui lòng nhập đầy đủ tên hành khách và những thông tin khác xuất hiện trên (các) giấy tờ tùy thân do chính phủ cấp của hành khách.-->
+<!--                                                            </p>-->
+<!--                                                        </div>-->
+<!--                                                        <div class="CustomerInfo_customer-info__content">-->
 
-                        <!--                                </div>-->
-                        <!--                            </div>-->
-                        <!--                        </form>-->
-                        <!--                        <form>-->
-                        <!--                            <div class="con2-1"></div>-->
-                        <!--                        </form>-->
+<!--                                                        </div>-->
+<!--                                                    </div>-->
+<!--                                                </form>-->
+<!--                                                <form>-->
+<!--                                                    <div class="con2-1"></div>-->
+<!--                                                </form>-->
+                        <div class=""></div>
                     </div>
                 </div>
             </div>

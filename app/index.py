@@ -1,10 +1,11 @@
 import time
 from flask import render_template, request, redirect, session
-import dao
+import dao, utils
 from app import db
 from app import app,login
 from flask_login import login_user, logout_user, current_user, UserMixin
-from app.models import User, Flight, Airport
+from app.models import User, Flight
+
 
 
 @app.route("/")
@@ -31,6 +32,58 @@ def user_signin():
 
     return render_template('login.html', err_msg=err_msg)
 
+
+@app.route("/forgot-password", methods=['get','post'])
+def forgot_pass():
+    err_msg = ''
+    if request.method == 'POST':
+        user_email = request.form['email']
+        email = dao.is_email_exists(user_email)
+        if email:
+                otp = utils.generate_otp()
+                session['otp'] = otp
+                session['email'] = user_email
+                utils.send_mail(user_email,otp)
+                return redirect('/forgot-password/verify')
+        else:
+            err_msg = 'Email không tồn tại!! Vui lòng thử lại. '
+    return render_template('forgot_pass.html',err_msg=err_msg)
+
+
+
+@app.route("/forgot-password/verify", methods=['get', 'post'])
+def confirm_vc():
+    err_msg = ''
+    if request.method == 'POST':
+        otp_code = request.form['otp']
+        stored_code = session['otp']
+        if otp_code == stored_code:
+            return redirect("/forgot-password/verify/update-pass")
+        else:
+            err_msg = 'OTP không hợp lệ !! Vui lòng thử lại.'
+    return render_template('confirm_vc.html', err_msg=err_msg)
+
+
+@app.route("/forgot-password/verify/update-pass", methods=['get', 'post'])
+def update_pass():
+    err_msg = ''
+    if request.method == 'POST':
+        new_password = request.form.get('new_password')
+        confirm = request.form.get('confirm')
+        email = session['email']
+        try:
+            if len(new_password) < 8:
+                raise Exception('Mật khẩu phải có ít nhất 8 ký tự!')
+            elif new_password.strip().__eq__(confirm.strip()):
+                dao.change_pass_by_email(email=email,new_password=new_password)
+                session.pop('email', None)
+                session.pop('otp', None)
+                return redirect('/user-login')
+            else:
+                err_msg = 'Mật khẩu không trùng khớp!'
+        except Exception as ex:
+            err_msg = 'He thong dang co loi : ' + str(ex)
+    return render_template('update_pass_forgot.html', err_msg=err_msg)
 
 
 @app.route('/register', methods=['get','post'])
@@ -163,6 +216,7 @@ def add_flight():
             A_air = request.form.get('sb2')
             Date = request.form.get('date')
             T_time = request.form.get('time1')
+            E_time = request.form.get('time5')
             T1_quantity = request.form.get('quantity1')
             T2_quantity = request.form.get('quantity2')
             I_air = request.form.get('sb3')
@@ -171,43 +225,51 @@ def add_flight():
             S2_time = request.form.get('time3')
             Flight_time = request.form.get('time4')
             note = request.form.get('note')
-            dao.add_flight(D_air=D_air, A_air=A_air, Date=Date, T_time=T_time, T1_quantity=T1_quantity
-                           , T2_quantity=T2_quantity, I_air=I_air, I2_air=I2_air, S_time=S_time, S2_time=S2_time, Flight_time=Flight_time, note=note)
+            flightRoute_id = request.form.get('route')
+            dao.add_flight(D_air=D_air, A_air=A_air, Date=Date, T_time=T_time, E_time=E_time, T1_quantity=T1_quantity
+                           , T2_quantity=T2_quantity, I_air=I_air, I2_air=I2_air, S_time=S_time, S2_time=S2_time, Flight_time=Flight_time, note=note, flightRoute_id=flightRoute_id)
         return redirect('/admin/flightview/')
 
 
 @app.route('/add_flights', methods=['get','post'])
 def add_flights():
-    airports = Airport.query.all()
+    # airports = Airport.query.all()
     flights = Flight.query.all()
     err_msg = ''
     if request.method.__eq__('POST'):
-        sanbaydi = request.form.get('airport1')
-        sanbayden = request.form.get('airport2')
-        ngaybay = request.form.get('date1')
-        gioibay = request.form.get('time1')
-        thoigianbay = request.form.get('time2')
-        ghehang1 = request.form.get('1stclass')
-        ghehang2 = request.form.get('2ndclass')
-        sbtrunggian = request.form.get('AP_TG1')
-        thoigiandung = request.form.get('pendingT')
+        D_air = request.form.get('airport1')
+        A_air = request.form.get('airport2')
+        Date = request.form.get('date1')
+        T_time = request.form.get('d_Time')
+        E_time = request.form.get('a_Time')
+        T1_quantity = request.form.get('1stclass')
+        T2_quantity = request.form.get('2ndclass')
+        I_air = request.form.get('AP_TG1')
+        I2_air = request.form.get('AP_TG2')
+        S_time = request.form.get('pendingT')
+        S2_time = request.form.get('pendingT2')
+        Flight_time = request.form.get('time1')
         note = request.form.get('note')
         flightRoute_id = request.form.get('route')
-        dao.add_flight(sanbaydi=sanbaydi,sanbayden=sanbayden,ngaybay=ngaybay,gioibay=gioibay,thoigianbay=thoigianbay,
-                       ghehang1=ghehang1,ghehang2=ghehang2,sbtrunggian=sbtrunggian,thoigiandung=thoigiandung,note=note)
+        dao.add_flight(D_air=D_air, A_air=A_air, Date=Date, T_time=T_time, E_time=E_time, T1_quantity=T1_quantity
+                       , T2_quantity=T2_quantity, I_air=I_air, I2_air=I2_air, S_time=S_time, S2_time=S2_time,
+                       Flight_time=Flight_time, note=note, flightRoute_id=flightRoute_id)
         err_msg = 'Thêm thành công'
     else:
         err_msg = 'Thêm không thành công'
-    return render_template('add_flights.html', airports=airports,flights=flights,err_msg=err_msg)
+    return render_template('add_flights.html',flights=flights,err_msg=err_msg)
 
 @app.route("/flight_list", methods=['get'])
 def search_flight():
     departure = request.args.get("departure")
     arrival = request.args.get("arrival")
     departure_date = request.args.get("departure_date")
-    flights = Flight.query.filter_by(departure=departure, arrival=arrival, ngaybay=departure_date).all()
+    flights = Flight.query.filter_by(D_air=departure, A_air=arrival, Date=departure_date).all()
 
     return render_template('flight_list.html', flights=flights, departure=departure, arrival=arrival, departure_date=departure_date)
+
+
+
 
 if __name__ == '__main__':
     from app import admin

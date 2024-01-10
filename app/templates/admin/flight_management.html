@@ -78,6 +78,15 @@
                          <input type="text" placeholder="Nhập thời gian.."
                                                class="form-control"
                                                id="time4" name="time4" required/>
+                          <label class="form-label" for="note">Mã tuyến bay : <span
+                            class="text-danger" style="color:red;">*</span></label>
+                         <select class="form-select" id="route" name="route" required>
+                            <option selected disabled>Chọn mã tuyến</option>
+                            {% for r in Routes %}
+                            <option value="{{ r.id }}">{{ r.id }}</option>
+                            {% endfor %}
+                        </select>
+
                      </div>
 
                      <div class="col-sm-3 form-group">
@@ -140,7 +149,7 @@
                         {% if u.S2_time > '0' %}
                         <td style="position: relative; left: 625px; ">{{ u.S_time }}, {{u.S2_time}} phút</td>
                         {% else %}
-                        <td style="position: relative; left: 675px; ">{{ u.S_time }} phút</td>
+                        <td style="position: relative; left: 625px; ">{{ u.S_time }} phút</td>
                         {%endif%}
 
                         {% if u.note == '1' %}
