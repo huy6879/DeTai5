@@ -33,7 +33,6 @@ def user_signin():
     return render_template('login.html', err_msg=err_msg)
 
 
-User
 @app.route("/forgot-password", methods=['get','post'])
 def forgot_pass():
     err_msg = ''
@@ -217,6 +216,7 @@ def add_flight():
             A_air = request.form.get('sb2')
             Date = request.form.get('date')
             T_time = request.form.get('time1')
+            E_time = request.form.get('time5')
             T1_quantity = request.form.get('quantity1')
             T2_quantity = request.form.get('quantity2')
             I_air = request.form.get('sb3')
@@ -226,8 +226,7 @@ def add_flight():
             Flight_time = request.form.get('time4')
             note = request.form.get('note')
             flightRoute_id = request.form.get('route')
-
-            dao.add_flight(D_air=D_air, A_air=A_air, Date=Date, T_time=T_time, T1_quantity=T1_quantity
+            dao.add_flight(D_air=D_air, A_air=A_air, Date=Date, T_time=T_time, E_time=E_time, T1_quantity=T1_quantity
                            , T2_quantity=T2_quantity, I_air=I_air, I2_air=I2_air, S_time=S_time, S2_time=S2_time, Flight_time=Flight_time, note=note, flightRoute_id=flightRoute_id)
         return redirect('/admin/flightview/')
 
@@ -238,46 +237,36 @@ def add_flights():
     flights = Flight.query.all()
     err_msg = ''
     if request.method.__eq__('POST'):
-        sanbaydi = request.form.get('airport1')
-        sanbayden = request.form.get('airport2')
-        ngaybay = request.form.get('date1')
-        gioibay = request.form.get('time1')
-        thoigianbay = request.form.get('time2')
-        ghehang1 = request.form.get('1stclass')
-        ghehang2 = request.form.get('2ndclass')
-        sbtrunggian = request.form.get('AP_TG1')
-        thoigiandung = request.form.get('pendingT')
+        D_air = request.form.get('airport1')
+        A_air = request.form.get('airport2')
+        Date = request.form.get('date1')
+        T_time = request.form.get('d_Time')
+        E_time = request.form.get('a_Time')
+        T1_quantity = request.form.get('1stclass')
+        T2_quantity = request.form.get('2ndclass')
+        I_air = request.form.get('AP_TG1')
+        I2_air = request.form.get('AP_TG2')
+        S_time = request.form.get('pendingT')
+        S2_time = request.form.get('pendingT2')
+        Flight_time = request.form.get('time1')
         note = request.form.get('note')
-
-        dao.add_flight(sanbaydi=sanbaydi,sanbayden=sanbayden,ngaybay=ngaybay,gioibay=gioibay,thoigianbay=thoigianbay,
-                       ghehang1=ghehang1,ghehang2=ghehang2,sbtrunggian=sbtrunggian,thoigiandung=thoigiandung,note=note)
+        flightRoute_id = request.form.get('route')
+        dao.add_flight(D_air=D_air, A_air=A_air, Date=Date, T_time=T_time, E_time=E_time, T1_quantity=T1_quantity
+                       , T2_quantity=T2_quantity, I_air=I_air, I2_air=I2_air, S_time=S_time, S2_time=S2_time,
+                       Flight_time=Flight_time, note=note, flightRoute_id=flightRoute_id)
         err_msg = 'Thêm thành công'
     else:
         err_msg = 'Thêm không thành công'
+    return render_template('add_flights.html',flights=flights,err_msg=err_msg)
 
-    return render_template('add_flights.html', airports=airports,flights=flights, err_msg=err_msg)
-
-@app.route("/flight_list")
+@app.route("/flight_list", methods=['get'])
 def search_flight():
-    # if request.method.__eq__('POST'):
-    # cate_id = request.args.get("flight_type")
-    # fr = request.args.get("from")
-    # to = request.args.get("to")
-    # flight = dao.get_flight(cate_id=cate_id, fr=fr, to=to)
-    # departure = request.form["departure"]
-    # arrival = request.form["arrival"]
-    # departure_date = request.form["departure_date"]
-    # return_date = request.form["return_date"]
-    # passenger_count = request.form["passenger_count"]
-    # #
-    # trip_type = "oneway"
-    # if request.form.get("trip_type") == "roundtrip":
-    #     trip_type = "roundtrip"
-    return render_template('flight_list.html')
+    departure = request.args.get("departure")
+    arrival = request.args.get("arrival")
+    departure_date = request.args.get("departure_date")
+    flights = Flight.query.filter_by(D_air=departure, A_air=arrival, Date=departure_date).all()
 
-# @app.route("/flight_list" , methods=['post'])
-# def flight_list():
-#     return render_template('flight_list.html')
+    return render_template('flight_list.html', flights=flights, departure=departure, arrival=arrival, departure_date=departure_date)
 
 
 

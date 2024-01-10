@@ -63,11 +63,12 @@ def re_pass(id, new_password):
     db.session.commit()
 
 
-def add_flight(D_air, A_air, Date,T_time,T1_quantity,T2_quantity,I_air,I2_air,S_time, S2_time, Flight_time, note, flightRoute_id):
-    flight = Flight(D_air=D_air,A_air=A_air,Date=Date,T_time=T_time,T1_quantity=T1_quantity,
+def add_flight(D_air, A_air, Date,T_time, E_time, T1_quantity,T2_quantity,I_air,I2_air,S_time, S2_time, Flight_time, note, flightRoute_id):
+    flight = Flight(D_air=D_air,A_air=A_air,Date=Date,T_time=T_time, E_time=E_time, T1_quantity=T1_quantity,
                     T2_quantity=T2_quantity, I_air=I_air, I2_air=I2_air, S_time=S_time,S2_time=S2_time,Flight_time=Flight_time, note=note, flightRoute_id=flightRoute_id)
     db.session.add(flight)
     db.session.commit()
+
 
 
 def change_flight(id, D_air, A_air, Date, T_time, T1_quantity, T2_quantity, I_air, I2_air, S_time, S2_time, Flight_time, note):

@@ -30,12 +30,6 @@ class User(db.Model, UserMixin):
     # def __str__(self):
     #     return self.name
 
-# class Airport(db.Model):
-#     id = Column(Integer, primary_key=True, autoincrement=True)
-#     name = Column(String(100), nullable=False)
-#     city = Column(String(100), nullable=False, unique=True)
-#     # def __str__(self):
-#     #     return self.name
 
 
 
@@ -46,7 +40,8 @@ class Flight(db.Model):
         D_air = Column(String(100), nullable=False)
         A_air = Column(String(100), nullable=False)
         Date = Column(Date, nullable=False)
-        T_time = Column(String(50), nullable=False)
+        T_time = Column(DateTime, nullable=False)
+        E_time = Column(DateTime, nullable=False)
         T1_quantity = Column(String(10), nullable=False)
         T2_quantity = Column(String(10), nullable=False)
         I_air = Column(String(100), nullable=False)
@@ -105,6 +100,19 @@ class ReceiptDetail(BaseModel):
 
 
 
+    # departure = Column(String(50), nullable=False)
+    # arrival = Column(String(50), nullable=False)
+    # ngaybay = Column(Date, nullable=False)
+    # giobay = Column(DateTime, nullable=False)
+    # gioden = Column(DateTime, nullable=False)
+    # thoigianbay = Column(String(5), nullable=False)
+    # ghehang1 = Column(String(5), nullable=False)
+    # ghehang2 = Column(String(5), nullable=False)
+    # sbtrunggian1 = Column(String(50), nullable=True)
+    # sbtrunggian2 = Column(String(50), nullable=True)
+    # thoigiandung = Column(String(10), nullable=True)
+    # note = Column(String(100))
+
 
 if __name__ == '__main__':
     with app.app_context():
@@ -142,16 +150,39 @@ if __name__ == '__main__':
 #                     password=str(hashlib.md5('123'.encode('utf-8')).hexdigest()), phone='232323', email='nv1@gmail.com', cmnd='232323', user_role=UserRoleEnum.EMPLOYEE)
 #         db.session.add(u3)
 #         db.session.commit()
+# <<<<<<< HEAD
 #         c2 = Flight(sanbaydi='Tan Son Nhat', sanbayden='Da Nang', ngaybay=datetime.strptime('21/12/2023', '%d/%m/%Y'),
 #                     gioibay='15:00PM', thoigianbay='2', ghehang1='88', ghehang2='80', sbtrunggian='Hue', thoigiandung='50', note='0')
 #
 #         db.session.add(c2)
 #         db.session.commit()
-#         f4 = Flight(D_air='Tan Son Nhat', A_air='Da Nang', Date=datetime.strptime('26/11/2003', '%d/%m/%Y'), T_time= '12:03 AM',
-#                     T1_quantity='90', T2_quantity='120', I_air='Lam Dong', I2_air='Phu Yen', S_time='130', S2_time='60', Flight_time='60', note='1', flightRoute_id='2')
+        f4 = Flight(D_air='Tan Son Nhat',
+                    A_air='Ha Noi', Date=datetime.strptime('09/01/2024', '%d/%m/%Y'),
+                    T_time= datetime.strptime('10:00', '%H:%M'),
+                    E_time= datetime.strptime('12:00','%H:%M'),
+                    T1_quantity='90', T2_quantity='120', I_air='Lam Dong', I2_air='Phu Yen', S_time='130', S2_time='60', Flight_time='60', note='1', flightRoute_id='2')
 #
 #
         # t1 = Ticket(flight_name='TSN - DAD', passenger_name='Van Tien', cmnd='12389', phone='124790',
         #                  type='1', price=2000000, flight_id='1', user_id='5')
-        # db.session.add(t1)
-        # db.session.commit()
+        db.session.add(f4)
+        db.session.commit()
+# =======
+#             c1 = Flight(departure='Ho Chi Minh', arrival='Ha Noi', sanbaydi='Tan Son Nhat', sanbayden='Noi Bai', ngaybay=datetime.strptime('21/12/2023', '%d/%m/%Y'),
+#                         gioibay='15:00PM', thoigianbay='2', ghehang1='88', ghehang2='80', sbtrunggian='đsdsa', thoigiandung='kcohong ', note='0')
+#
+
+#             db.session.add(c1)
+#             db.session.commit()
+#         c4 = Flight(departure='HaNoi', arrival='HoChiMinh',
+#                     ngaybay=datetime.strptime('8/1/2024', '%d/%m/%Y'),
+#                     giobay=datetime.strptime('10:00', '%H:%M'),
+#                     gioden=datetime.strptime('12:00','%H:%M'),
+#                     thoigianbay='2', ghehang1='88', ghehang2='80', sbtrunggian1='Không có',sbtrunggian2='Không có',
+#                     thoigiandung='0', note='0')
+#         db.session.add(c4)
+#         db.session.commit()
+#         route = Flight_route(departure='Ho Chi Minh', arrival='Da Nang')
+#         db.session.add(route)
+#         db.session.commit()
+

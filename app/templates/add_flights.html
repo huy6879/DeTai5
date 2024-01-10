@@ -106,6 +106,15 @@
                                class="form-control"
                                id="note" name="note" required/>
                     </div>
+                    <div class="col-sm-6 form-group">
+                        <label for="route" class="form-label">Ma tuyến bay:</label>
+                        <select class="form-select" id="route" name="route" required>
+                            <option selected disabled>Chọn mã tuyến bay</option>
+                            {% for r in flightRoute %}
+                            <option value="{{ r.id }}">{{ r.id }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
                 </div>
                 <section style="position: relative;">
                     <div class="mb-3" style="text-align: right; position: absolute; top: -30px;right: 0px;">
@@ -132,15 +141,24 @@
                 <tbody>
                 {% for flight in flights %}
                 <tr>
-                    <td>{{ flight.sanbaydi }}</td>
-                    <td>{{ flight.sanbayden }}</td>
-                    <td>{{ flight.ngaybay }}</td>
-                    <td>{{ flight.gioibay }}</td>
-                    <td>{{ flight.thoigianbay }}</td>
-                    <td>{{ flight.ghehang1 }}</td>
-                    <td>{{ flight.ghehang2 }}</td>
-                    <td>{{ flight.sbtrunggian}}</td>
-                    <td>{{ flight.thoigiandung }}</td>
+                    <td>{{ flight.D_air }}</td>
+                    <td>{{ flight.A_air }}</td>
+                    <td>{{ flight.Date }}</td>
+                    <td>{{ flight.T_time }}</td>
+                    <td>{{ flight.E_time }}</td>
+                    <td>{{ flight.T1_quantity }}</td>
+                    <td>{{ flight.T2_quantity }}</td>
+                    {% if flight.I2_air != '' %}
+                        <td>{{ flight.I_air }}, {{flight.I2_air}}</td>
+                        {% else %}
+                        <td>{{ flight.I_air }}</td>
+                    {% endif%}
+
+                    {% if flight.S2_time > '0' %}
+                        <td>{{ flight.S_time }}, {{ flight.S2_time}} phút</td>
+                        {% else %}
+                        <td>{{ flight.S_time }} phút</td>
+                    {%endif%}
                     <td>{{ flight.note }}</td>
                 </tr>
                 {% endfor %}

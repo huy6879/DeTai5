@@ -1,112 +1,67 @@
 {% extends 'layout/base.html' %}
 {% block title %}OUAirlines{% endblock %}
-
 {% block content %}
-<style>
-    .banner {
-    height: 550px;
-    width: 100%;
-    top: 150px;
-    left: 300px;
-    background-image: url("https://i.ibb.co/BBk5CG5/airplane-isolated-cloud-sky.jpg");
-    background-size: 100% 100%;
-    }
-    body {
-        background-color: #f8f9fa;
-    }
-    .search-container {
-        position: relative;
-        top: -120px;
-        background-color: white;
-        padding: 20px;
-        border-radius: 10px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-    .hidden{
-        display: none;
-    }
-    .center-line {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh; /* Chiều cao 100% của viewport */
-        }
-
-        .line {
-            width: 80%; /* Chiều rộng của đường kẻ ngang */
-            height: 2px; /* Độ dày của đường kẻ ngang */
-            background-color: #000; /* Màu sắc của đường kẻ ngang */
-        }
-</style>
 <div class="banner"></div>
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        <div class="col-md-9" style="height: 190px">
-            <div class="search-container">
-
-
-                <h2 class="mb-4 text-center">Tìm chuyến bay cùng OUAirlines</h2>
-                <form method="POST" action="/submit" href="">
-                        <div class="form-group">
-                          <input type="checkbox" id="roundtrip" name="trip_type" value="roundtrip">
-                          <label for="roundtrip" style="font-size: 18px">Khứ hồi</label>
-                        </div>
-<!--                        <div class="form-group">-->
-<!--                          <input type="checkbox" id="oneway" name="oneway" value="oneway">-->
-<!--                          <label for="oneway">Một chiều</label>-->
-<!--                        </div>-->
-
-                        <div style="display: grid; grid-template-columns: repeat(2,1fr); grid-row-gap: 24px; grid-column-gap: 16px; justify-content: center">
-                            <div class="col-sm-12 form group" >
-                                <label for="departure" class="form-label">Điểm khởi hành:</label>
-                                <input type="text" class="form-control" id="departure" name="departure" required>
-                            </div>
-                            <div class="col-sm-12 form group">
-                                <label for="arrival" class="form-label">Điểm đến:</label>
-                                <input type="text" class="form-control" id="arrival" name="arrival" required>
-                            </div>
-                        </div>
-                        <div style="display: grid; grid-template-columns: repeat(2,1fr); grid-row-gap: 24px; grid-column-gap: 16px;">
-                            <div style="display: grid; grid-template-columns: repeat(2,1fr); grid-row-gap: 24px; grid-column-gap: 16px;">
-                                <div class="col-sm-12 form group" >
-                                        <label for="departure_Date" class="form-label">Ngày đi:</label>
-                                        <input type="date" class="form-control" id="departure_Date" name="departure_date" required>
-                                </div>
-                                <div class="col-sm-12 form group hidden" id="return_date_container">
-
-                                    <label for="return_date" class="form-label">Ngày về:</label>
-                                    <input type="date" class="form-control" id="return_date" name="return_date" required>
-                                </div>
-                            </div>
-                            <div style="display: grid; grid-template-columns: repeat(2,1fr); grid-row-gap: 24px; grid-column-gap: 16px;">
-                                <div class="col-sm-12 form group">
-                                    <label for="numPassengers" class="form-label">Hành khách:</label>
-                                    <input type="number" class="form-control" id="numPassengers" name="num_passengers" required>
-                                </div>
-                                    <a href="/flight_list">
-                                        <button type="submit" class="btn btn-warning" style="position: relative; top: 30px; height: 40px;">Tìm Chuyến Bay</button>
-                                    </a>
-                            </div>
-                        </div>
-                </form>
-                <script>
-                    const roundtripCheckbox = document.getElementById("roundtrip");
-                    const onewayCheckbox = document.getElementById("oneway");
-                    const returnDateContainer = document.getElementById("return_date_container");
-
-                    roundtripCheckbox.addEventListener("change", () => {
-                      if (roundtripCheckbox.checked) {
-                        returnDateContainer.style.display = "block";
-                      } else {
-                        returnDateContainer.style.display = "none";
-                      }
-                    });
-                </script>
+<div class="search-container">
+    <h2 class="mb-4 text-center">Tìm chuyến bay cùng OUAirlines</h2>
+    <form method="GET" action="/flight_list">
+        <div class="form-group">
+            <input type="checkbox" id="roundtrip" name="trip_type" value="roundtrip">
+            <label for="roundtrip" style="font-size: 18px">Khứ hồi</label>
+        </div>
+        <!--                        <div class="form-group">-->
+        <!--                          <input type="checkbox" id="oneway" name="oneway" value="oneway">-->
+        <!--                          <label for="oneway">Một chiều</label>-->
+        <!--                        </div>-->
+        <div style="display: grid; grid-template-columns: repeat(2,1fr); grid-row-gap: 24px; grid-column-gap: 16px; justify-content: center">
+            <div class="col-sm-12 form group">
+                <label for="departure" class="form-label">Điểm khởi hành:</label>
+                <input type="text" class="form-control" id="departure" name="departure" required>
+            </div>
+            <div class="col-sm-12 form group">
+                <label for="arrival" class="form-label">Điểm đến:</label>
+                <input type="text" class="form-control" id="arrival" name="arrival" required>
             </div>
         </div>
-    </div>
+        <div style="display: grid; grid-template-columns: repeat(2,1fr); grid-row-gap: 24px; grid-column-gap: 16px;">
+            <div style="display: grid; grid-template-columns: repeat(2,1fr); grid-row-gap: 24px; grid-column-gap: 16px;">
+                <div class="col-sm-12 form group">
+                    <label for="departure_Date" class="form-label">Ngày đi:</label>
+                    <input type="date" class="form-control" id="departure_Date" name="departure_date" required>
+                </div>
+                <div class="col-sm-12 form group hidden" id="return_date_container">
+                    <label for="return_date" class="form-label">Ngày về:</label>
+                    <input type="date" class="form-control" id="return_date" name="return_date" disabled>
+                </div>
+            </div>
+            <div style="display: grid; grid-template-columns: repeat(2,1fr); grid-row-gap: 24px; grid-column-gap: 16px;">
+                <div class="col-sm-12 form group">
+                    <label for="numPassengers" class="form-label">Hành khách:</label>
+                    <input type="number" class="form-control" id="numPassengers" name="num_passengers" required>
+                </div>
+                <button type="submit" class="btn btn-warning submit-btn"
+                        style="position: relative; top: 30px; height: 40px;">Tìm Chuyến Bay
+                </button>
+            </div>
+        </div>
+    </form>
+    <script>
+        const roundtripCheckbox = document.getElementById("roundtrip");
+        const onewayCheckbox = document.getElementById("oneway");
+        const returnDateContainer = document.getElementById("return_date_container");
+        roundtripCheckbox.addEventListener("change", () => {
+          if (roundtripCheckbox.checked) {
+            document.getElementById("return_date").disabled = false;
+           returnDateContainer.style.display = "block";
+          } else {
+            document.getElementById("return_date").disabled = true;
+            returnDateContainer.style.display = "none";
+          }
+        });
+    </script>
 </div>
+
 <div></div>
-    <hr style="color: blue; margin: 0">
-    <h3>Khám Phá Các Chuyến Bay Phổ Biến Nhất Của Chúng Tôi</h3>
+<hr style="color: blue; margin: 0">
+<h3>Khám Phá Các Chuyến Bay Phổ Biến Nhất Của Chúng Tôi</h3>
 {% endblock %}

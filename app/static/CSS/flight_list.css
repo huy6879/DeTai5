@@ -1,0 +1,336 @@
+    * {
+            font-family: Archivo,sans-serif;
+            box-sizing: border-box;
+            padding: 0;
+            margin: 0;
+    }
+    .search-container-2 {
+
+        background-color: white;
+        padding: 30px;
+        border-radius: 20px;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+
+        left: 50%;
+    }
+    background-image{
+        opacity:0.6;
+    }
+    .background{
+        background-image: url("/static/Image/background.jpg");
+        background-size: 100% 100%;
+        height: 100vh;
+        width: 100%;
+        background-repeat: repeat-x;
+        position: relative;
+
+    }
+    .background::before{
+        position: absolute;
+        top: 0;
+        bottom:0;
+        left:0;
+        right:0;
+        background: rgba(0,0,0,0.7);
+    }
+
+    .container-flight{
+        width: 100%;
+        max-width: 1280px;
+        margin: auto;
+        padding: 65px 32px;
+        gap: 40px;
+        flex-direction: column;
+        display: flex;
+        opacity: 1;
+    }
+    .Layout_main{
+        flex-grow: 1;
+    }
+    .FlightSearchNavigation_wrapper {
+        display: flex;
+        width: 100%;
+        gap: 40px;
+        flex-direction: column;
+
+    }
+    .Card_card{
+        border-radius: 32px;
+        border: 1px solid var(--gray-200,#eaecf0);
+        background: var(--base-white,#fff);
+        box-shadow: var(--shadow-sm);
+    }
+    .cha{
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        gap: 10%;
+    }
+
+    .con1{
+        background-color: white;
+        width: 25%;
+        height: 450px;
+        border-radius: 20px;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+        display: flex;
+        flex-direction: column;
+    }
+    .chau3{
+
+        width: 100%;
+        height: 20%;
+        display: flex;
+        align-items: center;
+        font-family: KoHo,sans-serif;
+        font-size: 20px;
+        font-weight: bold;
+        padding: 10px;
+        justify-content: center;
+    }
+    .chau5{
+        display:flex;
+        flex-direction: column;
+        width: 100%;
+        height: 20%;
+        align-items: center;
+        font-family: Arial,sans-serif;
+        padding: 10px;
+        border-top: 1px solid rgba(0, 0, 0, 0.2);
+        gap: 5px
+    }
+    .lb_flight{
+        display: flex;
+        justify-content: center;
+        flex-direction: row;
+        width:100%;
+        height: 45%;
+    }
+    .chau6{
+        width: 100%;
+        height: 20%;
+        display: flex;
+        align-items: center;
+        font-family: KoHo,sans-serif;
+        font-size: 20px;
+        padding: 20px;
+        border-top: 1px solid rgba(0, 0, 0, 0.2);
+        gap: 10px;
+    }
+    .chau6-1{
+
+        width: 100%;
+        height: 50%;
+        display:flex;
+        justify-content: space-between;
+        gap 12px;
+
+    }
+    .chau4{
+        width: 100%;
+        height: 40%;
+        border-top: 1px solid rgba(0, 0, 0, 0.2);
+    }
+    .con2{
+        width: 65%;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+    }
+    .con2-1{
+        background-color: white;
+        width: 100%;
+        border-radius: 20px;
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+        row-gap: 30px ;
+        display: flex;
+        flex-direction: column;
+        padding: 25px;
+    }
+    .Flightscard_header{
+        width:100%;
+        height: 80px;
+        display: flex;
+        flex-direction: row;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+        gap: 3%
+
+    }
+    svg {
+            width: 10%;
+            height: 100%;
+            fill: red;
+            stroke: black;
+            stroke-width: 3;
+        }
+    .Flightscard_header_details{
+        display:flex;
+        flex-direction: column;
+        width: 87%;
+        height: 100%;
+        gap: 5px;
+        font-size: 20px;
+    }
+    .Flightscard_header_lb{
+        display: flex;
+        align-items: center;
+        width:100%;
+        height:45%;
+        gap: 15px;
+        font-weight: bold;
+    }
+
+    .chau{
+        width: 100%;
+        height: auto;
+
+        border-radius: 20px;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        cursor: pointer;
+        transition: height 2s;
+
+    }
+    .chau1{
+        width: 100%;
+        height: 80px;
+        display: flex;
+        padding: 10px;
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: center;
+        gap: 6.5%;
+
+    }
+    .chau2{
+        display: none;
+        flex-direction: row;
+        justify-content: center;
+        width: 100%;
+        height: 300px;
+        padding: 10px;
+        gap: 5%;
+        border-top: 1px solid var(--gray-200,#eaecf0);
+
+    }
+
+    .chat{
+        width: 20%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 10%;
+
+    }
+    .chit{
+        display:flex;
+        flex-direction: column;
+        height: 100%;
+        width: 45%;
+        justify-content: center;
+        gap: 20px ;
+
+    }
+    .chit1{
+        height: 33%;
+        width: 100%;
+        background-color: white;
+        border-radius: 20px;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        color: #E09824;
+        display: flex;
+        flex-direction: row;
+    }
+    .chit2{
+        background-color: #E09824;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 20px 0 0 20px;
+        font-family:  Courier New, Courier, monospace;
+        height: 100%;
+        width: 100px;
+        border-right: 1px solid var(--gray-200,#eaecf5);
+    }
+    .chit3{
+        display: flex;
+        color: grey;
+        width: 70%;
+        height: 20px;
+    }
+    .Airfares{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: grey;
+        width: 200px;
+        font-family:  Courier New, Courier, monospace;
+        font-size: 25px;
+        font-weight: bold;
+    }
+    hr {
+        border: 1px solid #000;
+    }
+    .chat1{
+        display:flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        width: 100%;
+    }
+    .container-icon{
+        width: 20%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        width-image: 50%;
+        height-image: 50%;
+
+    }
+
+    font-new{
+        font-family: Arial, sans-serif;
+        font-size: 4rem;
+    }
+    .btn-chiTietChuyenBay{
+        background-color: white;
+        width: 80%;
+        padding: 10px;
+        border-radius: 20px;
+        box-shadow: rgba(0, 0, 0, 0.5);
+        color: #364681;
+        border: 1px solid #E09824;
+    }
+    .CustomerInfo_customer-info{
+        display: flex;
+        flex-direction: column;
+        border-radius: 20px;
+        border: 1px solid var(--gray-200,#eaecf0);
+        background: var(--base-white,#fff);
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    }
+    .CustomerInfo_customer-info__header{
+        display: flex;
+        flex-direction: column;
+        padding: 20px 24px;
+        gap: 16px;
+        justify-content: center;
+        border-bottom: 1px solid var(--gray-200,#eaecf0);
+    }
+    .Subheading{
+        font-size: 20px;
+        line-height: 28px;
+        font-weight: 700;
+    }
+    .Submiddel{
+        font-size: 14px;
+        line-height: 20px;
+        font-weight: 400;
+    }
+    .CustomerInfo_customer-info__content{
+        display: flex;
+        flex-direction:column;
+        gap: 16px;
+        padding: 20px 24px;
+    }
