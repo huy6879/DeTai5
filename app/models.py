@@ -98,8 +98,8 @@ if __name__ == '__main__':
 #             db.session.commit()
         c4 = Flight(departure='HaNoi', arrival='HoChiMinh',
                     ngaybay=datetime.strptime('8/1/2024', '%d/%m/%Y'),
-                    giobay=datetime.strptime('10:00', '%H:%M'),
-                    gioden=datetime.strptime('12:00','%H:%M'),
+                    giobay=datetime.strptime('15:00', '%H:%M'),
+                    gioden=datetime.strptime('17:00','%H:%M'),
                     thoigianbay='2', ghehang1='88', ghehang2='80', sbtrunggian1='Không có',sbtrunggian2='Không có',
                     thoigiandung='0', note='0')
         db.session.add(c4)
