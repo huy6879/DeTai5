@@ -261,7 +261,7 @@ def add_flights():
         err_msg = 'Thêm không thành công'
     return render_template('add_flights.html',flights=flights,err_msg=err_msg)
 
-@app.route("/flight_list", methods=['get'])
+@app.route('/flight_list', methods=['get'])
 
 def search_flight():
     departure = request.args.get("departure")
@@ -271,9 +271,13 @@ def search_flight():
     flights = Flight.query.filter_by(D_air=departure, A_air=arrival).filter(func.date(Flight.T_time) == departure_date.date()).all()
 
     return render_template('flight_list.html', flights=flights, departure=departure, arrival=arrival, departure_date=departure_date)
-@app.route("/customer_info", methods=['get'])
+@app.route('/customer_info', methods=['get'])
 def input_customer_info():
     return render_template('customer_info.html')
+
+@app.route('/customer_pay', methods=['get'])
+def customer_pay():
+    return render_template('customer_pay.html')
 
 if __name__ == '__main__':
     from app import admin

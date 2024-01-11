@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>OUAirlines</title>
+    <link href="{{ url_for('static', filename='CSS/customer_pay.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='CSS/customer_info.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='CSS/flight_list.css') }}" rel="stylesheet">
+</head>
+<body>
+{% include 'layout/header.html' %}
+<div class="Layout-main">
+    <div class="background_flight_list">
+        <div class="container-flight">
+            <div class="CustomerInfo_customer-pay">
+                <div class="CustomerInfo_customer-pay_header">
+                    <div class="CustomerInfo_customer-pay__header">
+                                <div class="Subheading">Thông tin thanh toán</div>
+                                <p class="Submiddel" style="margin: 0; color: red;">Mã đơn hàng: Abc123
+                                </p>
+                    </div>
+                    <div class="CustomerInfo_customer-pay__content">
+                        <div class="c_pay">
+                            <div class="c_pay_1">
+                               <div class="qr_code"></div>
+                                <label>Quét mã QR để thanh toán</label>
+                            </div>
+                            <div class="c_pay_1" style="padding-left: 50px">
+                                <div class="lb_qr">
+                                            <div class="chit3">Số tiền:</div>
+                                            <div class="chit3" style="font-weight: bold; font-size: 30px; color:#364681 ">1.780.000 VND</div>
+                                            <div class="chit3">Số tài khoản:</div>
+                                            <div class="chit3" style="font-weight: bold; color: black">0945540161</div>
+                                            <div class="chit3">Tên tài khoản:</div>
+                                            <div class="chit3" style="font-weight: bold; color: black">Công ty Hàng không OUAirlines</div>
+                                            <div class="chit3">Ngân hàng:</div>
+                                            <div class="chit3" style="font-weight: bold; color: black">Vietcombank</div>
+                                            <div class="chit3">Nội dung chuyển khoản:</div>
+                                            <div class="chit3" style="font-weight: bold; color: black">OUA1001</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="CustomerInfo_customer-pay__content" style="padding: 20px;">
+                        <div class="con2_2" style="justify-content: center;align-items: center; gap: 10px;">
+                            <label>Vui lòng chờ trong giây lát. Nếu đã thanh toán hãy ấn chọn</label>
+                            <button type="button" class="btn_next" style="width: 150px;">
+                                    <label>Đã thanh toán</label>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="CustomerInfo_customer-info">
+                            <div class="CustomerInfo_customer-info__header">
+                                <div class="Subheading">Thông tin vé</div>
+                            </div>
+                <div class="CustomerInfo_customer-pay__content" style="padding: 20px;">
+                    <div class="chau">
+                                <div class="chau1">
+                                    <div class="chat">
+                                        <div class="chat1" style="font-weight: bold;">
+                                            <label style="color: #364681;">HCM</label>
+                                        </div>
+                                        <div class="chat1">
+                                            <label for="gioBay" id="gioBay">20:00 </label>
+                                        </div>
+                                    </div>
+                                    <div class="container-icon">
+                                        <img src="/static/Image/yellow-plane-icon.png" style="width 50%; height:50%">
+                                    </div>
+                                    <div class="chat">
+                                        <div class="chat1" style="font-weight: bold;">
+                                            <label style="color: #364681;">HaNoi</label>
+                                        </div>
+                                        <div class="chat1">
+                                            <label for="gioden" id="gioden">22:00</label>
+                                        </div>
+                                    </div>
+                                    <div class="chat" style="justify-content: center; align-items: center; ">
+                                        <button type="submit" class="btn-chiTietChuyenBay" onclick="ChiTietChuyenBay()">
+                                            Chi Tiết
+                                        </button>
+
+                                        <script>
+                                            function ChiTietChuyenBay(flightId) {
+                                                var elementId = 'chau2';
+                                                var element = document.getElementById(elementId);
+                                                if (element.style.display == 'none')
+                                                    element.style.display = 'flex';
+                                                else
+                                                    element.style.display = 'none';
+                                            }
+                                        </script>
+                                    </div>
+                                </div>
+                                <div id="chau2" class="chau2">
+                                    <div class="chit">
+                                        <div class="chit1" style="color: white">
+                                            <div class="chit2" style="font-size: 20px; font-weight: bold;">"1st"<br>CLASS
+                                            </div>
+                                            <div class="Airfares">
+                                                <label class="lb_price">
+                                                    1.600.000
+                                                </label>
+                                                <label class="lb_price">
+                                                    VND
+                                                </label>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                        <div class="chit">
+                                            <div class="chit3">Chuyến bay:</div>
+                                            <div class="chit3">Thời gian chuyến bay:</div>
+                                            <div class="chit3">Máy bay:</div>
+                                            <div class="chit3">Hành lý xách tay:</div>
+                                            <div class="chit3">Hành lý ký gửi:</div>
+                                        </div>
+                                </div>
+                    </div>
+                </div>
+                <div class="CustomerInfo_customer-info__content">
+                    <div class="row_lb">
+                        <div class="Sum_ticket">
+                            <label>Giá vé:</label>
+                            <label>Phí hành lý:</label>
+                            <label style="font-weight: bold; font-size: 22px">Tổng tiền:</label>
+                        </div>
+                        <div class="Sum_ticket" style="align-items: flex-end">
+                            <label>1.600.000 VND</label>
+                            <label>180.000 VND</label>
+                            <label style="font-weight: bold; font-size: 22px">1.780.000 VND</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="CustomerInfo_customer-info">
+                            <div class="CustomerInfo_customer-info__header">
+                                <div class="Subheading">Thông tin hành khách</div>
+                                    <p class="Submiddel" style="margin: 0; color: red;">* Nếu nhập sai thông tin. Quý Khách vui lòng quay lại trang trước để bổ sung hoặc sửa đổi.
+                                    </p>
+                            </div>
+                            <div class="CustomerInfo_customer-info__content">
+                                <div class="form_c_info" style="width:10%;">
+                                    <div class="col-sm form-group">
+                                         <label>Giới tính: </label>
+                                         <label class="form_textbox">Nam</label>
+                                    </div>
+                                </div>
+                                <div class="form_c_info">
+                                     <div class="col-sm form-group">
+                                         <label>Họ: </label>
+                                         <label class="form_textbox">PHAM</label>
+                                     </div>
+                                    <div class="col-sm form-group">
+                                        <label>Tên đệm và tên: </label>
+                                        <label class="form_textbox">TIEN DUNG</label>
+                                    </div>
+                                </div>
+                                 <div class="form_c_info">
+                                     <div class="col-sm form-group">
+                                        <label>Ngày sinh: </label>
+                                        <label class="form_textbox">19/03/2003</label>
+                                    </div>
+                                    <div class="col-sm form-group">
+                                        <label>Quốc gia: </label>
+                                        <label class="form_textbox">Viet Nam</label>
+                                    </div>
+                                </div>
+                                <div class="form_c_info">
+                                     <div class="col-sm form-group">
+                                        <label>Số điện thoại </label>
+                                        <label class="form_textbox">0945540161</label>
+                                    </div>
+                                    <div class="col-sm form-group">
+                                        <label>Email: </label>
+                                        <label class="form_textbox">ptd.zuxg193@gmail.com</label>
+                                    </div>
+                                </div>
+                                <div class="form_c_info">
+                                     <div class="col-sm form-group">
+                                        <label>Đại chỉ hiện tại: </label>
+                                        <label class="form_textbox">1902 Lê Văn Lương, Nhà Bè, HCM</label>
+                                    </div>
+                                </div>
+                            </div>
+            </div>
+            <div class="con2_2">
+                        <button type="button" class="btn_back">
+                                <label>← Quay lại</label>
+                        </button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -243,10 +243,11 @@
         border-right: 1px solid var(--gray-200,#eaecf5);
     }
     .chit3{
+        font-size: 17px;
         display: flex;
         color: grey;
         width: 70%;
-        height: 20px;
+        height: 40px;
     }
     .Airfares{
         display:flex;
