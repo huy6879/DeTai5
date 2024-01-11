@@ -2,15 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>OUAirlines</title>
     <link href="{{ url_for('static', filename='CSS/flight_list.css') }}" rel="stylesheet">
-    <link href="{{ url_for('static', filename='Image/background.jpg') }}" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script src="/static/JS/function.js"></script>
 </head>
 <body>
 {% include 'layout/header.html' %}
 <div class="Layout-main">
-    <div class="background">
+    <div class="background_flight_list">
         <div class="container-flight">
             <div class="Card-card FlightSearchNavigation_wrapper">
                 <div class="search-container-2">
@@ -37,17 +36,20 @@
                             <div style="display: grid; grid-template-columns: repeat(2,1fr); grid-row-gap: 24px; grid-column-gap: 16px;">
                                 <div class="col-sm-12 form group">
                                     <label for="departure_Date" class="form-label">Ngày đi:</label>
-                                    <input type="date" class="form-control" id="departure_Date" name="departure_date" required>
+                                    <input type="date" class="form-control" id="departure_Date" name="departure_date"
+                                           required>
                                 </div>
                                 <div class="col-sm-12 form group hidden" id="return_date_container">
                                     <label for="return_date" class="form-label">Ngày về:</label>
-                                    <input type="date" class="form-control" id="return_date" name="return_date" disabled>
+                                    <input type="date" class="form-control" id="return_date" name="return_date"
+                                           disabled>
                                 </div>
                             </div>
                             <div style="display: grid; grid-template-columns: repeat(2,1fr); grid-row-gap: 24px; grid-column-gap: 16px;">
                                 <div class="col-sm-12 form group">
                                     <label for="numPassengers" class="form-label">Hành khách:</label>
-                                    <input type="number" class="form-control" id="numPassengers" name="num_passengers" required>
+                                    <input type="number" class="form-control" id="numPassengers" name="num_passengers"
+                                           required>
                                 </div>
                                 <button type="submit" class="btn btn-warning submit-btn"
                                         style="position: relative; top: 30px; height: 40px;">Tìm Chuyến Bay
@@ -87,7 +89,13 @@
                                 <label>gioiBay, ngaybay</label>
                             </div>
                         </div>
+
                         <div class="chau4">
+                            <div class="chat3">Chuyến bay:</div>
+                            <div class="chit3">Thời gian bay:</div>
+                            <div class="chit3">Máy bay:</div>
+                            <div class="chit3">Hành lý xách tay:</div>
+                            <div class="chit3">Hành lý ký gửi:</div>
                         </div>
                         <div class="chau6">
                             <div class="chau6-1">
@@ -98,7 +106,7 @@
                         </div>
                     </div>
                     <div class="con2">
-                        <div class="con2-1">
+                        <div class="con2_1">
                             <div class="Flightscard_header">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200">
                                     <image xlink:href="/static/Image/logo-OUAir.png" width="80" height="80"/>
@@ -106,110 +114,103 @@
 
                                 <div class="Flightscard_header_details">
                                     <div class="Flightscard_header_lb">
-                                        <label style="color: #364681;" >{{ departure }}</label>
+                                        <label style="color: #364681;">{{ departure }}</label>
                                         <div class="container-icon" style="width: 10%">
                                             <img src="/static/Image/right-arrow.png" style="width 50%; height:50%">
                                         </div>
                                         <label style="color: #364681;">{{ arrival }}</label>
                                     </div>
                                     <div class="Flightscard_header_lb" style="font-weight: normal; font-size: 15px;">
-                                        <label>{{ departure_date }}</label>
+                                        <label>{{ departure_date.strftime('%Y-%m-%d') }}</label>
                                     </div>
                                 </div>
                             </div>
                             {% for f in flights %}
                             <div class="chau">
+                                <div class="chau1">
 
-                                        <div class="chau1" onclick="hienThiThongTinChiTiet()">
-                                            <script>
-                                                function hienThiThongTinChiTiet(){
-                                                        if(document.getElementById('chau2').style.display == 'none')
-                                                            document.getElementById('chau2').style.display = 'flex';
-                                                        else
-                                                            document.getElementById('chau2').style.display = 'none';
-                                                }
-                                            </script>
-                                            <div class="chat">
-                                                <div class="chat1" style="font-weight: bold;">
-                                                    <label style="color: #364681;">{{ f.D_air }}</label>
-                                                </div>
-                                                <div class="chat1">
-<!--                                                    <script>-->
-<!--                                                        const gioBay ='{{ f.giobay }}';-->
-<!--                                                        const gioBayFormatted = moment(gioBay).format('HH:mm');-->
-<!--                                                        var labelGioBay = -->
-<!--                                                        document.getElementById("gioBay").textContent = gioBayFormatted;-->
-<!--                                                    </script>-->
-                                                    <label for="gioBay" id="gioBay">{{ f.T_time.strftime('%H:%M') }} </label>
-                                                </div>
-                                            </div>
-                                            <div class="container-icon">
-                                                <img src="/static/Image/yellow-plane-icon.png" style="width 50%; height:50%">
-                                            </div>
-                                            <div class="chat">
-                                                <div class="chat1" style="font-weight: bold;">
-                                                    <label style="color: #364681;">{{ f.A_air }}</label>
-                                                </div>
-                                                <div class="chat1">
-                                                    <label for="gioden" id="gioden">{{ f.E_time.strftime('%H:%M') }}</label>
-                                                </div>
-                                            </div>
-                                            <div class="chat" style="justify-content: center; align-items: center; ">
-                                                <button type="submit" class="btn-chiTietChuyenBay" onclick="ChiTietChuyenBay()">Chi Tiết</button>
-                                                <script>
-                                                    function ChiTietChuyenBay(){
-                                                            if(document.getElementById('chau2').style.display == 'none')
-                                                                document.getElementById('chau2').style.display = 'flex';
-                                                            else
-                                                                document.getElementById('chau2').style.display = 'none';
-                                                    }
-                                                </script>
-                                            </div>
+                                    <div class="chat">
+                                        <div class="chat1" style="font-weight: bold;">
+                                            <label style="color: #364681;">{{ f.D_air }}</label>
                                         </div>
+                                        <div class="chat1">
+                                            <label for="gioBay" id="gioBay">{{ f.T_time.strftime('%H:%M') }} </label>
+                                        </div>
+                                    </div>
+                                    <div class="container-icon">
+                                        <img src="/static/Image/yellow-plane-icon.png" style="width 50%; height:50%">
+                                    </div>
+                                    <div class="chat">
+                                        <div class="chat1" style="font-weight: bold;">
+                                            <label style="color: #364681;">{{ f.A_air }}</label>
+                                        </div>
+                                        <div class="chat1">
+                                            <label for="gioden" id="gioden">{{ f.E_time.strftime('%H:%M') }}</label>
+                                        </div>
+                                    </div>
+                                    <div class="chat" style="justify-content: center; align-items: center; ">
+                                        <button type="submit" class="btn-chiTietChuyenBay" onclick="ChiTietChuyenBay('{{ f.id }}')">
+                                            Chi Tiết
+                                        </button>
+
                                         <script>
-                                        function hienThiForm() {
-                                            // Hiển thị form khi click vào nút "Chọn"
-                                            document.getElementById('formKhachHang').style.display = 'block';
-                                        }
+                                            function ChiTietChuyenBay(flightId) {
+                                                var elementId = 'chau2-' + flightId;
+                                                var element = document.getElementById(elementId);
+                                                if (element.style.display == 'none')
+                                                    element.style.display = 'flex';
+                                                else
+                                                    element.style.display = 'none';
+                                            }
                                         </script>
-                                        <div id="chau2" class="chau2">
-                                            <div class="chit">
-                                                <div class="chit1" style="color: white">
-                                                    <div class="chit2" style="font-size: 20px; font-weight: bold;">"1st"<br>CLASS</div>
-                                                    <div class="Airfares">1.600.000VND</div>
-                                                </div>
-                                                <div class="chit1" style="color: white;">
-                                                    <div class="chit2" style="font-size: 20px; font-weight: bold; background-color: #364681;">"2nd"<br>CLASS</div>
-                                                    <div class="Airfares">880.000VND</div>
-                                                </div>
+                                    </div>
+                                </div>
+                                <div id="chau2-{{ f.id }}" class="chau2">
+                                    <div class="chit">
+                                        <div class="chit1" style="color: white">
+                                            <div class="chit2" style="font-size: 20px; font-weight: bold;">"1st"<br>CLASS
                                             </div>
-                                            <div class="chit">
-                                                <div class="chit3">Chuyến bay:</div>
-                                                <div class="chit3">Thời gian chuyến bay:</div>
-                                                <div class="chit3">Máy bay:</div>
-                                                <div class="chit3">Hành lý xách tay:</div>
-                                                <div class="chit3">Hành lý ký gửi:</div>
+                                            <div class="Airfares">
+                                                <label class="lb_price">
+                                                    1.600.000
+                                                </label>
+                                                <label class="lb_price">
+                                                    VND
+                                                </label>
                                             </div>
                                         </div>
+                                        <div class="chit1" style="color: white;">
+                                            <div class="chit2"
+                                                 style="font-size: 20px; font-weight: bold; background-color: #364681;">
+                                                "2nd"<br>CLASS
+                                            </div>
+                                            <div class="Airfares">
+                                                <label class="lb_price">
+                                                    880.000
+                                                </label>
+                                                <label class="lb_price">
+                                                    VND
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="chit">
+                                        <div class="chit3">Chuyến bay:</div>
+                                        <div class="chit3">Thời gian chuyến bay:</div>
+                                        <div class="chit3">Máy bay:</div>
+                                        <div class="chit3">Hành lý xách tay:</div>
+                                        <div class="chit3">Hành lý ký gửi:</div>
+                                    </div>
+                                </div>
                             </div>
                             {% endfor %}
                         </div>
-                        <form>
-                            <div class="CustomerInfo_customer-info">
-                                <div class="CustomerInfo_customer-info__header">
-                                    <div class="Subheading">Thông tin hành khách</div>
-                                    <p class="Submiddel" style="margin: 0;">* Quý Khách vui lòng sử dụng tiếng Việt không dấu và không sử dụng các ký tự đặc biệt.
-                                        <br>* Vui lòng nhập đầy đủ tên hành khách và những thông tin khác xuất hiện trên (các) giấy tờ tùy thân do chính phủ cấp của hành khách.
-                                    </p>
-                                </div>
-                                <div class="CustomerInfo_customer-info__content">
 
-                                </div>
-                            </div>
-                        </form>
-                        <form>
-                            <div class="con2-1"></div>
-                        </form>
+                        <div class="con2_2">
+                            <button type="button" class="btn_next">
+                                <label>Tiếp tục →</label>
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -218,7 +219,5 @@
 </div>
 {% include 'layout/footer.html' %}
 </body>
-<script>
 
-</script>
 </html>

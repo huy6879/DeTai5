@@ -1,11 +1,13 @@
+
 import time
+from datetime import datetime
 from flask import render_template, request, redirect, session
 import dao, utils
 from app import db
 from app import app,login
 from flask_login import login_user, logout_user, current_user, UserMixin
 from app.models import User, Flight, FlightRoute
-
+from sqlalchemy.sql import func
 
 
 @app.route("/")
@@ -262,15 +264,18 @@ def add_flights():
     return render_template('add_flights.html',flights=flights, route=Routes, err_msg=err_msg)
 
 @app.route("/flight_list", methods=['get'])
+
 def search_flight():
     departure = request.args.get("departure")
     arrival = request.args.get("arrival")
     departure_date = request.args.get("departure_date")
-    flights = Flight.query.filter_by(D_air=departure, A_air=arrival, T_time=departure_date).all()
+    departure_date = datetime.strptime(departure_date, "%Y-%m-%d")
+    flights = Flight.query.filter_by(D_air=departure, A_air=arrival).filter(func.date(Flight.T_time) == departure_date.date()).all()
+
     return render_template('flight_list.html', flights=flights, departure=departure, arrival=arrival, departure_date=departure_date)
-
-
-
+@app.route("/customer_info", methods=['get'])
+def input_customer_info():
+    return render_template('customer_info.html')
 
 if __name__ == '__main__':
     from app import admin

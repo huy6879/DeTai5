@@ -175,16 +175,7 @@ if __name__ == '__main__':
 #                         gioibay='15:00PM', thoigianbay='2', ghehang1='88', ghehang2='80', sbtrunggian='đsdsa', thoigiandung='kcohong ', note='0')
 #
 
-#             db.session.add(c1)
-#             db.session.commit()
-#         c4 = Flight(departure='HaNoi', arrival='HoChiMinh',
-#                     ngaybay=datetime.strptime('8/1/2024', '%d/%m/%Y'),
-#                     giobay=datetime.strptime('10:00', '%H:%M'),
-#                     gioden=datetime.strptime('12:00','%H:%M'),
-#                     thoigianbay='2', ghehang1='88', ghehang2='80', sbtrunggian1='Không có',sbtrunggian2='Không có',
-#                     thoigiandung='0', note='0')
-#         db.session.add(c4)
-#         db.session.commit()
+
 #         route = Flight_route(departure='Ho Chi Minh', arrival='Da Nang')
 #         db.session.add(route)
 #         db.session.commit()
