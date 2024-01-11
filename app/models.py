@@ -39,7 +39,6 @@ class Flight(db.Model):
         id = Column(Integer, primary_key=True, autoincrement=True)
         D_air = Column(String(100), nullable=False)
         A_air = Column(String(100), nullable=False)
-        Date = Column(Date, nullable=False)
         T_time = Column(DateTime, nullable=False)
         E_time = Column(DateTime, nullable=False)
         T1_quantity = Column(String(10), nullable=False)
@@ -160,14 +159,14 @@ if __name__ == '__main__':
         c2 = FlightRoute(name='HN-HCM')
         c3 = FlightRoute(name='HCM-DN')
         f4 = Flight(D_air='HoChiMinh',
-                    A_air='HaNoi', Date=datetime.strptime('09/01/2024', '%d/%m/%Y'),
-                    T_time= datetime.strptime('10:00', '%H:%M'),
-                    E_time= datetime.strptime('12:00','%H:%M'),
+                    A_air='HaNoi',
+                    T_time=datetime.strptime('2024-01-09 10:00', '%Y-%m-%d %H:%M'),
+                    E_time=datetime.strptime('2024-01-09 12:00', '%Y-%m-%d %H:%M'),
                     T1_quantity='90', T2_quantity='120', I_air='Lam Dong', I2_air='Phu Yen', S_time='130', S2_time='60', Flight_time='120', note='1', flightRoute_id='2')
         f5 = Flight(D_air='HoChiMinh',
-                    A_air='HaNoi', Date=datetime.strptime('09/01/2024', '%d/%m/%Y'),
-                    T_time=datetime.strptime('15:00', '%H:%M'),
-                    E_time=datetime.strptime('17:00', '%H:%M'),
+                    A_air='HaNoi',
+                    T_time=datetime.strptime('09/01/2024 15:00', '%d/%m/%Y %H:%M'),
+                    E_time=datetime.strptime('09/01/2024 17:00', '%d/%m/%Y %H:%M'),
                     T1_quantity='90', T2_quantity='120', I_air='Khong co', I2_air='Khong co', S_time='0', S2_time='0',
                     Flight_time='120', note='1', flightRoute_id='2')
 
