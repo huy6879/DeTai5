@@ -15,16 +15,17 @@ def count_flight_by_route():
 
 
 
-def stats_revenue(month=None):
+def stats_revenue():
     query = db.session.query(FlightRoute.id, FlightRoute.name, func.sum(ReceiptDetail.unit_price * ReceiptDetail.quantity)) \
         .join(ReceiptDetail, ReceiptDetail.flightRoute_id.__eq__(FlightRoute.id), isouter=True) \
+        .join(Ticket,Ticket.id.__eq__(ReceiptDetail.ticket_id))\
         .group_by(FlightRoute.id, FlightRoute.name)
 
-    # if month
 
-    return query.group_by(FlightRoute.id).all()
+    return query.all()
 
-def stats_revenue_by_month(year=2024):
+
+def stats_revenue_by_year(year=2024):
     return db.session.query(func.extract('month', Ticket.created_date),
                             func.sum(ReceiptDetail.unit_price*ReceiptDetail.quantity))\
                      .join(ReceiptDetail, ReceiptDetail.ticket_id.__eq__(Ticket.id))\

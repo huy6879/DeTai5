@@ -39,7 +39,7 @@ class Flight(db.Model):
         id = Column(Integer, primary_key=True, autoincrement=True)
         D_air = Column(String(100), nullable=False)
         A_air = Column(String(100), nullable=False)
-        Date = Column(Date, nullable=False)
+        # Date = Column(Date, nullable=False)
         T_time = Column(DateTime, nullable=False)
         E_time = Column(DateTime, nullable=False)
         T1_quantity = Column(String(10), nullable=False)
@@ -60,6 +60,8 @@ class FlightRoute(db.Model):
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String(100), nullable=False)
     flights = relationship('Flight', backref='flightroute', lazy=True)
+    receipt_details = relationship('ReceiptDetail', backref='flightroute', lazy=True)
+
 
 class BaseModel(db.Model):
     __abstract__ = True
@@ -156,17 +158,18 @@ if __name__ == '__main__':
 #
 #         db.session.add(c2)
 #         db.session.commit()
-        f4 = Flight(D_air='Tan Son Nhat',
-                    A_air='Ha Noi', Date=datetime.strptime('09/01/2024', '%d/%m/%Y'),
-                    T_time= datetime.strptime('10:00', '%H:%M'),
-                    E_time= datetime.strptime('12:00','%H:%M'),
-                    T1_quantity='90', T2_quantity='120', I_air='Lam Dong', I2_air='Phu Yen', S_time='130', S2_time='60', Flight_time='60', note='1', flightRoute_id='2')
+#         Date = datetime.strptime('09/01/2024', '%d/%m/%Y')
+#         f4 = Flight(D_air='Tan Son Nhat',
+#                     A_air='Ha Noi',
+#                     T_time= datetime.strptime('10:00', '%H:%M'),
+#                     E_time= datetime.strptime('12:00','%H:%M'),
+#                     T1_quantity='90', T2_quantity='120', I_air='Lam Dong', I2_air='Phu Yen', S_time='130', S2_time='60', Flight_time='60', note='1', flightRoute_id='2')
 #
 #
         # t1 = Ticket(flight_name='TSN - DAD', passenger_name='Van Tien', cmnd='12389', phone='124790',
         #                  type='1', price=2000000, flight_id='1', user_id='5')
-        db.session.add(f4)
-        db.session.commit()
+        # db.session.add(f4)
+        # db.session.commit()
 # =======
 #             c1 = Flight(departure='Ho Chi Minh', arrival='Ha Noi', sanbaydi='Tan Son Nhat', sanbayden='Noi Bai', ngaybay=datetime.strptime('21/12/2023', '%d/%m/%Y'),
 #                         gioibay='15:00PM', thoigianbay='2', ghehang1='88', ghehang2='80', sbtrunggian='đsdsa', thoigiandung='kcohong ', note='0')

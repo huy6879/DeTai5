@@ -63,20 +63,21 @@ def re_pass(id, new_password):
     db.session.commit()
 
 
-def add_flight(D_air, A_air, Date,T_time, E_time, T1_quantity,T2_quantity,I_air,I2_air,S_time, S2_time, Flight_time, note, flightRoute_id):
-    flight = Flight(D_air=D_air,A_air=A_air,Date=Date,T_time=T_time, E_time=E_time, T1_quantity=T1_quantity,
+def add_flight(D_air, A_air,T_time, E_time, T1_quantity,T2_quantity,I_air,I2_air,S_time, S2_time, Flight_time, note, flightRoute_id):
+    flight = Flight(D_air=D_air,A_air=A_air,T_time=T_time, E_time=E_time, T1_quantity=T1_quantity,
                     T2_quantity=T2_quantity, I_air=I_air, I2_air=I2_air, S_time=S_time,S2_time=S2_time,Flight_time=Flight_time, note=note, flightRoute_id=flightRoute_id)
     db.session.add(flight)
     db.session.commit()
 
 
 
-def change_flight(id, D_air, A_air, Date, T_time, T1_quantity, T2_quantity, I_air, I2_air, S_time, S2_time, Flight_time, note):
+def change_flight(id, D_air, A_air, T_time, E_time, T1_quantity, T2_quantity, I_air, I2_air, S_time, S2_time, Flight_time, note, flightRoute_id):
     flight = db.session.query(Flight).filter_by(id=id).first()
     flight.D_air = D_air
     flight.A_air = A_air
-    flight.Date = Date
+    # flight.Date = Date
     flight.T_time = T_time
+    flight.E_time = E_time
     flight.T1_quantity = T1_quantity
     flight.T2_quantity = T2_quantity
     flight.I_air = I_air
@@ -85,6 +86,7 @@ def change_flight(id, D_air, A_air, Date, T_time, T1_quantity, T2_quantity, I_ai
     flight.S2_time = S2_time
     flight.note = note
     flight.Flight_time = Flight_time
+    flight.flightRoute_id = flightRoute_id
     db.session.commit()
 
 

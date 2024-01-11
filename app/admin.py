@@ -56,7 +56,8 @@ class FlightView(AuthenticatedUser):
 class StatsView(BaseView):
     @expose('/')
     def index(self):
-        return self.render('admin/stats.html',stats=utils.stats_revenue(), month_stats=utils.stats_revenue_by_month(2024))
+        # month = request.form.get('from_month_year')
+        return self.render('admin/stats.html',stats=utils.stats_revenue(), year_stats=utils.stats_revenue_by_year(2024))
 
 
 admin.add_view(MyUserView(User, db.session))

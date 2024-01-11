@@ -25,20 +25,6 @@
       </tr>
       {% endfor %}
     </table>
-    <br><br><br>
-    <table class="table">
-            <tr>
-                <th>Tháng</th>
-                <th>Doanh thu</th>
-
-            </tr>
-            {% for s in month_stats %}
-            <tr>
-                <td>{{s[0]}}</td>
-                <td>{{"{:,.0f}".format(s[1])}} VNĐ</td>
-            </tr>
-            {% endfor %}
-    </table>
     </div>
 
 
@@ -46,49 +32,97 @@
   <div class="col-md-5 col-xs-12" style="left: 50px;">
     <form>
       <div class="form-group d-flex">
-        <input type="month" class="form-control" name="from_month" />
+        <input type="month" class="form-control" name="from_month_year"/>
         <input type="submit" value="Thong ke" class="btn btn-info ml-2" />
       </div>
     </form>
          <canvas id="myChart"></canvas>
   </div>
 </div>
+<div class="row">
+    <div class="col-md-5 col-xs-12">
+        <table class="table">
+            <tr>
+                <th>Tháng</th>
+                <th>Doanh thu</th>
+
+            </tr>
+            {% for s in year_stats %}
+            <tr>
+                <td>{{s[0]}}</td>
+                <td>{{"{:,.0f}".format(s[1])}} VNĐ</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </div>
+    <div class="col-md-5 col-xs-12" style="left: 50px;">
+        <canvas id="myChart2"></canvas>
+    </div>
+</div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
-window.onload = function() {
-  const ctx = document.getElementById('myChart');
+  let data=[];
+  let labels=[];
 
-  let data = [];
-  let labels = [];
+  let mData=[];
+  let mLabels=[];
 
   {% for s in stats %}
-  {% if s[2] %}
+  data.push({{s[2]}})
   labels.push('{{s[1]}}')
-  data.push({{s[2]}});
-  {% endif %}
   {% endfor %}
 
-  new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: labels,
-      datasets: [{
-        label: '# Doanh thu',
-        data: data,
-        borderWidth: 1,
-        backgroundColor: ['red', 'green', 'blue', 'gold', 'silver']
-      }]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
+  {% for s in year_stats %}
+  mData.push({{s[1]}})
+  mLabels.push({{s[0]}})
+  {% endfor %}
+
+  window.onload = function() {
+    const ctx = document.getElementById('myChart');
+
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: '# Doanh thu',
+          data: data,
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
         }
       }
-    }
-  });
-}
+    });
+
+    const ctx2 = document.getElementById('myChart2');
+
+    new Chart(ctx2, {
+      type: 'bar',
+      data: {
+        labels: mLabels,
+        datasets: [{
+          label: '# Doanh thu',
+          data: mData,
+          borderWidth: 1,
+          backgroundColor: ['red', 'green', 'blue', 'gold', 'brown']
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  }
+
 </script>
 {% endblock %}
 
