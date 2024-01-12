@@ -101,6 +101,17 @@ class ReceiptDetail(BaseModel):
 
 
 
+class Regulations(db.Model):
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    flight_mTime = Column(String(10), nullable=False)
+    sl_TGA = Column(String(10), nullable=False)
+    time_mS = Column(String(10), nullable=False)
+    time_MAS = Column(String(10), nullable=False)
+    time_G = Column(String(10), nullable=False)
+    time_E = Column(String(10), nullable=False)
+
+
+
 
     # departure = Column(String(50), nullable=False)
     # arrival = Column(String(50), nullable=False)

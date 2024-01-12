@@ -25,7 +25,7 @@ def stats_revenue():
     return query.all()
 
 
-def stats_revenue_by_year(year=2024):
+def stats_revenue_by_year(year=None):
     return db.session.query(func.extract('month', Ticket.created_date),
                             func.sum(ReceiptDetail.unit_price*ReceiptDetail.quantity))\
                      .join(ReceiptDetail, ReceiptDetail.ticket_id.__eq__(Ticket.id))\
@@ -59,4 +59,4 @@ def send_mail(mailto, msg):
 
 if __name__ == '__main__':
     with app.app_context():
-        print(stats_revenue_by_month(2024))
+        print(stats_revenue_by_year(year=2024))

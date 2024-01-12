@@ -264,7 +264,6 @@ def add_flights():
     return render_template('add_flights.html',flights=flights, route=Routes, err_msg=err_msg)
 
 @app.route('/flight_list', methods=['get'])
-
 def search_flight():
     departure = request.args.get("departure")
     arrival = request.args.get("arrival")

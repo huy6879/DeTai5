@@ -88,7 +88,8 @@
         datasets: [{
           label: '# Doanh thu',
           data: data,
-          borderWidth: 1
+          borderWidth: 1,
+          backgroundColor: ['red', 'green', 'blue', 'gold', 'brown']
         }]
       },
       options: {
@@ -103,14 +104,14 @@
     const ctx2 = document.getElementById('myChart2');
 
     new Chart(ctx2, {
-      type: 'bar',
+      type: 'line',
       data: {
         labels: mLabels,
         datasets: [{
           label: '# Doanh thu',
           data: mData,
           borderWidth: 1,
-          backgroundColor: ['red', 'green', 'blue', 'gold', 'brown']
+          backgroundColor: ['navy', 'green', 'pink', 'gold', 'brown']
         }]
       },
       options: {
