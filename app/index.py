@@ -279,6 +279,10 @@ def input_customer_info():
 def customer_pay():
     return render_template('customer_pay.html')
 
+@app.route('/employee_pay', methods=['get'])
+def employee_pay():
+    return render_template('employee_pay.html')
+
 if __name__ == '__main__':
     from app import admin
     app.run(debug=True)

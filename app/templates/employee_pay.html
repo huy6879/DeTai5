@@ -6,6 +6,7 @@
     <link href="{{ url_for('static', filename='CSS/customer_pay.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='CSS/customer_info.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='CSS/flight_list.css') }}" rel="stylesheet">
+    <script src="/static/JS/function.js"></script>
 </head>
 <body>
 {% include 'layout/header.html' %}
@@ -49,6 +50,34 @@
                         <div class="con2_2" style="justify-content: center;align-items: center; gap: 10px;">
                             <label>Vui lòng chờ trong giây lát. Nếu đã thanh toán hãy ấn chọn</label>
                             <button type="button" class="btn_next" style="width: 150px;">Đã thanh toán</button>
+
+                            <button type="button" class="btn_next" style="width: 200px;"
+                                    onclick="hienThiThanhToanTienMat()">Thanh toán tiền mặt
+                            </button>
+                        </div>
+                    </div>
+                    <div class="CustomerInfo_customer-pay__content" id="thanhToanTienMat" style="display: none">
+                        <div class="e_c_pay">
+                            <label class="Subheading">Thanh toán tiền mặt</label>
+                            <div class="e_c_pay_input">
+                                <label for="c_tiennhan" style="width: 120px; font-size: 18px;">Tiền nhận: </label>
+                                <input type="text" placeholder="Nhập tiền nhận:" class="form_textbox"
+                                       id="c_tiennhan" name="c_tiennhan" required>
+                            </div>
+                            <div class="lb_tong_tien">
+                                <label class="lb_tong_tien">Tổng tiền:</label>
+                                <label class="lb_tien" id="tongtien">1.780.000VND</label>
+                            </div>
+                            <div class="lb_tong_tien">
+                                <label class="lb_tong_tien">Tiền dư:</label>
+                                <label class="lb_tien" id="tiendu"></label>
+                            </div>
+                            <div class="e_c_pay_input">
+                                <button type="button" class="btn_next" style="width: 150px;" onclick="thanhToan()">Thanh
+                                    toán
+                                </button>
+                                <button type="button" class="btn_next" style="width: 150px;">In vé</button>
+                            </div>
                         </div>
                     </div>
                 </div>

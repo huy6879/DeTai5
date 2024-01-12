@@ -63,25 +63,59 @@
         border: 5px solid #364681;
   }
   .lb_qr{
-    display: flex;
-    flex-direction: column;
-    height: 100%;
-    width: 100%;
-    justify-content: center;
-    gap: 10px;
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+        width: 100%;
+        justify-content: center;
+        gap: 10px;
   }
   .row_lb{
-     width: 100%;
-     display:flex;
-     flex-direction:row;
-     gap:34%;
-
+         width: 100%;
+         display:flex;
+         flex-direction:row;
+         gap:34%;
   }
   .Sum_ticket{
-     display:flex;
-     flex-direction:column;
-     width: 33%;
-     height: 100px;
-     gap: 10px;
+         display:flex;
+         flex-direction:column;
+         width: 33%;
+         height: 100px;
+         gap: 10px;
+  }
+  .e_c_pay{
+        width: 70%;
+        height: auto;
+        border-radius: 20px;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        cursor: pointer;
+        transition: height 2s;
+        padding: 20px;
+        display: flex;
+        flex-direction:column;
+        align-items: center;
+        gap: 20px;
+  }
+  .e_c_pay_input{
+        display: flex;
+        flex-direction: row;
+        width: 60%;
+        gap: 4px;
+        align-items: center;
+        justify-content: flex-end;
+  }
+  .lb_tong_tien{
+        display:flex;
+        width: 60%;
+        height: 30px;
+        gap:55%;
+        font-size: 18px;
+        align-items: center;
 
+  }
+  .lb_tien{
+        font-weight: bold;
+        width: 120px;
+        display:flex;
+        justify-content: flex-end;
   }
