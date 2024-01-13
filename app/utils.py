@@ -18,7 +18,6 @@ def count_flight_by_route():
 def stats_revenue():
     query = db.session.query(FlightRoute.id, FlightRoute.name, func.sum(ReceiptDetail.unit_price * ReceiptDetail.quantity)) \
         .join(ReceiptDetail, ReceiptDetail.flightRoute_id.__eq__(FlightRoute.id), isouter=True) \
-        .join(Ticket,Ticket.id.__eq__(ReceiptDetail.ticket_id))\
         .group_by(FlightRoute.id, FlightRoute.name)
 
 
@@ -59,4 +58,4 @@ def send_mail(mailto, msg):
 
 if __name__ == '__main__':
     with app.app_context():
-        print(stats_revenue_by_year(year=2024))
+        print(stats_revenue_by_year(2024))

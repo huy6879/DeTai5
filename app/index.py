@@ -235,6 +235,7 @@ def add_flight():
         return redirect('/admin/flightview/')
 
 
+
 @app.route('/add_flights', methods=['get','post'])
 def add_flights():
     Routes = FlightRoute.query.all()
@@ -262,6 +263,8 @@ def add_flights():
     else:
         err_msg = 'Thêm không thành công'
     return render_template('add_flights.html',flights=flights, route=Routes, err_msg=err_msg)
+
+
 
 @app.route('/flight_list', methods=['get'])
 def search_flight():

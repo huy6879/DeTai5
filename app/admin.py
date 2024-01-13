@@ -56,11 +56,16 @@ class FlightView(AuthenticatedUser):
         flight = dao.get_flight()
         return self.render('/admin/flight_management.html', Flight=flight, Routes=Routes)
 
-class StatsView(BaseView):
+class StatsView(AuthenticatedUser):
     @expose('/')
     def index(self):
-        month_year = request.form.get('from_month_year')
-        return self.render('admin/stats.html',stats=utils.stats_revenue(), year_stats=utils.stats_revenue_by_year(2024))
+        month = request.args.get('month')
+        year = request.args.get('year')
+        if year:
+            year = int(year)
+        else:
+            year = 2024
+        return self.render('admin/stats.html',stats=utils.stats_revenue(), year_stats=utils.stats_revenue_by_year(year=year))
 
 
 admin.add_view(MyUserView(User, db.session))

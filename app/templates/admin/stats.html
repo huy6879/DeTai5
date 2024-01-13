@@ -30,10 +30,11 @@
 
 
   <div class="col-md-5 col-xs-12" style="left: 50px;">
-    <form>
+    <form method="POST" action="/admin/statsview/">
       <div class="form-group d-flex">
-        <input type="month" class="form-control" name="from_month_year"/>
-        <input type="submit" value="Thong ke" class="btn btn-info ml-2" />
+          <input type="text" class="form-control" style="width: 150px;" name="month" placeholder="Tháng"/>
+          <input type="text" class="form-control" style="width: 150px;" name="year" placeholder="Năm"/>
+          <input type="submit" value="Thong ke" class="btn btn-info ml-2" />
       </div>
     </form>
          <canvas id="myChart"></canvas>
@@ -69,7 +70,7 @@
   let mLabels=[];
 
   {% for s in stats %}
-  data.push({{s[2]}})
+  data.push({{s[0]}})
   labels.push('{{s[1]}}')
   {% endfor %}
 
