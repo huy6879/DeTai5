@@ -61,14 +61,12 @@ window.onload = function() {
 
   let data = [];
   let labels = [];
-
   {% for s in stats %}
   {% if s[2] %}
   labels.push('{{s[1]}}')
   data.push({{s[2]}});
   {% endif %}
   {% endfor %}
-
   new Chart(ctx, {
     type: 'bar',
     data: {
