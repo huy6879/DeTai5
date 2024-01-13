@@ -23,3 +23,9 @@ function thanhToan() {
          alert('Số tiền nhận không đủ để thanh toán!');
     }
 }
+function quayLai() {
+            window.history.back();
+}
+ function tiepTuc() {
+            window.location.href = "{{ url_for('tiep_tuc') }}";
+}

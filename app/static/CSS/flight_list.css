@@ -338,3 +338,8 @@
         width: 100%;
         height: 300px;
     }
+    .form-dk{
+        display:flex;
+        flex-direction:column;
+        gap: 10px;
+    }
