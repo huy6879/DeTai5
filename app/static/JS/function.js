@@ -29,3 +29,14 @@ function quayLai() {
  function tiepTuc() {
             window.location.href = "{{ url_for('tiep_tuc') }}";
 }
+function hienthiChuyenDaChon() {
+             var ttchuyen1 = document.getElementById('ttchuyen1');
+             var ttchuyen2 = document.getElementById('ttchuyen2');
+             if (ttchuyen1.style.display == 'none' && ttchuyen2.style.display == 'none') {
+                    ttchuyen1.style.display = 'flex';
+                    ttchuyen2.style.display = 'flex';
+             } else {
+                     ttchuyen1.style.display = 'none';
+                     ttchuyen2.style.display = 'none';
+             }
+}

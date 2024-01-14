@@ -78,9 +78,9 @@
                             <label style="color: #364681;">THÔNG TIN ĐẶT CHỖ</label>
                         </div>
                         <div class="thongTinVe">
-                            <div class="chau5" id="chuyenDaChon1">
+                            <div class="chau5" id="ttchuyen1">
                                 <div class="lb_flight">
-                                        <label class="chat1" style="font-size: 20px;font-weight: bold;">SGN</label>
+                                        <label class="chat1" style="font-size: 20px;font-weight: bold;">HCM</label>
                                         <div class="container-icon">
                                             <img src="/static/Image/blue-plane-icon.png" style="width: 50%; height:50%">
                                         </div>
@@ -90,13 +90,13 @@
                                         <label>gioiBay, ngaybay</label>
                                 </div>
                             </div>
-                            <div class="chau4" id="chuyenDaChon2">
-                                    <div class="chat3">Chuyến bay:</div>
+                            <div class="chau4" id="ttchuyen2">
+                                    <div class="chat3">Chuyến bay: </div>
                                     <div class="chit3">Thời gian bay:</div>
                                     <div class="chit3">Máy bay:</div>
                                     <div class="chit3">Hành lý xách tay:</div>
                                     <div class="chit3">Hành lý ký gửi:</div>
-                                </div>
+                            </div>
                         </div>
                         <div class="chau6">
                             <div class="chau6-1">
@@ -165,48 +165,33 @@
                                     </div>
                                     <div id="chau2-{{ f.id }}" class="chau2">
                                         <div class="chit">
-                                            <button type="button" class="chit1" style="color: white" onclick="hienThiChuyenDaChon()">
+                                            <script>
+                                                function hienthiChuyenDaChon() {
+                                                    var ttchuyen1 = document.getElementById('ttchuyen1');
+                                                    var ttchuyen2 = document.getElementById('ttchuyen2');
+                                                    if (ttchuyen1.style.display == 'none' && ttchuyen2.style.display == 'none') {
+                                                            ttchuyen1.style.display = 'flex';
+                                                            ttchuyen2.style.display = 'flex';
+                                                    } else {
+                                                            ttchuyen1.style.display = 'none';
+                                                            ttchuyen2.style.display = 'none';
+                                                    }
+                                                }
+                                            </script>
+                                            <button type="button" class="chit1" style="color: white" onclick="hienthiChuyenDaChon()">
                                                 <label class="chit2" style="font-size: 20px; font-weight: bold;">"1st"<br>CLASS</label>
                                                 <label class="Airfares">
                                                     <label class="lb_price">1.600.000</label>
                                                     <label class="lb_price">VND</label>
                                                 </label>
                                             </button>
-                                            <button  type="button" class="chit1" style="color: white;" onclick="hienThiChuyenDaChon()">
+                                            <button  type="button" class="chit1" style="color: white;" onclick="hienthiChuyenDaChon()">
                                                 <label class="chit2" style="font-size: 20px; font-weight: bold; background-color: #364681;">"2nd"<br>CLASS</label>
                                                 <label class="Airfares">
                                                     <label class="lb_price">880.000</label>
                                                     <label class="lb_price">VND</label>
                                                 </label>
                                             </button>
-                                            <script>
-                                                function hienThiChuyenDaChon(flightId){
-                                                    var elementId = 'chuyenDaChon1-' + flightId;
-                                                    var elementId = 'chuyenDaChon1-' + flightId;
-                                                    var 1stclass = document.getElementById('elementId');
-                                                                if (1stclass.style.display == 'none' && chuyenDaChon2.style.display == 'none') {
-                                                                    chuyenDaChon1.style.display = 'flex';
-                                                                    chuyenDaChon2.style.display = 'flex';
-                                                                } else {
-                                                                    chuyenDaChon1.style.display = 'none';
-                                                                    chuyenDaChon2.style.display = 'none';
-                                                                }
-                                                }
-                                                function hienThiChuyenDaChon(flightId) {
-                                                    var elementId1= 'ttchuyen1-' + flightId;
-                                                    var elementId2 = 'ttchuyen2-' + flightId;
-                                                    var element1 = document.getElementById(elementId1);
-                                                    var element2 = document.getElementById(elementId2);
-                                                    if (element1.style.display == 'none' && element2.style.display == 'none')
-                                                        chuyenDaChon1.style.display = 'flex';
-                                                        chuyenDaChon2.style.display = 'flex';
-                                                        } else {
-                                                              chuyenDaChon1.style.display = 'none';
-                                                              chuyenDaChon2.style.display = 'none';
-                                                        }
-                                                }
-
-                                            </script>
                                         </div>
                                             <div class="chit">
                                                 <div class="chit3">Chuyến bay:</div>
