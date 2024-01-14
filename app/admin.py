@@ -15,7 +15,7 @@ class MyAdmin(AdminIndexView):
 
 
 
-admin = Admin(app=app, name="OU AIRLINE Administration", template_mode='bootstrap4',  index_view=MyAdmin())
+admin = Admin(app=app,name="OU AIRLINE Administration", template_mode='bootstrap4',  index_view=MyAdmin())
 
 class AuthenticatedAdmin(ModelView):
     def is_accessible(self):

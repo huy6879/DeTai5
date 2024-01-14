@@ -82,7 +82,6 @@
         align-items: center;
         font-family: Arial,sans-serif;
         padding: 10px;
-        border-top: 1px solid rgba(0, 0, 0, 0.2);
         gap: 5px
     }
     .lb_flight{
@@ -229,6 +228,7 @@
         box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
         color: #E09824;
         gap: 10px;
+        border: none;
 
     }
     .chit2{

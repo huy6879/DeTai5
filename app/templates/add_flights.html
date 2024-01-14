@@ -128,13 +128,13 @@
                 <tr>
                     <th scope="col">Sân bay đi</th>
                     <th scope="col">Sân bay đến</th>
-                    <th scope="col">Ngày bay</th>
-                    <th scope="col">Giời bay</th>
-                    <th scope="col">Thời gian bay</th>
+                    <th scope="col">Thời gian đi</th>
+                    <th scope="col">Thời gian đến</th>
                     <th scope="col">1st Class</th>
                     <th scope="col">2nd Class</th>
-                    <th scope="col">Sân bay Trung gian</th>
+                    <th scope="col">AP_Trung gian</th>
                     <th scope="col">Thời gian dừng</th>
+                    <th scope="col">Thời gian bay</th>
                     <th scope="col">Ghi chú</th>
                 </tr>
                 </thead>
@@ -143,7 +143,6 @@
                 <tr>
                     <td>{{ flight.D_air }}</td>
                     <td>{{ flight.A_air }}</td>
-                    <td>{{ flight.Date }}</td>
                     <td>{{ flight.T_time }}</td>
                     <td>{{ flight.E_time }}</td>
                     <td>{{ flight.T1_quantity }}</td>
@@ -159,6 +158,7 @@
                         {% else %}
                         <td>{{ flight.S_time }} phút</td>
                     {%endif%}
+                    <td>{{ flight.Flight.time }}</td>
                     <td>{{ flight.note }}</td>
                 </tr>
                 {% endfor %}

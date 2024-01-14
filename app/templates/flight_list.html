@@ -180,10 +180,11 @@
                                                 </label>
                                             </button>
                                             <script>
-                                                function hienThiChuyenDaChon(){
-                                                    var chuyenDaChon1 = document.getElementById('chuyenDaChon1');
-                                                    var chuyenDaChon2 = document.getElementById('chuyenDaChon2');
-                                                                if (chuyenDaChon1.style.display == 'none' && chuyenDaChon2.style.display == 'none') {
+                                                function hienThiChuyenDaChon(flightId){
+                                                    var elementId = 'chuyenDaChon1-' + flightId;
+                                                    var elementId = 'chuyenDaChon1-' + flightId;
+                                                    var 1stclass = document.getElementById('elementId');
+                                                                if (1stclass.style.display == 'none' && chuyenDaChon2.style.display == 'none') {
                                                                     chuyenDaChon1.style.display = 'flex';
                                                                     chuyenDaChon2.style.display = 'flex';
                                                                 } else {
@@ -191,6 +192,20 @@
                                                                     chuyenDaChon2.style.display = 'none';
                                                                 }
                                                 }
+                                                function hienThiChuyenDaChon(flightId) {
+                                                    var elementId1= 'ttchuyen1-' + flightId;
+                                                    var elementId2 = 'ttchuyen2-' + flightId;
+                                                    var element1 = document.getElementById(elementId1);
+                                                    var element2 = document.getElementById(elementId2);
+                                                    if (element1.style.display == 'none' && element2.style.display == 'none')
+                                                        chuyenDaChon1.style.display = 'flex';
+                                                        chuyenDaChon2.style.display = 'flex';
+                                                        } else {
+                                                              chuyenDaChon1.style.display = 'none';
+                                                              chuyenDaChon2.style.display = 'none';
+                                                        }
+                                                }
+
                                             </script>
                                         </div>
                                             <div class="chit">
