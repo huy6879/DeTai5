@@ -5,6 +5,7 @@
     <title>OUAirlines</title>
     <link href="{{ url_for('static', filename='CSS/customer_info.css') }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='CSS/flight_list.css') }}" rel="stylesheet">
+    <script src="/static/JS/function.js"></script>
 </head>
 <body>
 {% include 'layout/header.html' %}
@@ -20,7 +21,7 @@
                         <div class="lb_flight">
                             <label class="chat1" style="font-size: 20px;font-weight: bold;">SGN</label>
                             <div class="container-icon">
-                                <img src="/static/Image/blue-plane-icon.png" style="width 50%; height:50%">
+                                <img src="/static/Image/blue-plane-icon.png" style="width: 50%; height:50%">
                             </div>
                             <label class="chat1" style="font-size: 20px;font-weight: bold;">HAN</label>
                         </div>
@@ -28,7 +29,6 @@
                             <label>gioiBay, ngaybay</label>
                         </div>
                     </div>
-
                     <div class="chau4">
                         <div class="chat3">Chuyến bay:</div>
                         <div class="chit3">Thời gian bay:</div>
@@ -45,84 +45,84 @@
                     </div>
                 </div>
                 <div class="con2">
-                    <div class="CustomerInfo_customer-info">
-                        <div class="CustomerInfo_customer-info__header">
-                            <div class="Subheading">Thông tin hành khách</div>
-                            <p class="Submiddel" style="margin: 0; color: red;">* Quý Khách vui lòng sử dụng tiếng Việt
-                                không
-                                dấu và không sử dụng các ký tự đặc biệt.
-                                <br>* Vui lòng nhập đầy đủ tên hành khách và những thông tin khác xuất hiện trên
-                                (các) giấy tờ tùy thân do chính phủ cấp của hành khách.
-                            </p>
+                        <div class="CustomerInfo_customer-info">
+                            <form action="/customer_info" method="POST">
+                                <div class="CustomerInfo_customer-info__header">
+                                    <div class="Subheading">Thông tin hành khách</div>
+                                    <p class="Submiddel" style="margin: 0; color: red;">* Quý Khách vui lòng sử dụng tiếng Việt
+                                        không
+                                        dấu và không sử dụng các ký tự đặc biệt.
+                                        <br>* Vui lòng nhập đầy đủ tên hành khách và những thông tin khác xuất hiện trên
+                                        (các) giấy tờ tùy thân do chính phủ cấp của hành khách.
+                                    </p>
+                                </div>
+                                <div class="CustomerInfo_customer-info__content">
+                                        <div class="form_c_info" style="gap: 90px; height: 60px">
+                                            <div class="lb_h_100">
+                                                <input type="checkbox" id="checkboxnam">
+                                                <label class="checkbox" for="checkboxnam">Nam</label>
+                                            </div>
+                                            <div class="lb_h_100">
+                                                <input type="checkbox" id="checkboxnu">
+                                                <label class="checkbox" for="checkboxnu">Nữ</label>
+                                            </div>
+                                            <div class="lb_h_100">
+                                                <input type="checkbox" id="checkboxkhac">
+                                                <label class="checkbox" for="checkboxkhac">Khác</label>
+                                            </div>
+                                        </div>
+                                        <div class="form_c_info">
+                                            <div class="col-sm ">
+                                                <label for="c_Ho">Họ: </label>
+                                                <input type="text" placeholder="Nhập họ" class="form_textbox" id="c_Ho" name="c_Ho"
+                                                       required>
+                                            </div>
+                                            <div class="col-sm form-group">
+                                                <label for="c_TenDemTen">Tên đệm và tên: </label>
+                                                <input type="text" placeholder="Nhập tên đệm và tên:" class="form_textbox"
+                                                       id="c_TenDemTen" name="c_TenDemTen" required>
+                                            </div>
+                                        </div>
+                                        <div class="form_c_info">
+                                            <div class="col-sm form-group">
+                                                <label for="c_NgaySinh">Ngày sinh: </label>
+                                                <input type="text" placeholder="Nhập ngày sinh:" class="form_textbox"
+                                                       id="c_NgaySinh" name="c_NgaySinh" required>
+                                            </div>
+                                            <div class="col-sm form-group">
+                                                <label for="c_QuocGia">Quốc gia: </label>
+                                                <input type="text" placeholder="Nhập quốc gia:" class="form_textbox" id="c_QuocGia"
+                                                       name="c_QuocGia" required>
+                                            </div>
+                                        </div>
+                                        <div class="form_c_info">
+                                            <div class="col-sm form-group">
+                                                <label for="c_sdt">Số điện thoại </label>
+                                                <input type="text" placeholder="Nhập số điện thoại:" class="form_textbox" id="c_sdt"
+                                                       name="c_sdt" required>
+                                            </div>
+                                            <div class="col-sm form-group">
+                                                <label for="c_email">Email: </label>
+                                                <input type="text" placeholder="Nhập email:" class="form_textbox" id="c_email"
+                                                       name="c_email" required>
+                                            </div>
+                                        </div>
+                                        <div class="form_c_info">
+                                            <div class="col-sm form-group">
+                                                <label for="c_DiaChi">Đại chỉ hiện tại: </label>
+                                                <input type="text" placeholder="Nhập địa chỉ" class="form_textbox" id="c_DiaChi"
+                                                       name="c_DiaChi" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </form>
                         </div>
-                        <div class="CustomerInfo_customer-info__content">
-                            <div class="form_c_info" style="gap: 90px; height: 60px">
-                                <div class="lb_h_100">
-                                    <input type="checkbox" id="checkboxnam">
-                                    <label class="checkbox" for="checkboxnam">Nam</label>
-                                </div>
-                                <div class="lb_h_100">
-                                    <input type="checkbox" id="checkboxnu">
-                                    <label class="checkbox" for="checkboxnu">Nữ</label>
-                                </div>
-                                <div class="lb_h_100">
-                                    <input type="checkbox" id="checkboxkhac">
-                                    <label class="checkbox" for="checkboxkhac">Khác</label>
-                                </div>
-                            </div>
-                            <div class="form_c_info">
-                                <div class="col-sm form-group">
-                                    <label for="c_Ho">Họ: </label>
-                                    <input type="text" placeholder="Nhập họ" class="form_textbox" id="c_Ho" name="c_Ho"
-                                           required>
-                                </div>
-                                <div class="col-sm form-group">
-                                    <label for="c_TenDemTen">Tên đệm và tên: </label>
-                                    <input type="text" placeholder="Nhập tên đệm và tên:" class="form_textbox"
-                                           id="c_TenDemTen" name="c_TenDemTen" required>
-                                </div>
-                            </div>
-                            <div class="form_c_info">
-                                <div class="col-sm form-group">
-                                    <label for="c_NgaySinh">Ngày sinh: </label>
-                                    <input type="text" placeholder="Nhập ngày sinh:" class="form_textbox"
-                                           id="c_NgaySinh" name="c_NgaySinh" required>
-                                </div>
-                                <div class="col-sm form-group">
-                                    <label for="c_QuocGia">Quốc gia: </label>
-                                    <input type="text" placeholder="Nhập quốc gia:" class="form_textbox" id="c_QuocGia"
-                                           name="c_QuocGia" required>
-                                </div>
-                            </div>
-                            <div class="form_c_info">
-                                <div class="col-sm form-group">
-                                    <label for="c_sdt">Số điện thoại </label>
-                                    <input type="text" placeholder="Nhập số điện thoại:" class="form_textbox" id="c_sdt"
-                                           name="c_sdt" required>
-                                </div>
-                                <div class="col-sm form-group">
-                                    <label for="c_email">Email: </label>
-                                    <input type="text" placeholder="Nhập email:" class="form_textbox" id="c_email"
-                                           name="c_email" required>
-                                </div>
-                            </div>
-                            <div class="form_c_info">
-                                <div class="col-sm form-group">
-                                    <label for="c_DiaChi">Đại chỉ hiện tại: </label>
-                                    <input type="text" placeholder="Nhập địa chỉ" class="form_textbox" id="c_DiaChi"
-                                           name="c_DiaChi" required>
-                                </div>
-                            </div>
+                        <div class="con2_2" style="gap: 68%;">
+                                <button type="submit" class="btn_back" onclick="quayLai()">← Quay lại</button>
+                            <form action="/customer_pay" method="POST">
+                                <button type="submit" class="btn_next">Tiếp tục →</button>
+                            </form>
                         </div>
-                    </div>
-                    <div class="con2_2" style="gap: 67%;">
-                        <button type="button" class="btn_back">
-                            <label>← Quay lại</label>
-                        </button>
-                        <button type="button" class="btn_next">
-                            <label>Tiếp tục →</label>
-                        </button>
-                    </div>
                 </div>
             </div>
         </div>

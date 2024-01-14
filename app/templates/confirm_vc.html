@@ -3,9 +3,6 @@
 
 {% block title %}Xác minh Email{% endblock %}
 
-
-{% block content %}
-
 {% if err_msg %}
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
     <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
@@ -19,13 +16,7 @@
     </symbol>
 </svg>
 
-<div class="alert alert-danger d-flex align-items-center" role="alert" style="
-  position: absolute;
-  top: 25%;
-  left: 35.5%;
-  transform: translate(-20%, -20%);
-  z-index: 1;
-">
+<div class="alert alert-danger d-flex align-items-center" role="alert" style="top: 25%;left: 35.5%;transform: translate(-20%, -20%);z-index: 1;">
 
     <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:">
         <use xlink:href="#exclamation-triangle-fill"/>
@@ -35,15 +26,13 @@
     </div>
 </div>
 {% endif %}
-
-
+{% block content %}
 <div class="container mt-5">
-    <div class="row justify-content-center">
+    <div class="row justify-content-center" style="height: 400px;">
         <div class="col-md-6">
             <div class="card mt-5" style="top:35px; left: 30px;">
                 <div class="card-body">
                     <h5 class="card-title">Xác minh OTP</h5>
-
                     <!-- Form để nhập mã xác nhận -->
                     <form method="POST" action="/forgot-password/verify">
                         <div class="mb-3">
@@ -54,11 +43,9 @@
                     </form>
                 </div>
             </div>
-            <br><br><br><br><br><br><br><br><br><br><br>
         </div>
     </div>
 </div>
-
 <!-- Thay đổi đường dẫn đến các tệp JS của Bootstrap 5 tương ứng với ứng dụng của bạn -->
 <script src="path/to/bootstrap.bundle.min.js"></script>
 

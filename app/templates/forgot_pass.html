@@ -1,10 +1,5 @@
 {% extends 'layout/base.html' %}
-
-
 {% block title %}Quên mật khẩu{% endblock %}
-
-
-{% block content %}
 {% if err_msg %}
 <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
     <symbol id="check-circle-fill" fill="currentColor" viewBox="0 0 16 16">
@@ -34,30 +29,35 @@
     </div>
 </div>
 {% endif %}
-
-
+{% block content %}
 <style>
     body {
-      background-color: #F5F5F5;
+        background-color: #F5F5F5;
     }
 </style>
-
 <div>
+    <img src="https://www.vietnamairlines.com/~/media/Files/VNANewPage-Images/Vietnam%20Airlines/Overview/DOI_TAUBAY_Thumb.jpg"
+         alt="Image" style=" width: 65%; height: 88%;">
 
-     <img src="https://www.vietnamairlines.com/~/media/Files/VNANewPage-Images/Vietnam%20Airlines/Overview/DOI_TAUBAY_Thumb.jpg"
-         alt="Image" style="top: 20; left: 30; width: 65%; height: 88%;">
 
-    <form method="POST" action="/forgot-password" style="position: absolute; top: 45%; left: 83%; transform: translate(-50%, -50%); width: 25%;">
+    <form method="POST" action="/forgot-password"
+          style="position: absolute; top: 45%; left: 83%; transform: translate(-50%, -50%); width: 25%;">
         <div class="input-group">
 
-            <label style="margin-bottom: 20px; font-size: 24px; color: #333; border-left: 5px solid #0db9f2; padding-left: 10px; border-radius: 5px; font-weight: bold;">Quên mật khẩu</label>
+            <label style="margin-bottom: 20px; font-size: 24px; color: #333; border-left: 5px solid #0db9f2; padding-left: 10px; border-radius: 5px; font-weight: bold;">Quên
+                mật khẩu</label>
 
-            <input type="Email" class="form-control narrow-input" style="width: 100%; height: 60px; border-radius: 30px; padding: 10px; font-size: 16px;"
+            <input type="Email" class="form-control narrow-input"
+                   style="width: 100%; height: 60px; border-radius: 30px; padding: 10px; font-size: 16px;"
                    placeholder="Nhập Email" id="email" name="email" required/>
 
-            <button type="submit" class="btn btn-primary" style="margin-top: 20px; width: 100%; height: 50px; border-radius: 25px; font-size: 18px; background-color: #0db9f2; color: #fff; border: none;">Gửi</button>
+            <button type="submit" class="btn btn-primary"
+                    style="margin-top: 20px; width: 100%; height: 50px; border-radius: 25px; font-size: 18px; background-color: #0db9f2; color: #fff; border: none;">
+                Gửi
+            </button>
 
         </div>
     </form>
 </div>
+
 {% endblock %}

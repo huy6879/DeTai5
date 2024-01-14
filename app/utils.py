@@ -15,21 +15,43 @@ def count_flight_by_route():
 
 
 
-def stats_revenue():
-    query = db.session.query(FlightRoute.id, FlightRoute.name, func.sum(ReceiptDetail.unit_price * ReceiptDetail.quantity)) \
-        .join(ReceiptDetail, ReceiptDetail.flightRoute_id.__eq__(FlightRoute.id), isouter=True) \
+def stats_revenue(month=None):
+    query = db.session.query(
+        FlightRoute.id,
+        FlightRoute.name,
+        func.sum(ReceiptDetail.unit_price * ReceiptDetail.quantity).label('total_revenue')
+    ) \
+        .outerjoin(ReceiptDetail, ReceiptDetail.flightRoute_id.__eq__(FlightRoute.id)) \
         .group_by(FlightRoute.id, FlightRoute.name)
 
+    if month is not None:
+        query = query.filter(func.extract('month', ReceiptDetail.created_date) == month)
 
     return query.all()
 
+    # Ví dụ sử dụng với tháng cụ thể (ví dụ: tháng 1)
+
+
+
 
 def stats_revenue_by_year(year=None):
-    return db.session.query(func.extract('month', Ticket.created_date),
-                            func.sum(ReceiptDetail.unit_price*ReceiptDetail.quantity))\
-                     .join(ReceiptDetail, ReceiptDetail.ticket_id.__eq__(Ticket.id))\
-                     .filter(func.extract('year', Ticket.created_date).__eq__(year))\
-                     .group_by(func.extract('month', Ticket.created_date)).all()
+    query = db.session.query(
+        func.extract('month', ReceiptDetail.created_date).label('month'),
+        func.sum(ReceiptDetail.unit_price * ReceiptDetail.quantity).label('total_revenue')
+    ) \
+        .outerjoin(FlightRoute, FlightRoute.id == ReceiptDetail.flightRoute_id) \
+        .group_by(func.extract('month', ReceiptDetail.created_date)) \
+        .filter(func.extract('year', ReceiptDetail.created_date) == year)
+
+    # Chuyển kết quả về list, điền các tháng không có doanh thu với giá trị 0
+    result = {row[0]: row[1] for row in query.all()}
+    for month in range(1, 13):
+        if month not in result:
+            result[month] = 0
+
+    # Sắp xếp kết quả theo tháng
+    sorted_result = sorted(result.items())
+    return sorted_result
 
 
 
@@ -58,4 +80,4 @@ def send_mail(mailto, msg):
 
 if __name__ == '__main__':
     with app.app_context():
-        print(stats_revenue_by_year(2024))
+        print(stats_revenue(7))

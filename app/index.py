@@ -273,19 +273,19 @@ def search_flight():
     departure_date = request.args.get("departure_date")
     departure_date = datetime.strptime(departure_date, "%Y-%m-%d")
     flights = Flight.query.filter_by(D_air=departure, A_air=arrival).filter(func.date(Flight.T_time) == departure_date.date()).all()
-
     return render_template('flight_list.html', flights=flights, departure=departure, arrival=arrival, departure_date=departure_date)
-@app.route('/customer_info', methods=['get'])
+@app.route('/customer_info', methods=['POST'])
 def input_customer_info():
     return render_template('customer_info.html')
 
-@app.route('/customer_pay', methods=['get'])
+@app.route('/customer_pay', methods=['POST'])
 def customer_pay():
     return render_template('customer_pay.html')
 
-@app.route('/employee_pay', methods=['get'])
-def employee_pay():
-    return render_template('employee_pay.html')
+@app.route('/employee_pay/<int:user_id>', methods=['POST'])
+def employee_pay(user_id):
+    user = User.query.get(user_id)
+    return render_template('employee_pay.html', user=user)
 
 if __name__ == '__main__':
     from app import admin

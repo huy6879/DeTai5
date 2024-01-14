@@ -77,140 +77,138 @@
                         <div class="chau3">
                             <label style="color: #364681;">THÔNG TIN ĐẶT CHỖ</label>
                         </div>
-                        <div class="chau5">
-                            <div class="lb_flight">
-                                <label class="chat1" style="font-size: 20px;font-weight: bold;">SGN</label>
-                                <div class="container-icon">
-                                    <img src="/static/Image/blue-plane-icon.png" style="width 50%; height:50%">
+                        <div class="thongTinVe">
+                            <div class="chau5" id="chuyenDaChon1">
+                                <div class="lb_flight">
+                                        <label class="chat1" style="font-size: 20px;font-weight: bold;">SGN</label>
+                                        <div class="container-icon">
+                                            <img src="/static/Image/blue-plane-icon.png" style="width: 50%; height:50%">
+                                        </div>
+                                        <label class="chat1" style="font-size: 20px;font-weight: bold;">HAN</label>
                                 </div>
-                                <label class="chat1" style="font-size: 20px;font-weight: bold;">HAN</label>
+                                <div class="lb_flight">
+                                        <label>gioiBay, ngaybay</label>
+                                </div>
                             </div>
-                            <div class="lb_flight">
-                                <label>gioiBay, ngaybay</label>
-                            </div>
-                        </div>
-
-                        <div class="chau4">
-                            <div class="chat3">Chuyến bay:</div>
-                            <div class="chit3">Thời gian bay:</div>
-                            <div class="chit3">Máy bay:</div>
-                            <div class="chit3">Hành lý xách tay:</div>
-                            <div class="chit3">Hành lý ký gửi:</div>
+                            <div class="chau4" id="chuyenDaChon2">
+                                    <div class="chat3">Chuyến bay:</div>
+                                    <div class="chit3">Thời gian bay:</div>
+                                    <div class="chit3">Máy bay:</div>
+                                    <div class="chit3">Hành lý xách tay:</div>
+                                    <div class="chit3">Hành lý ký gửi:</div>
+                                </div>
                         </div>
                         <div class="chau6">
                             <div class="chau6-1">
                                 <label style="font-weight: bold; color: #364681;">Tổng:</label>
-                                <label>1.500.000VND</label>
-
+                                <label></label>
                             </div>
                         </div>
                     </div>
                     <div class="con2">
-                        <div class="con2_1">
-                            <div class="Flightscard_header">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200">
-                                    <image xlink:href="/static/Image/logo-OUAir.png" width="80" height="80"/>
-                                </svg>
-
-                                <div class="Flightscard_header_details">
-                                    <div class="Flightscard_header_lb">
-                                        <label style="color: #364681;">{{ departure }}</label>
-                                        <div class="container-icon" style="width: 10%">
-                                            <img src="/static/Image/right-arrow.png" style="width 50%; height:50%">
+                            <div class="con2_1">
+                                <div class="Flightscard_header">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200">
+                                        <image xlink:href="/static/Image/logo-OUAir.png" width="80" height="80"/>
+                                    </svg>
+                                    <div class="Flightscard_header_details">
+                                        <div class="Flightscard_header_lb">
+                                            <label style="color: #364681;">{{ departure }}</label>
+                                            <div class="container-icon" style="width: 10%">
+                                                <img src="/static/Image/right-arrow.png" style="height:50%">
+                                            </div>
+                                            <label style="color: #364681;">{{ arrival }}</label>
                                         </div>
-                                        <label style="color: #364681;">{{ arrival }}</label>
-                                    </div>
-                                    <div class="Flightscard_header_lb" style="font-weight: normal; font-size: 15px;">
-                                        <label>{{ departure_date.strftime('%Y-%m-%d') }}</label>
+                                        <div class="Flightscard_header_lb" style="font-weight: normal; font-size: 15px;">
+                                            <label>{{ departure_date.strftime('%Y-%m-%d') }}</label>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            {% for f in flights %}
-                            <div class="chau">
-                                <div class="chau1">
+                                {% for f in flights %}
+                                <div class="chau">
+                                    <div class="chau1">
 
-                                    <div class="chat">
-                                        <div class="chat1" style="font-weight: bold;">
-                                            <label style="color: #364681;">{{ f.D_air }}</label>
-                                        </div>
-                                        <div class="chat1">
-                                            <label for="gioBay" id="gioBay">{{ f.T_time.strftime('%H:%M') }} </label>
-                                        </div>
-                                    </div>
-                                    <div class="container-icon">
-                                        <img src="/static/Image/yellow-plane-icon.png" style="width 50%; height:50%">
-                                    </div>
-                                    <div class="chat">
-                                        <div class="chat1" style="font-weight: bold;">
-                                            <label style="color: #364681;">{{ f.A_air }}</label>
-                                        </div>
-                                        <div class="chat1">
-                                            <label for="gioden" id="gioden">{{ f.E_time.strftime('%H:%M') }}</label>
-                                        </div>
-                                    </div>
-                                    <div class="chat" style="justify-content: center; align-items: center; ">
-                                        <button type="submit" class="btn-chiTietChuyenBay" onclick="ChiTietChuyenBay('{{ f.id }}')">
-                                            Chi Tiết
-                                        </button>
-
-                                        <script>
-                                            function ChiTietChuyenBay(flightId) {
-                                                var elementId = 'chau2-' + flightId;
-                                                var element = document.getElementById(elementId);
-                                                if (element.style.display == 'none')
-                                                    element.style.display = 'flex';
-                                                else
-                                                    element.style.display = 'none';
-                                            }
-                                        </script>
-                                    </div>
-                                </div>
-                                <div id="chau2-{{ f.id }}" class="chau2">
-                                    <div class="chit">
-                                        <div class="chit1" style="color: white">
-                                            <div class="chit2" style="font-size: 20px; font-weight: bold;">"1st"<br>CLASS
+                                        <div class="chat">
+                                            <div class="chat1" style="font-weight: bold;">
+                                                <label style="color: #364681;">{{ f.D_air }}</label>
                                             </div>
-                                            <div class="Airfares">
-                                                <label class="lb_price">
-                                                    1.600.000
-                                                </label>
-                                                <label class="lb_price">
-                                                    VND
-                                                </label>
+                                            <div class="chat1">
+                                                <label for="gioBay" id="gioBay">{{ f.T_time.strftime('%H:%M') }} </label>
                                             </div>
                                         </div>
-                                        <div class="chit1" style="color: white;">
-                                            <div class="chit2"
-                                                 style="font-size: 20px; font-weight: bold; background-color: #364681;">
-                                                "2nd"<br>CLASS
+                                        <div class="container-icon">
+                                            <img src="/static/Image/yellow-plane-icon.png" style="height:50%">
+                                        </div>
+                                        <div class="chat">
+                                            <div class="chat1" style="font-weight: bold;">
+                                                <label style="color: #364681;">{{ f.A_air }}</label>
                                             </div>
-                                            <div class="Airfares">
-                                                <label class="lb_price">
-                                                    880.000
-                                                </label>
-                                                <label class="lb_price">
-                                                    VND
-                                                </label>
+                                            <div class="chat1">
+                                                <label for="gioden" id="gioden">{{ f.E_time.strftime('%H:%M') }}</label>
                                             </div>
                                         </div>
+                                        <div class="chat" style="justify-content: center; align-items: center; ">
+                                            <button type="button" class="btn-chiTietChuyenBay" onclick="ChiTietChuyenBay('{{ f.id }}')">
+                                                Chi Tiết
+                                            </button>
+                                            <script>
+                                                function ChiTietChuyenBay(flightId) {
+                                                    var elementId = 'chau2-' + flightId;
+                                                    var element = document.getElementById(elementId);
+                                                    if (element.style.display == 'none')
+                                                        element.style.display = 'flex';
+                                                    else
+                                                        element.style.display = 'none';
+                                                }
+                                            </script>
+                                        </div>
                                     </div>
+                                    <div id="chau2-{{ f.id }}" class="chau2">
                                         <div class="chit">
-                                            <div class="chit3">Chuyến bay:</div>
-                                            <div class="chit3">Thời gian chuyến bay:</div>
-                                            <div class="chit3">Máy bay:</div>
-                                            <div class="chit3">Hành lý xách tay:</div>
-                                            <div class="chit3">Hành lý ký gửi:</div>
+                                            <button type="button" class="chit1" style="color: white" onclick="hienThiChuyenDaChon()">
+                                                <label class="chit2" style="font-size: 20px; font-weight: bold;">"1st"<br>CLASS</label>
+                                                <label class="Airfares">
+                                                    <label class="lb_price">1.600.000</label>
+                                                    <label class="lb_price">VND</label>
+                                                </label>
+                                            </button>
+                                            <button  type="button" class="chit1" style="color: white;" onclick="hienThiChuyenDaChon()">
+                                                <label class="chit2" style="font-size: 20px; font-weight: bold; background-color: #364681;">"2nd"<br>CLASS</label>
+                                                <label class="Airfares">
+                                                    <label class="lb_price">880.000</label>
+                                                    <label class="lb_price">VND</label>
+                                                </label>
+                                            </button>
+                                            <script>
+                                                function hienThiChuyenDaChon(){
+                                                    var chuyenDaChon1 = document.getElementById('chuyenDaChon1');
+                                                    var chuyenDaChon2 = document.getElementById('chuyenDaChon2');
+                                                                if (chuyenDaChon1.style.display == 'none' && chuyenDaChon2.style.display == 'none') {
+                                                                    chuyenDaChon1.style.display = 'flex';
+                                                                    chuyenDaChon2.style.display = 'flex';
+                                                                } else {
+                                                                    chuyenDaChon1.style.display = 'none';
+                                                                    chuyenDaChon2.style.display = 'none';
+                                                                }
+                                                }
+                                            </script>
                                         </div>
+                                            <div class="chit">
+                                                <div class="chit3">Chuyến bay:</div>
+                                                <div class="chit3">Thời gian chuyến bay:</div>
+                                                <div class="chit3">Máy bay:</div>
+                                                <div class="chit3">Hành lý xách tay:</div>
+                                                <div class="chit3">Hành lý ký gửi:</div>
+                                            </div>
+                                    </div>
                                 </div>
+                                {% endfor %}
                             </div>
-                            {% endfor %}
-                        </div>
-
-                        <div class="con2_2">
-                            <button type="button" class="btn_next">
-                                <label>Tiếp tục →</label>
-                            </button>
-                        </div>
+                            <form action="/customer_info" method="POST">
+                                <div class="con2_2">
+                                    <button type="submit" class="btn_next">Tiếp tục →</button>
+                                </div>
+                            </form>
                     </div>
                 </div>
             </div>

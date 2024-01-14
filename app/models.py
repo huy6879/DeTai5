@@ -56,7 +56,6 @@ class Flight(db.Model):
 
 class FlightRoute(db.Model):
     __tablename__ = 'flightroute'
-
     id = Column(Integer, primary_key=True, autoincrement=True)
     name = Column(String(100), nullable=False)
     flights = relationship('Flight', backref='flightroute', lazy=True)
@@ -175,6 +174,36 @@ if __name__ == '__main__':
 #                     T_time= datetime.strptime('10:00', '%H:%M'),
 #                     E_time= datetime.strptime('12:00','%H:%M'),
 #                     T1_quantity='90', T2_quantity='120', I_air='Lam Dong', I2_air='Phu Yen', S_time='130', S2_time='60', Flight_time='60', note='1', flightRoute_id='2')
+#         c1 = FlightRoute(name='HCM-HN')
+#         c2 = FlightRoute(name='HN-HCM')
+#         c3 = FlightRoute(name='HCM-DN')
+#         f4 = Flight(D_air='HoChiMinh',
+#                     A_air='HaNoi',
+#                     T_time=datetime.strptime('2024-01-09 10:00', '%Y-%m-%d %H:%M'),
+#                     E_time=datetime.strptime('2024-01-09 12:00', '%Y-%m-%d %H:%M'),
+#                     T1_quantity='90', T2_quantity='120', I_air='Lam Dong', I2_air='Phu Yen', S_time='130', S2_time='60', Flight_time='120', note='1', flightRoute_id='2')
+#         f5 = Flight(D_air='HoChiMinh',
+#                     A_air='HaNoi',
+#                     T_time=datetime.strptime('09/01/2024 15:00', '%d/%m/%Y %H:%M'),
+#                     E_time=datetime.strptime('09/01/2024 17:00', '%d/%m/%Y %H:%M'),
+#                     T1_quantity='90', T2_quantity='120', I_air='Khong co', I2_air='Khong co', S_time='0', S2_time='0',
+#                     Flight_time='120', note='1', flightRoute_id='2')
+#
+#         db.session.add(c1)
+#         db.session.add(c2)
+#         db.session.add(c3)
+#         db.session.add(f5)
+#         db.session.add(f4)
+#         db.session.commit()
+# #
+#         # t1 = Ticket(flight_name='TSN - DAD', passenger_name='Van Tien', cmnd='12389', phone='124790',
+#         #                  type='1', price=2000000, flight_id='1', user_id='5')
+#         db.session.add(f4)
+
+# # =======
+# #             c1 = Flight(departure='Ho Chi Minh', arrival='Ha Noi', sanbaydi='Tan Son Nhat', sanbayden='Noi Bai', ngaybay=datetime.strptime('21/12/2023', '%d/%m/%Y'),
+# #                         gioibay='15:00PM', thoigianbay='2', ghehang1='88', ghehang2='80', sbtrunggian='đsdsa', thoigiandung='kcohong ', note='0')
+# #
 #
 #
         # t1 = Ticket(flight_name='TSN - DAD', passenger_name='Van Tien', cmnd='12389', phone='124790',

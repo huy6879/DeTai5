@@ -61,11 +61,13 @@ class StatsView(AuthenticatedUser):
     def index(self):
         month = request.args.get('month')
         year = request.args.get('year')
-        if year:
-            year = int(year)
+        if year or month:
+            month = month
+            year = year
         else:
+            month = None
             year = 2024
-        return self.render('admin/stats.html',stats=utils.stats_revenue(), year_stats=utils.stats_revenue_by_year(year=year))
+        return self.render('/admin/stats.html',stats=utils.stats_revenue(month=month), year_stats=utils.stats_revenue_by_year(year=year))
 
 
 admin.add_view(MyUserView(User, db.session))
