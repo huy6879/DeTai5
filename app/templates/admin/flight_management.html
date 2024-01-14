@@ -19,18 +19,26 @@
                                                id="airport2" name="sb2" required/>
                      </div>
 
-                     <div class="col-sm-3 form-group">
-                         <label for="date">Ngày : <span
-                            class="text-danger" style="color:red;">*</span></label>
-                         <input type="date" class="form-control form-control-ml"
-                                               id="date" name="date"/>
-                     </div>
+<!--                     <div class="col-sm-3 form-group">-->
+<!--                         <label for="date">Ngày : <span-->
+<!--                            class="text-danger" style="color:red;">*</span></label>-->
+<!--                         <input type="date" class="form-control form-control-ml"-->
+<!--                                               id="date" name="date"/>-->
+<!--                     </div>-->
 
                     <div class="col-sm-3 form-group">
-                      <label for="time1">Thời gian khởi hành : <span
+                      <label for="time1">TG khởi hành : <span
                             class="text-danger" style="color:red;">*</span></label>
-                      <input type="text" class="form-control" id="time1" name="time1"/>
+                        <input type="datetime-local" class="form-control" id="time1" name="time1"/>
                     </div>
+
+                     <div class="col-sm-3 form-group">
+                         <label for="time5">TG đến : <span class="text-danger" style="color:red;">*</span></label>
+                         <input type="datetime-local" class="form-control" id="time5" name="time5" />
+                     </div>
+
+
+
 
 
 
@@ -117,8 +125,9 @@
                         <th>Id</th>
                         <th style="position: relative; padding-left: 50px; ">Sân bay đi</th>
                         <th style="position: relative; padding-left: 50px;">Sân bay đến</th>
-                        <th style="position: relative; padding-left: 50px;">Ngày</th>
+<!--                        <th style="position: relative; padding-left: 50px;">Ngày</th>-->
                         <th style="position: relative; padding-left: 50px;">TG khởi hành</th>
+                        <th style="position: relative; padding-left: 50px;">TG đến </th>
                         <th style="position: relative; padding-left: 50px;">Thời gian bay</th>
                         <th style="position: relative; padding-left: 50px;">Vé hạng 1</th>
                         <th style="position: relative; padding-left: 50px;">Vé hạng 2</th>
@@ -135,29 +144,30 @@
                         <td>{{ u.id }} </td>
                         <td style="position: relative; left: 55px;">{{ u.D_air }}</td>
                         <td style="position: relative; left: 105px;">{{ u.A_air }}</td>
-                        <td style="position: relative; left: 140px;">{{ u.Date}}</td>
-                        <td style="position: relative; left: 180px;">{{ u.T_time }}</td>
-                        <td style="position: relative; left: 270px;">{{ u.Flight_time }} phút</td>
-                        <td style="position: relative; left: 360px;">{{ u.T1_quantity }}</td>
-                        <td style="position: relative; left: 470px;">{{ u.T2_quantity }}</td>
+<!--                        <td style="position: relative; left: 140px;">{{ u.Date}}</td>-->
+                        <td style="position: relative; left: 140px;">{{ u.T_time }}</td>
+                        <td style="position: relative; left: 160px;">{{ u.E_time.strftime("%H:%M:%S") }}</td>
+                        <td style="position: relative; left: 230px;">{{ u.Flight_time }} phút</td>
+                        <td style="position: relative; left: 325px;">{{ u.T1_quantity }}</td>
+                        <td style="position: relative; left: 425px;">{{ u.T2_quantity }}</td>
                         {% if u.I2_air != '' %}
-                        <td style="position: relative; left: 550px;">{{ u.I_air }}, {{u.I2_air}}</td>
+                        <td style="position: relative; left: 495px;">{{ u.I_air }}, {{u.I2_air}}</td>
                         {% else %}
-                        <td style="position: relative; left: 550px;">{{ u.I_air }}</td>
+                        <td style="position: relative; left: 510px;">{{ u.I_air }}</td>
                         {% endif%}
 
                         {% if u.S2_time > '0' %}
-                        <td style="position: relative; left: 625px; ">{{ u.S_time }}, {{u.S2_time}} phút</td>
+                        <td style="position: relative; left: 550px; ">{{ u.S_time }}, {{u.S2_time}} phút</td>
                         {% else %}
-                        <td style="position: relative; left: 625px; ">{{ u.S_time }} phút</td>
+                        <td style="position: relative; left: 580px; ">{{ u.S_time }} phút</td>
                         {%endif%}
 
                         {% if u.note == '1' %}
-                        <td  style="position: relative; left: 715px;">&#9989;</td>
-                        {% elif u.note == '0' %} <td style="position: relative; left: 715px;">&#10060;</td>
-                        {% else %}  <td  style="position: relative; left: 710px; ">{{ u.note }}</td>
+                        <td  style="position: relative; left: 655px;">&#9989;</td>
+                        {% elif u.note == '0' %} <td style="position: relative; left: 655px;">&#10060;</td>
+                        {% else %}  <td  style="position: relative; left: 645px; ">{{ u.note }}</td>
                         {% endif %}
-                        <td style="position: relative; top: -7px; left: 745px;"><a href="/admin/flightview/{{u.id}}/edit"><img src="https://cdn-icons-png.flaticon.com/512/7398/7398464.png"
+                        <td style="position: relative; top: -7px; left: 675px;"><a href="/admin/flightview/{{u.id}}/edit"><img src="https://cdn-icons-png.flaticon.com/512/7398/7398464.png"
                                                                         style="position: absolute; width: 16px; height: 18px; left: 5%;"></a></td>
                     </tr>
                     {% endfor %}

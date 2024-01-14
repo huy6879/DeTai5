@@ -6,7 +6,7 @@ import dao, utils
 from app import db
 from app import app,login
 from flask_login import login_user, logout_user, current_user, UserMixin
-from app.models import User, Flight
+from app.models import User, Flight, FlightRoute
 from sqlalchemy.sql import func
 
 
@@ -185,8 +185,9 @@ def flight_edit(flight_id):
         if request.method.__eq__('POST'):
             D_air = request.form.get('sb1')
             A_air = request.form.get('sb2')
-            Date = request.form.get('date')
+            # Date = request.form.get('date')
             T_time = request.form.get('time1')
+            E_time = request.form.get('time5')
             T1_quantity = request.form.get('sl1')
             T2_quantity = request.form.get('sl2')
             I_air = request.form.get('sb3')
@@ -194,9 +195,10 @@ def flight_edit(flight_id):
             S_time = request.form.get('time2')
             S2_time = request.form.get('time3')
             Flight_time = request.form.get('time4')
+            Route = request.form.get('route')
             note = request.form.get('status')
-            dao.change_flight(id=flight_id, D_air=D_air, A_air=A_air, Date=Date, T_time=T_time, T1_quantity=T1_quantity,
-                                  T2_quantity=T2_quantity, I_air=I_air, I2_air=I2_air, S_time=S_time, S2_time=S2_time, Flight_time=Flight_time, note=note)
+            dao.change_flight(id=flight_id, D_air=D_air, A_air=A_air, T_time=T_time, E_time=E_time, T1_quantity=T1_quantity,
+                                  T2_quantity=T2_quantity, I_air=I_air, I2_air=I2_air, S_time=S_time, S2_time=S2_time, Flight_time=Flight_time, note=note, flightRoute_id=Route)
     return render_template('flight_edit.html', flight=flight)
 
 
@@ -216,7 +218,7 @@ def add_flight():
         if request.method.__eq__('POST'):
             D_air = request.form.get('sb1')
             A_air = request.form.get('sb2')
-            Date = request.form.get('date')
+            # Date = request.form.get('date')
             T_time = request.form.get('time1')
             E_time = request.form.get('time5')
             T1_quantity = request.form.get('quantity1')
@@ -228,41 +230,43 @@ def add_flight():
             Flight_time = request.form.get('time4')
             note = request.form.get('note')
             flightRoute_id = request.form.get('route')
-            dao.add_flight(D_air=D_air, A_air=A_air, Date=Date, T_time=T_time, E_time=E_time, T1_quantity=T1_quantity
+            dao.add_flight(D_air=D_air, A_air=A_air, T_time=T_time, E_time=E_time, T1_quantity=T1_quantity
                            , T2_quantity=T2_quantity, I_air=I_air, I2_air=I2_air, S_time=S_time, S2_time=S2_time, Flight_time=Flight_time, note=note, flightRoute_id=flightRoute_id)
         return redirect('/admin/flightview/')
 
 
+
 @app.route('/add_flights', methods=['get','post'])
 def add_flights():
-    # airports = Airport.query.all()
+    Routes = FlightRoute.query.all()
     flights = Flight.query.all()
     err_msg = ''
     if request.method.__eq__('POST'):
-        D_air = request.form.get('airport1')
-        A_air = request.form.get('airport2')
-        Date = request.form.get('date1')
-        T_time = request.form.get('d_Time')
-        E_time = request.form.get('a_Time')
-        T1_quantity = request.form.get('1stclass')
-        T2_quantity = request.form.get('2ndclass')
-        I_air = request.form.get('AP_TG1')
-        I2_air = request.form.get('AP_TG2')
-        S_time = request.form.get('pendingT')
-        S2_time = request.form.get('pendingT2')
-        Flight_time = request.form.get('time1')
+        D_air = request.form.get('sb1')
+        A_air = request.form.get('sb2')
+        # Date = request.form.get('date')
+        T_time = request.form.get('time1')
+        E_time = request.form.get('time5')
+        T1_quantity = request.form.get('quantity1')
+        T2_quantity = request.form.get('quantity2')
+        I_air = request.form.get('sb3')
+        I2_air = request.form.get('sb4')
+        S_time = request.form.get('time2')
+        S2_time = request.form.get('time3')
+        Flight_time = request.form.get('time4')
         note = request.form.get('note')
         flightRoute_id = request.form.get('route')
-        dao.add_flight(D_air=D_air, A_air=A_air, Date=Date, T_time=T_time, E_time=E_time, T1_quantity=T1_quantity
+        dao.add_flight(D_air=D_air, A_air=A_air, T_time=T_time, E_time=E_time, T1_quantity=T1_quantity
                        , T2_quantity=T2_quantity, I_air=I_air, I2_air=I2_air, S_time=S_time, S2_time=S2_time,
                        Flight_time=Flight_time, note=note, flightRoute_id=flightRoute_id)
         err_msg = 'Thêm thành công'
     else:
         err_msg = 'Thêm không thành công'
-    return render_template('add_flights.html',flights=flights,err_msg=err_msg)
+    return render_template('add_flights.html',flights=flights, route=Routes, err_msg=err_msg)
+
+
 
 @app.route('/flight_list', methods=['get'])
-
 def search_flight():
     departure = request.args.get("departure")
     arrival = request.args.get("arrival")
@@ -277,10 +281,9 @@ def input_customer_info():
 def customer_pay():
     return render_template('customer_pay.html')
 
-@app.route('/employee_pay/<int:user_id>', methods=['POST'])
-def employee_pay(user_id):
-    user = User.query.get(user_id)
-    return render_template('employee_pay.html', user=user)
+@app.route('/employee_pay')
+def employee_pay():
+    return render_template('employee_pay.html')
 
 if __name__ == '__main__':
     from app import admin

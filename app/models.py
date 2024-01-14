@@ -39,6 +39,7 @@ class Flight(db.Model):
         id = Column(Integer, primary_key=True, autoincrement=True)
         D_air = Column(String(100), nullable=False)
         A_air = Column(String(100), nullable=False)
+        # Date = Column(Date, nullable=False)
         T_time = Column(DateTime, nullable=False)
         E_time = Column(DateTime, nullable=False)
         T1_quantity = Column(String(10), nullable=False)
@@ -59,6 +60,7 @@ class FlightRoute(db.Model):
     name = Column(String(100), nullable=False)
     flights = relationship('Flight', backref='flightroute', lazy=True)
     receipt_details = relationship('ReceiptDetail', backref='flightroute', lazy=True)
+
 
 class BaseModel(db.Model):
     __abstract__ = True
@@ -95,6 +97,17 @@ class ReceiptDetail(BaseModel):
     ticket_id = Column(Integer, ForeignKey(Ticket.id), nullable=False)
     quantity = Column(Integer, default=0)
     unit_price = Column(Float, default=0)
+
+
+
+class Regulations(db.Model):
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    flight_mTime = Column(String(10), nullable=False)
+    sl_TGA = Column(String(10), nullable=False)
+    time_mS = Column(String(10), nullable=False)
+    time_MAS = Column(String(10), nullable=False)
+    time_G = Column(String(10), nullable=False)
+    time_E = Column(String(10), nullable=False)
 
 
 
@@ -155,6 +168,12 @@ if __name__ == '__main__':
 #
 #         db.session.add(c2)
 #         db.session.commit()
+#         Date = datetime.strptime('09/01/2024', '%d/%m/%Y')
+#         f4 = Flight(D_air='Tan Son Nhat',
+#                     A_air='Ha Noi',
+#                     T_time= datetime.strptime('10:00', '%H:%M'),
+#                     E_time= datetime.strptime('12:00','%H:%M'),
+#                     T1_quantity='90', T2_quantity='120', I_air='Lam Dong', I2_air='Phu Yen', S_time='130', S2_time='60', Flight_time='60', note='1', flightRoute_id='2')
 #         c1 = FlightRoute(name='HCM-HN')
 #         c2 = FlightRoute(name='HN-HCM')
 #         c3 = FlightRoute(name='HCM-DN')
@@ -186,17 +205,16 @@ if __name__ == '__main__':
 # #                         gioibay='15:00PM', thoigianbay='2', ghehang1='88', ghehang2='80', sbtrunggian='đsdsa', thoigiandung='kcohong ', note='0')
 # #
 #
-# #             db.session.add(c1)
-# #             db.session.commit()
 #
-        # c4 = Flight(departure='HaNoi', arrival='HoChiMinh',
-        #             ngaybay=datetime.strptime('8/1/2024', '%d/%m/%Y'),
-        #             giobay=datetime.strptime('15:00', '%H:%M'),
-        #             gioden=datetime.strptime('17:00','%H:%M'),
-        #             thoigianbay='2', ghehang1='88', ghehang2='80', sbtrunggian1='Không có',sbtrunggian2='Không có',
-        #             thoigiandung='0', note='0')
-        # db.session.add(c4)
+        # t1 = Ticket(flight_name='TSN - DAD', passenger_name='Van Tien', cmnd='12389', phone='124790',
+        #                  type='1', price=2000000, flight_id='1', user_id='5')
+        # db.session.add(f4)
         # db.session.commit()
+# =======
+#             c1 = Flight(departure='Ho Chi Minh', arrival='Ha Noi', sanbaydi='Tan Son Nhat', sanbayden='Noi Bai', ngaybay=datetime.strptime('21/12/2023', '%d/%m/%Y'),
+#                         gioibay='15:00PM', thoigianbay='2', ghehang1='88', ghehang2='80', sbtrunggian='đsdsa', thoigiandung='kcohong ', note='0')
+#
+
 
 #         route = Flight_route(departure='Ho Chi Minh', arrival='Da Nang')
 #         db.session.add(route)
